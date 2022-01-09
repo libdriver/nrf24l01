@@ -1,10 +1,12 @@
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+
 <div align=center>
 <img src="/doc/image/logo.png"/>
 </div>
 
 ## LibDriver NRF24L01
 
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/nrf24l01/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 nRF24L01+ 是一款帶有嵌入式基帶協議引擎 (Enhanced ShockBurst™) 的單芯片 2.4GHz 收發器，適用於超低功耗無線應用。 nRF24L01+ 設計用於在 2.400 - 2.4835GHz 的全球 ISM 頻段中運行。要使用 nRF24L01+ 設計無線電系統，您只需要一個 MCU（微控制器）和一些外部無源元件。您可以操作和配置 nRF24L01+通過串行外設接口 (SPI)。寄存器映射，可通過SPI訪問，包含nRF24L01+中的所有配置寄存器，可在芯片的所有工作模式下訪問。嵌入式基帶協議引擎（Enhanced ShockBurst™）基於數據包通信，支持手動多種模式操作到高級自治協議操作。內部 FIFO 可確保無線電前端和系統 MCU 之間的數據流順暢。增強型 Shock-Burst™ 通過處理所有高速鏈路層操作來降低系統成本。無線電前端使用 GFSK 調製。它具有用戶可配置的參數，如頻道、輸出功率和空中數據速率。 nRF24L01+ 支持 250 kbps、1 Mbps 和 2Mbps 的空中數據速率。高空中數據速率結合兩種省電模式nRF24L01+ 非常適合超低功耗設計。 nRF24L01+ 與 nRF24L01 直接兼容，空中兼容 nRF2401A、nRF2402、nRF24E1 和 nRF24E2。與 nRF24L01 相比，nRF24L01+ 中的互調和寬帶阻塞值有了很大改善，並且 nRF24L01+ 的內部濾波增加了滿足 RF 監管標準的餘量。內部穩壓器確保高電源抑制比 (PSRR) 和寬功率供應範圍。 NRF24L01用於無線PC外設、鼠標、鍵盤、遙控器、遊戲控制器等。
 
