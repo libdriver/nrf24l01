@@ -39,13 +39,13 @@
 static nrf24l01_handle_t gs_handle;        /**< nrf24l01 handle */
 
 /**
- * @brief  nrf24l01 test irq
+ * @brief  nrf24l01 interrupt test irq
  * @return status code
  *         - 0 success
  *         - 1 run failed
  * @note   none
  */
-uint8_t nrf24l01_test_irq_handler(void)
+uint8_t nrf24l01_interrupt_test_irq_handler(void)
 {
     if (nrf24l01_irq_handler(&gs_handle))
     {

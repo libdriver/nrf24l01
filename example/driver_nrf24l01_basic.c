@@ -45,7 +45,7 @@ static nrf24l01_handle_t gs_handle;        /**< nrf24l01 handle */
  *         - 1 run failed
  * @note   none
  */
-uint8_t nrf24l01_basic_irq_handler(void)
+uint8_t nrf24l01_interrupt_irq_handler(void)
 {
     if (nrf24l01_irq_handler(&gs_handle))
     {

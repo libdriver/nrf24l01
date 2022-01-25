@@ -49,13 +49,13 @@ extern "C"{
  */
 
 /**
- * @brief  nrf24l01 test irq
+ * @brief  nrf24l01 interrupt test irq
  * @return status code
  *         - 0 success
  *         - 1 run failed
  * @note   none
  */
-uint8_t nrf24l01_test_irq_handler(void);
+uint8_t nrf24l01_interrupt_test_irq_handler(void);
 
 /**
  * @brief  sent test

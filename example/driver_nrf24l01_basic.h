@@ -111,7 +111,7 @@ typedef enum
  *         - 1 run failed
  * @note   none
  */
-uint8_t nrf24l01_basic_irq_handler(void);
+uint8_t nrf24l01_interrupt_irq_handler(void);
 
 /**
  * @brief     basic example init

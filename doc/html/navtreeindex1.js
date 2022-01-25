@@ -214,6 +214,9 @@ var NAVTREEINDEX1 =
 "group__nrf24l01__example__driver.html#ga4a0952357e143976451d5f98fc5a1540":[0,0,5,41],
 "group__nrf24l01__example__driver.html#ga5a789b2fbd3486f17e17ca5ea81e15cd":[2,0,1,1,34],
 "group__nrf24l01__example__driver.html#ga5a789b2fbd3486f17e17ca5ea81e15cd":[0,0,5,34],
+"group__nrf24l01__example__driver.html#ga643b5a77dd5416eca4d2be68bf505fbe":[2,0,1,1,45],
+"group__nrf24l01__example__driver.html#ga643b5a77dd5416eca4d2be68bf505fbe":[0,0,5,45],
+"group__nrf24l01__example__driver.html#ga643b5a77dd5416eca4d2be68bf505fbe":[2,0,1,0,3],
 "group__nrf24l01__example__driver.html#ga6725b93417514739b836adfb69dd9186":[2,0,1,1,9],
 "group__nrf24l01__example__driver.html#ga6725b93417514739b836adfb69dd9186":[0,0,5,9],
 "group__nrf24l01__example__driver.html#ga6862aead47fd4a2e08a25a62bf64f14e":[2,0,1,1,8],
@@ -233,9 +236,9 @@ var NAVTREEINDEX1 =
 "group__nrf24l01__example__driver.html#ga9739be7e2378698a284f4a9f9ea43a85":[2,0,1,1,42],
 "group__nrf24l01__example__driver.html#ga9739be7e2378698a284f4a9f9ea43a85":[0,0,5,42],
 "group__nrf24l01__example__driver.html#ga9739be7e2378698a284f4a9f9ea43a85":[2,0,1,0,0],
-"group__nrf24l01__example__driver.html#gaaa8adb4c1831d2d755dcc913ab42f316":[2,0,1,1,45],
-"group__nrf24l01__example__driver.html#gaaa8adb4c1831d2d755dcc913ab42f316":[0,0,5,45],
-"group__nrf24l01__example__driver.html#gaaa8adb4c1831d2d755dcc913ab42f316":[2,0,1,0,3],
+"group__nrf24l01__example__driver.html#gaaa8adb4c1831d2d755dcc913ab42f316":[2,0,1,0,2],
+"group__nrf24l01__example__driver.html#gaaa8adb4c1831d2d755dcc913ab42f316":[2,0,1,1,44],
+"group__nrf24l01__example__driver.html#gaaa8adb4c1831d2d755dcc913ab42f316":[0,0,5,44],
 "group__nrf24l01__example__driver.html#gaac624e1cc5af20991ca39d40682f2c85":[0,0,5,6],
 "group__nrf24l01__example__driver.html#gaac624e1cc5af20991ca39d40682f2c85":[2,0,1,1,6],
 "group__nrf24l01__example__driver.html#gaad6a4a8859be9af4010971410a54d410":[0,0,5,25],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "group__nrf24l01__example__driver.html#gab9077c3eb5d09bc3a8b2515295948594":[0,0,5,13],
 "group__nrf24l01__example__driver.html#gab9ccab4db0fb9ba4a9e1209622d41420":[2,0,1,1,43],
 "group__nrf24l01__example__driver.html#gab9ccab4db0fb9ba4a9e1209622d41420":[2,0,1,0,1],
-"group__nrf24l01__example__driver.html#gab9ccab4db0fb9ba4a9e1209622d41420":[0,0,5,43],
-"group__nrf24l01__example__driver.html#gabdcb6bc4468aab31986abbd3ea1c0aea":[0,0,5,23],
-"group__nrf24l01__example__driver.html#gabdcb6bc4468aab31986abbd3ea1c0aea":[2,0,1,1,23],
-"group__nrf24l01__example__driver.html#gac118f0320a4b01070f65edd714d45a11":[0,0,5,12]
+"group__nrf24l01__example__driver.html#gab9ccab4db0fb9ba4a9e1209622d41420":[0,0,5,43]
 };

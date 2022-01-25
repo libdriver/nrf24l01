@@ -104,7 +104,7 @@ if (res)
 {
     return 1;
 }
-g_gpio_irq = nrf24l01_basic_irq_handler;
+g_gpio_irq = nrf24l01_interrupt_irq_handler;
 res = nrf24l01_basic_init(NRF24L01_TYPE_TX, _callback);
 if (res)
 {
@@ -190,7 +190,7 @@ if (res)
 {
     return 1;
 }
-g_gpio_irq = nrf24l01_basic_irq_handler;
+g_gpio_irq = nrf24l01_interrupt_irq_handler;
 res = nrf24l01_basic_init(NRF24L01_TYPE_RX, _callback);
 if (res)
 {

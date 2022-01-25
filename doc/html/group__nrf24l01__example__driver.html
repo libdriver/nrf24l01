@@ -192,9 +192,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaf818856ab7b8206f884c4a61da5b535c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nrf24l01__example__driver.html#gaf818856ab7b8206f884c4a61da5b535c">nrf24l01_basic_irq_handler</a> (void)</td></tr>
-<tr class="memdesc:gaf818856ab7b8206f884c4a61da5b535c"><td class="mdescLeft">&#160;</td><td class="mdescRight">nrf24l01 irq  <a href="group__nrf24l01__example__driver.html#gaf818856ab7b8206f884c4a61da5b535c">More...</a><br /></td></tr>
-<tr class="separator:gaf818856ab7b8206f884c4a61da5b535c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga643b5a77dd5416eca4d2be68bf505fbe"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nrf24l01__example__driver.html#ga643b5a77dd5416eca4d2be68bf505fbe">nrf24l01_interrupt_irq_handler</a> (void)</td></tr>
+<tr class="memdesc:ga643b5a77dd5416eca4d2be68bf505fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">nrf24l01 irq  <a href="group__nrf24l01__example__driver.html#ga643b5a77dd5416eca4d2be68bf505fbe">More...</a><br /></td></tr>
+<tr class="separator:ga643b5a77dd5416eca4d2be68bf505fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab9ccab4db0fb9ba4a9e1209622d41420"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nrf24l01__example__driver.html#gab9ccab4db0fb9ba4a9e1209622d41420">nrf24l01_basic_init</a> (<a class="el" href="group__nrf24l01__example__driver.html#ga4a0952357e143976451d5f98fc5a1540">nrf24l01_type_t</a> type, uint8_t(*callback)(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len))</td></tr>
 <tr class="memdesc:gab9ccab4db0fb9ba4a9e1209622d41420"><td class="mdescLeft">&#160;</td><td class="mdescRight">basic example init  <a href="group__nrf24l01__example__driver.html#gab9ccab4db0fb9ba4a9e1209622d41420">More...</a><br /></td></tr>
 <tr class="separator:gab9ccab4db0fb9ba4a9e1209622d41420"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1006,34 +1006,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaf818856ab7b8206f884c4a61da5b535c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf818856ab7b8206f884c4a61da5b535c">&#9670;&nbsp;</a></span>nrf24l01_basic_irq_handler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t nrf24l01_basic_irq_handler </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>nrf24l01 irq </p>
-<dl class="section return"><dt>Returns</dt><dd>status code<ul>
-<li>0 success</li>
-<li>1 run failed </li>
-</ul>
-</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="driver__nrf24l01__basic_8c_source.html#l00048">48</a> of file <a class="el" href="driver__nrf24l01__basic_8c_source.html">driver_nrf24l01_basic.c</a>.</p>
-
-</div>
-</div>
 <a id="gaaa8adb4c1831d2d755dcc913ab42f316"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaaa8adb4c1831d2d755dcc913ab42f316">&#9670;&nbsp;</a></span>nrf24l01_basic_sent()</h2>
 
@@ -1083,6 +1055,34 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="driver__nrf24l01__basic_8c_source.html#l00712">712</a> of file <a class="el" href="driver__nrf24l01__basic_8c_source.html">driver_nrf24l01_basic.c</a>.</p>
+
+</div>
+</div>
+<a id="ga643b5a77dd5416eca4d2be68bf505fbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga643b5a77dd5416eca4d2be68bf505fbe">&#9670;&nbsp;</a></span>nrf24l01_interrupt_irq_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t nrf24l01_interrupt_irq_handler </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>nrf24l01 irq </p>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>1 run failed </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__nrf24l01__basic_8c_source.html#l00048">48</a> of file <a class="el" href="driver__nrf24l01__basic_8c_source.html">driver_nrf24l01_basic.c</a>.</p>
 
 </div>
 </div>
