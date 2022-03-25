@@ -4,8 +4,6 @@
 
 chip name : Raspberry Pi 4B
 
-iic pin: SCL/SDA GPIO3/GPIO2
-
 spi pin: SCLK/MOSI/MISO/CS GPIO11/GPIO10/GPIO9/GPIO8
 
 gpio pin: INT GPIO17
