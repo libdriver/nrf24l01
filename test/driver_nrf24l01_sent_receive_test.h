@@ -34,8 +34,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_NRF24L01_SENT_RECEIVE_TEST_H_
-#define _DRIVER_NRF24L01_SENT_RECEIVE_TEST_H_
+#ifndef DRIVER_NRF24L01_SENT_RECEIVE_TEST_H
+#define DRIVER_NRF24L01_SENT_RECEIVE_TEST_H
 
 #include "driver_nrf24l01_interface.h"
 

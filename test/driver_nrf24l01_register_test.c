@@ -48,13 +48,13 @@ static nrf24l01_handle_t gs_handle;        /**< nrf24l01 handle */
  */
 uint8_t nrf24l01_register_test(void)
 {
-    volatile uint8_t res;
-    volatile uint8_t len;
-    volatile uint8_t value, value_check;
-    volatile uint32_t us, us_check;
-    volatile uint8_t addr[5];
-    volatile uint8_t addr_check[5];
-    volatile uint8_t buf[5];
+    uint8_t res;
+    uint8_t len;
+    uint8_t value, value_check;
+    uint32_t us, us_check;
+    uint8_t addr[5];
+    uint8_t addr_check[5];
+    uint8_t buf[5];
     nrf24l01_info_t info;
     nrf24l01_bool_t enable;
     nrf24l01_mode_t mode;
@@ -77,7 +77,7 @@ uint8_t nrf24l01_register_test(void)
     
     /* get information */
     res = nrf24l01_info(&info);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get info failed.\n");
         
@@ -102,7 +102,7 @@ uint8_t nrf24l01_register_test(void)
     
     /* init */
     res = nrf24l01_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: init failed.\n");
         
@@ -111,10 +111,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* set active false */
     res = nrf24l01_set_active(&gs_handle, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set active failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -124,19 +124,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable power up */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_PWR_UP, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable power up.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_PWR_UP, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -144,19 +144,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable power up */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_PWR_UP, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable power up.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_PWR_UP, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -164,19 +164,19 @@ uint8_t nrf24l01_register_test(void)
 
     /* disable encoding 2 bytes */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_CRCO, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable encoding 2 bytes.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_CRCO, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -184,19 +184,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable encoding 2 bytes */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_CRCO, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable encoding 2 bytes.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_CRCO, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -204,19 +204,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable crc */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_EN_CRC, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable crc.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_EN_CRC, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -224,19 +224,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable crc */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_EN_CRC, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable crc.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_EN_CRC, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -244,19 +244,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable max rt */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_MASK_MAX_RT, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable max rt.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_MASK_MAX_RT, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -264,19 +264,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable max rt */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_MASK_MAX_RT, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable max rt.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_MASK_MAX_RT, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -284,19 +284,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable tx ds */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_MASK_TX_DS, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable tx ds.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_MASK_TX_DS, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -304,19 +304,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable tx ds */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_MASK_TX_DS, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable tx ds.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_MASK_TX_DS, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -324,19 +324,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable rx dr */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_MASK_RX_DR, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable rx dr.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_MASK_RX_DR, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -344,19 +344,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable rx dr */
     res = nrf24l01_set_config(&gs_handle, NRF24L01_CONFIG_MASK_RX_DR, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable rx dr.\n");
     res = nrf24l01_get_config(&gs_handle, NRF24L01_CONFIG_MASK_RX_DR, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get config failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -367,19 +367,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* set tx mode */
     res = nrf24l01_set_mode(&gs_handle, NRF24L01_MODE_TX);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set mode failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set tx mode.\n");
     res = nrf24l01_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get mode failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -387,19 +387,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* set rx mode */
     res = nrf24l01_set_mode(&gs_handle, NRF24L01_MODE_RX);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set mode failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set rx mode.\n");
     res = nrf24l01_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get mode failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -410,19 +410,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 0 disable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_0, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 0 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_0, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -430,19 +430,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 0 enable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_0, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 0 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_0, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -450,19 +450,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 1 disable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_1, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 1 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_1, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -470,19 +470,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 1 enable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_1, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 1 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_1, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -490,19 +490,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 2 disable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_2, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 2 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_2, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -510,19 +510,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 2 enable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_2, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 2 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_2, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -530,19 +530,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 3 disable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_3, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 3 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_3, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -550,19 +550,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 3 enable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_3, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 3 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_3, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -570,19 +570,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 4 disable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_4, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 4 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_4, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -590,19 +590,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 4 enable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_4, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 4 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_4, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -610,19 +610,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 5 disable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_5, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 5 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_5, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -630,19 +630,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 5 enable */
     res = nrf24l01_set_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_5, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 5 auto acknowledgment.\n");
     res = nrf24l01_get_auto_acknowledgment(&gs_handle, NRF24L01_PIPE_5, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto acknowledgment failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -653,19 +653,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable rx pipe 0 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_0, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable rx pipe 0.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_0, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -673,19 +673,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable rx pipe 0 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_0, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable rx pipe 0.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_0, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -693,19 +693,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable rx pipe 1 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_1, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable rx pipe 1.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_1, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -713,19 +713,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable rx pipe 1 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_1, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable rx pipe 1.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_1, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -733,19 +733,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable rx pipe 2 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_2, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable rx pipe 2.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_2, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -753,19 +753,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable rx pipe 2 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_2, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable rx pipe 2.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_2, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -773,19 +773,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable rx pipe 3 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_3, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable rx pipe 3.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_3, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -793,19 +793,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable rx pipe 3 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_3, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable rx pipe 3.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_3, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -813,19 +813,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable rx pipe 4 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_4, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable rx pipe 4.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_4, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -833,19 +833,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable rx pipe 4 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_4, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable rx pipe 4.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_4, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -853,19 +853,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable rx pipe 5 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_5, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable rx pipe 5.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_5, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -873,19 +873,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable rx pipe 5 */
     res = nrf24l01_set_rx_pipe(&gs_handle, NRF24L01_PIPE_5, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable rx pipe 5.\n");
     res = nrf24l01_get_rx_pipe(&gs_handle, NRF24L01_PIPE_5, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -896,19 +896,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* set address width illegal */
     res = nrf24l01_set_address_width(&gs_handle, NRF24L01_ADDRESS_WIDTH_ILLEGAL);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set address width illegal.\n");
     res = nrf24l01_get_address_width(&gs_handle, &width);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -916,19 +916,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* set address width 3 bytes */
     res = nrf24l01_set_address_width(&gs_handle, NRF24L01_ADDRESS_WIDTH_3_BYTES);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set address width 3 bytes.\n");
     res = nrf24l01_get_address_width(&gs_handle, &width);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -936,19 +936,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* set address width 4 bytes */
     res = nrf24l01_set_address_width(&gs_handle, NRF24L01_ADDRESS_WIDTH_4_BYTES);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set address width 4 bytes.\n");
     res = nrf24l01_get_address_width(&gs_handle, &width);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -956,19 +956,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* set address width 5 bytes */
     res = nrf24l01_set_address_width(&gs_handle, NRF24L01_ADDRESS_WIDTH_5_BYTES);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set address width 5 bytes.\n");
     res = nrf24l01_get_address_width(&gs_handle, &width);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get address width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -979,19 +979,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 0xF;
     res = nrf24l01_set_auto_retransmit_delay(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto retransmit delay failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set auto retransmit delay %d.\n", value);
     res = nrf24l01_get_auto_retransmit_delay(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto retransmit delay failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1002,18 +1002,18 @@ uint8_t nrf24l01_register_test(void)
     
     us = 250 * (rand() % 0xF);
     res = nrf24l01_auto_retransmit_delay_convert_to_register(&gs_handle, us, (uint8_t *)&value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: auto retransmit delay convert to register failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     res = nrf24l01_auto_retransmit_delay_convert_to_data(&gs_handle, value, (uint32_t *)&us_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: auto retransmit delay convert to data failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1024,19 +1024,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 0xF;
     res = nrf24l01_set_auto_retransmit_count(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set auto retransmit count failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set auto retransmit count %d.\n", value);
     res = nrf24l01_get_auto_retransmit_count(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get auto retransmit count failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1047,19 +1047,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 0xF;
     res = nrf24l01_set_channel_frequency(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set channel frequency failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set channel frequency %d.\n", value);
     res = nrf24l01_get_channel_frequency(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get channel frequency failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1070,19 +1070,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable continuous carrier transmit */
     res = nrf24l01_set_continuous_carrier_transmit(&gs_handle, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set continuous carrier transmit failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable continuous carrier transmit.\n");
     res = nrf24l01_get_continuous_carrier_transmit(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get continuous carrier transmit failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1090,19 +1090,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable continuous carrier transmit */
     res = nrf24l01_set_continuous_carrier_transmit(&gs_handle, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set continuous carrier transmit failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable continuous carrier transmit.\n");
     res = nrf24l01_get_continuous_carrier_transmit(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get continuous carrier transmit failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1113,19 +1113,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable force pll lock signal */
     res = nrf24l01_set_force_pll_lock_signal(&gs_handle, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set force pll lock signal failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable force pll lock signal.\n");
     res = nrf24l01_get_force_pll_lock_signal(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get force pll lock signal failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1133,19 +1133,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable force pll lock signal */
     res = nrf24l01_set_force_pll_lock_signal(&gs_handle, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set force pll lock signal failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable force pll lock signal.\n");
     res = nrf24l01_get_force_pll_lock_signal(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get force pll lock signal failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1156,19 +1156,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* data rate 1M */
     res = nrf24l01_set_data_rate(&gs_handle, NRF24L01_DATA_RATE_1M);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set data rate failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: data rate 1M.\n");
     res = nrf24l01_get_data_rate(&gs_handle, &rate);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get data rate failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1176,19 +1176,19 @@ uint8_t nrf24l01_register_test(void)
 
     /* data rate 2M */
     res = nrf24l01_set_data_rate(&gs_handle, NRF24L01_DATA_RATE_2M);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set data rate failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: data rate 2M.\n");
     res = nrf24l01_get_data_rate(&gs_handle, &rate);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get data rate failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1196,19 +1196,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* data rate 250K */
     res = nrf24l01_set_data_rate(&gs_handle, NRF24L01_DATA_RATE_250K);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set data rate failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: data rate 250K.\n");
     res = nrf24l01_get_data_rate(&gs_handle, &rate);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get data rate failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1219,19 +1219,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* output power -18 dBm */
     res = nrf24l01_set_output_power(&gs_handle, NRF24L01_OUTPUT_POWER_NEGTIVE_18_DBM);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set output power -18 dBm.\n");
     res = nrf24l01_get_output_power(&gs_handle, &power);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1239,19 +1239,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* output power -12 dBm */
     res = nrf24l01_set_output_power(&gs_handle, NRF24L01_OUTPUT_POWER_NEGTIVE_12_DBM);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set output power -12 dBm.\n");
     res = nrf24l01_get_output_power(&gs_handle, &power);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1259,19 +1259,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* output power -6 dBm */
     res = nrf24l01_set_output_power(&gs_handle, NRF24L01_OUTPUT_POWER_NEGTIVE_6_DBM);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set output power -6 dBm.\n");
     res = nrf24l01_get_output_power(&gs_handle, &power);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1279,19 +1279,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* output power 0 dBm */
     res = nrf24l01_set_output_power(&gs_handle, NRF24L01_OUTPUT_POWER_0_DBM);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set output power 0 dBm.\n");
     res = nrf24l01_get_output_power(&gs_handle, &power);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get output power failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1307,10 +1307,10 @@ uint8_t nrf24l01_register_test(void)
     addr[3] = rand() % 256;
     addr[4] = rand() % 256;
     res = nrf24l01_set_rx_pipe_0_address(&gs_handle, (uint8_t *)addr, 5);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe 0 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1318,10 +1318,10 @@ uint8_t nrf24l01_register_test(void)
                                    addr[0], addr[1], addr[2], addr[3], addr[4]);
     len = 5;
     res = nrf24l01_get_rx_pipe_0_address(&gs_handle, (uint8_t *)addr_check, (uint8_t *)&len);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe 0 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1337,10 +1337,10 @@ uint8_t nrf24l01_register_test(void)
     addr[3] = rand() % 256;
     addr[4] = rand() % 256;
     res = nrf24l01_set_rx_pipe_1_address(&gs_handle, (uint8_t *)addr, 5);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe 1 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1348,10 +1348,10 @@ uint8_t nrf24l01_register_test(void)
                                    addr[0], addr[1], addr[2], addr[3], addr[4]);
     len = 5;
     res = nrf24l01_get_rx_pipe_1_address(&gs_handle, (uint8_t *)addr_check, (uint8_t *)&len);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe 1 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1363,19 +1363,19 @@ uint8_t nrf24l01_register_test(void)
     /* pipe 2 */
     value = rand() % 256;
     res = nrf24l01_set_rx_pipe_2_address(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe 2 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set rx pipe 2 addr 0x%02X.\n", value);
     res = nrf24l01_get_rx_pipe_2_address(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe 2 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1387,19 +1387,19 @@ uint8_t nrf24l01_register_test(void)
     /* pipe 3 */
     value = rand() % 256;
     res = nrf24l01_set_rx_pipe_3_address(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe 3 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set rx pipe 3 addr 0x%02X.\n", value);
     res = nrf24l01_get_rx_pipe_3_address(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe 3 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1411,19 +1411,19 @@ uint8_t nrf24l01_register_test(void)
     /* pipe 4 */
     value = rand() % 256;
     res = nrf24l01_set_rx_pipe_4_address(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe 4 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set rx pipe 4 addr 0x%02X.\n", value);
     res = nrf24l01_get_rx_pipe_4_address(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe 4 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1435,19 +1435,19 @@ uint8_t nrf24l01_register_test(void)
     /* pipe 5 */
     value = rand() % 256;
     res = nrf24l01_set_rx_pipe_5_address(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx pipe 5 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set rx pipe 5 addr 0x%02X.\n", value);
     res = nrf24l01_get_rx_pipe_5_address(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx pipe 5 address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1463,10 +1463,10 @@ uint8_t nrf24l01_register_test(void)
     addr[3] = rand() % 256;
     addr[4] = rand() % 256;
     res = nrf24l01_set_tx_address(&gs_handle, (uint8_t *)addr, 5);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set tx address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1474,10 +1474,10 @@ uint8_t nrf24l01_register_test(void)
                                    addr[0], addr[1], addr[2], addr[3], addr[4]);
     len = 5;
     res = nrf24l01_get_tx_address(&gs_handle, (uint8_t *)addr_check, (uint8_t *)&len);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get tx address failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1488,19 +1488,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 32;
     res = nrf24l01_set_pipe_0_payload_number(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe 0 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set pipe 0 payload number %d.\n", value);
     res = nrf24l01_get_pipe_0_payload_number(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe 0 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1511,19 +1511,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 32;
     res = nrf24l01_set_pipe_1_payload_number(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe 1 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set pipe 1 payload number %d.\n", value);
     res = nrf24l01_get_pipe_1_payload_number(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe 1 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1534,19 +1534,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 32;
     res = nrf24l01_set_pipe_2_payload_number(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe 2 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set pipe 2 payload number %d.\n", value);
     res = nrf24l01_get_pipe_2_payload_number(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe 2 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1557,19 +1557,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 32;
     res = nrf24l01_set_pipe_3_payload_number(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe 3 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set pipe 3 payload number %d.\n", value);
     res = nrf24l01_get_pipe_3_payload_number(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe 3 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1580,19 +1580,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 32;
     res = nrf24l01_set_pipe_4_payload_number(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe 4 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set pipe 4 payload number %d.\n", value);
     res = nrf24l01_get_pipe_4_payload_number(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe 4 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1603,19 +1603,19 @@ uint8_t nrf24l01_register_test(void)
     
     value = rand() % 32;
     res = nrf24l01_set_pipe_5_payload_number(&gs_handle, value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe 5 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: set pipe 5 payload number %d.\n", value);
     res = nrf24l01_get_pipe_5_payload_number(&gs_handle, (uint8_t *)&value_check);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe 5 payload number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1626,19 +1626,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable pipe 0 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_0, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 0 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_0, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1646,19 +1646,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable pipe 0 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_0, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 0 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_0, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1666,19 +1666,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable pipe 1 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_1, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 1 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_1, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1686,19 +1686,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable pipe 1 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_1, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 1 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_1, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1706,19 +1706,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable pipe 2 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_2, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 2 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_2, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1726,19 +1726,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable pipe 2 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_2, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 2 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_2, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1746,19 +1746,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable pipe 3 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_3, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 3 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_3, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1766,19 +1766,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable pipe 3 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_3, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 3 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_3, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1786,19 +1786,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable pipe 4 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_4, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 4 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_4, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1806,19 +1806,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable pipe 4 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_4, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 4 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_4, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1826,19 +1826,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable pipe 5 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_5, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable pipe 5 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_5, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1846,19 +1846,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable pipe 5 */
     res = nrf24l01_set_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_5, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable pipe 5 dynamic payload.\n");
     res = nrf24l01_get_pipe_dynamic_payload(&gs_handle, NRF24L01_PIPE_5, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get pipe dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1869,19 +1869,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable dynamic payload */
     res = nrf24l01_set_dynamic_payload(&gs_handle, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable dynamic payload.\n");
     res = nrf24l01_get_dynamic_payload(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1889,19 +1889,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable dynamic payload */
     res = nrf24l01_set_dynamic_payload(&gs_handle, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable dynamic payload.\n");
     res = nrf24l01_get_dynamic_payload(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get dynamic payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1912,19 +1912,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable payload with ack */
     res = nrf24l01_set_payload_with_ack(&gs_handle, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable payload with ack.\n");
     res = nrf24l01_get_payload_with_ack(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1932,19 +1932,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable payload with ack */
     res = nrf24l01_set_payload_with_ack(&gs_handle, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable payload with ack.\n");
     res = nrf24l01_get_payload_with_ack(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1955,19 +1955,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* disable tx payload with no ack */
     res = nrf24l01_set_tx_payload_with_no_ack(&gs_handle, NRF24L01_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set tx payload with no ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: disable tx payload with no ack.\n");
     res = nrf24l01_get_tx_payload_with_no_ack(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get tx payload with no ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1975,19 +1975,19 @@ uint8_t nrf24l01_register_test(void)
     
     /* enable tx payload with no ack */
     res = nrf24l01_set_tx_payload_with_no_ack(&gs_handle, NRF24L01_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set tx payload with no ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     nrf24l01_interface_debug_print("nrf24l01: enable tx payload with no ack.\n");
     res = nrf24l01_get_tx_payload_with_no_ack(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get tx payload with no ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -1998,10 +1998,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* read rx payload */
     res = nrf24l01_read_rx_payload(&gs_handle, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set rx payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2012,10 +2012,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* write tx payload */
     res = nrf24l01_write_tx_payload(&gs_handle, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: set tx payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2026,10 +2026,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* rx_dr */
     res = nrf24l01_get_interrupt(&gs_handle, NRF24L01_INTERRUPT_RX_DR, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2037,10 +2037,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* tx_ds */
     res = nrf24l01_get_interrupt(&gs_handle, NRF24L01_INTERRUPT_TX_DS, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2048,10 +2048,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* max_rt */
     res = nrf24l01_get_interrupt(&gs_handle, NRF24L01_INTERRUPT_MAX_RT, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2059,10 +2059,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* tx_full */
     res = nrf24l01_get_interrupt(&gs_handle, NRF24L01_INTERRUPT_TX_FULL, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2073,10 +2073,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* rx_dr */
     res = nrf24l01_clear_interrupt(&gs_handle, NRF24L01_INTERRUPT_RX_DR);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: clear interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2084,10 +2084,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* tx_ds */
     res = nrf24l01_clear_interrupt(&gs_handle, NRF24L01_INTERRUPT_TX_DS);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: clear interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2095,10 +2095,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* max_rt */
     res = nrf24l01_clear_interrupt(&gs_handle, NRF24L01_INTERRUPT_MAX_RT);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: clear interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2106,10 +2106,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* tx_full */
     res = nrf24l01_clear_interrupt(&gs_handle, NRF24L01_INTERRUPT_TX_FULL);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: clear interrupt failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2120,10 +2120,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* get data pipe number */
     res = nrf24l01_get_data_pipe_number(&gs_handle, (uint8_t *)&value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get data pipe number failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2134,10 +2134,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* get lost packet count */
     res = nrf24l01_get_lost_packet_count(&gs_handle, (uint8_t *)&value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get lost packet count failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2148,10 +2148,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* get retransmitted packet count */
     res = nrf24l01_get_retransmitted_packet_count(&gs_handle, (uint8_t *)&value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get retransmitted packet count failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2162,10 +2162,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* get received power detector */
     res = nrf24l01_get_received_power_detector(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get received power detector failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2176,10 +2176,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* get fifo status */
     res = nrf24l01_get_fifo_status(&gs_handle, (uint8_t *)&value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get fifo status failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2190,10 +2190,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* get rx payload width */
     res = nrf24l01_get_rx_payload_width(&gs_handle, (uint8_t *)&value);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: get rx payload width failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2204,10 +2204,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* flush tx */
     res = nrf24l01_flush_tx(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: flush tx failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2218,10 +2218,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* flush rx */
     res = nrf24l01_flush_rx(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: flush rx failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2232,10 +2232,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* reuse tx payload */
     res = nrf24l01_reuse_tx_payload(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: reuse tx payload failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2246,10 +2246,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 0 write payload with ack */
     res = nrf24l01_write_payload_with_ack(&gs_handle, NRF24L01_PIPE_0, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: write payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2257,10 +2257,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 1 write payload with ack */
     res = nrf24l01_write_payload_with_ack(&gs_handle, NRF24L01_PIPE_1, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: write payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2268,10 +2268,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 2 write payload with ack */
     res = nrf24l01_write_payload_with_ack(&gs_handle, NRF24L01_PIPE_2, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: write payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2279,10 +2279,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 3 write payload with ack */
     res = nrf24l01_write_payload_with_ack(&gs_handle, NRF24L01_PIPE_3, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: write payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2290,10 +2290,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 4 write payload with ack */
     res = nrf24l01_write_payload_with_ack(&gs_handle, NRF24L01_PIPE_4, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: write payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2301,10 +2301,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* pipe 5 write payload with ack */
     res = nrf24l01_write_payload_with_ack(&gs_handle, NRF24L01_PIPE_5, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: write payload with ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2315,10 +2315,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* write payload with no ack */
     res = nrf24l01_write_payload_with_no_ack(&gs_handle, (uint8_t *)buf, 32);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: write payload with no ack failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2329,10 +2329,10 @@ uint8_t nrf24l01_register_test(void)
     
     /* nop */
     res = nrf24l01_nop(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         nrf24l01_interface_debug_print("nrf24l01: nop failed.\n");
-        nrf24l01_deinit(&gs_handle);
+        (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
@@ -2340,7 +2340,7 @@ uint8_t nrf24l01_register_test(void)
     
     /* finish register test */
     nrf24l01_interface_debug_print("nrf24l01: finish register test.\n");
-    nrf24l01_deinit(&gs_handle);
+    (void)nrf24l01_deinit(&gs_handle);
     
     return 0;
 }

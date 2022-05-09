@@ -34,8 +34,8 @@
  * </table>
  */
 
-#ifndef _GPIO_H_
-#define _GPIO_H_
+#ifndef GPIO_H
+#define GPIO_H
 
 #include <gpiod.h>
 #include <pthread.h>

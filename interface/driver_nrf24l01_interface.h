@@ -34,8 +34,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_NRF24L01_INTERFACE_H_
-#define _DRIVER_NRF24L01_INTERFACE_H_
+#ifndef DRIVER_NRF24L01_INTERFACE_H
+#define DRIVER_NRF24L01_INTERFACE_H
 
 #include "driver_nrf24l01.h"
 
@@ -130,10 +130,9 @@ void nrf24l01_interface_delay_ms(uint32_t ms);
 /**
  * @brief     interface print format data
  * @param[in] fmt is the format data
- * @return    length of the send data
  * @note      none
  */
-uint16_t nrf24l01_interface_debug_print(char *fmt, ...);
+void nrf24l01_interface_debug_print(const char *const fmt, ...);
 
 /**
  * @brief     interface receive callback
@@ -141,12 +140,9 @@ uint16_t nrf24l01_interface_debug_print(char *fmt, ...);
  * @param[in] num is the pipe number
  * @param[in] *buf points to a data buffer
  * @param[in] len is the buffer length
- * @return    status code
- *            - 0 success
- *            - 1 run failed
  * @note      none
  */
-uint8_t nrf24l01_interface_receive_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len);
+void nrf24l01_interface_receive_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len);
 
 /**
  * @}
