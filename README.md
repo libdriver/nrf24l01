@@ -118,11 +118,15 @@ if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
     (void)nrf24l01_basic_deinit();
     (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
+    
+    return 1;
 }
 if (nrf24l01_basic_deinit() != 0)
 {
     (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
+    
+    return 1;
 }
 
 (void)gpio_interrupt_deinit();
@@ -203,6 +207,8 @@ if (nrf24l01_basic_deinit() != 0)
 {
     (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
+    
+    return 1;
 }
 
 (void)gpio_interrupt_deinit();
