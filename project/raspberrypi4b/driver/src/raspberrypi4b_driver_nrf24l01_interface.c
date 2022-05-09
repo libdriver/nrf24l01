@@ -154,13 +154,12 @@ void nrf24l01_interface_delay_ms(uint32_t ms)
 /**
  * @brief     interface print format data
  * @param[in] fmt is the format data
- * @return    length of the send data
  * @note      none
  */
-uint16_t nrf24l01_interface_debug_print(char *fmt, ...)
+void nrf24l01_interface_debug_print(const char *const fmt, ...)
 {
-    volatile char str[256];
-    volatile uint8_t len;
+    char str[256];
+    uint8_t len;
     va_list args;
     
     memset((char *)str, 0, sizeof(char)*256); 
@@ -169,14 +168,7 @@ uint16_t nrf24l01_interface_debug_print(char *fmt, ...)
     va_end(args);
     
     len = strlen((char *)str);
-    if (printf((uint8_t *)str, len))
-    {
-        return 0;
-    }
-    else
-    { 
-        return len;
-    }
+    (void)printf((uint8_t *)str, len);
 }
 
 /**
@@ -185,18 +177,15 @@ uint16_t nrf24l01_interface_debug_print(char *fmt, ...)
  * @param[in] num is the pipe number
  * @param[in] *buf points to a data buffer
  * @param[in] len is the buffer length
- * @return    status code
- *            - 0 success
- *            - 1 run failed
  * @note      none
  */
-uint8_t nrf24l01_interface_receive_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
+void nrf24l01_interface_receive_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
 {
     switch (type)
     {
         case NRF24L01_INTERRUPT_RX_DR :
         {
-            volatile uint8_t i;
+            uint8_t i;
             
             nrf24l01_interface_debug_print("nrf24l01: irq receive with pipe %d with %d.\n", num, len);
             for (i = 0; i < len; i++)
@@ -205,27 +194,31 @@ uint8_t nrf24l01_interface_receive_callback(uint8_t type, uint8_t num, uint8_t *
             }
             nrf24l01_interface_debug_print(".\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_MAX_RT :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq reach max retry times.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_FULL :
         {
-            return 0;
+            nrf24l01_interface_debug_print("nrf24l01: irq tx full.\n");
+            
+            break;
         }
         default :
         {
-            return 1;
+            nrf24l01_interface_debug_print("nrf24l01: unknown code.\n");
+            
+            break;
         }
     }
 }

@@ -49,18 +49,15 @@ uint8_t (*g_gpio_irq)(void) = NULL;        /**< gpio irq function address */
  * @param[in] num is the pipe number
  * @param[in] *buf points to a data buffer
  * @param[in] len is the buffer length
- * @return    status code
- *            - 0 success
- *            - 1 run failed
  * @note      none
  */
-static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
+static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
 {
     switch (type)
     {
         case NRF24L01_INTERRUPT_RX_DR :
         {
-            volatile uint8_t i;
+            uint8_t i;
             
             nrf24l01_interface_debug_print("nrf24l01: irq receive with pipe %d with %d.\n", num, len);
             for (i = 0; i < len; i++)
@@ -69,27 +66,31 @@ static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
             }
             nrf24l01_interface_debug_print(".\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_MAX_RT :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq reach max retry times.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_FULL :
         {
-            return 0;
+            nrf24l01_interface_debug_print("nrf24l01: irq tx full.\n");
+            
+            break;
         }
         default :
         {
-            return 1;
+            nrf24l01_interface_debug_print("nrf24l01: unknown code.\n");
+            
+            break;
         }
     }
 }
@@ -172,10 +173,10 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             /* reg test */
             if (strcmp("reg", argv[2]) == 0)
             {
-                volatile uint8_t res;
+                uint8_t res;
                 
                 res = nrf24l01_register_test();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
@@ -186,23 +187,23 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             /* sent test */
             else if (strcmp("sent", argv[2]) == 0)
             {
-                volatile uint8_t res;
+                uint8_t res;
                 
                 res = gpio_interrupt_init();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
                 g_gpio_irq = nrf24l01_interrupt_test_irq_handler;
                 res = nrf24l01_sent_test();
-                if (res)
+                if (res != 0)
                 {
-                    gpio_interrupt_deinit();
+                    (void)gpio_interrupt_deinit();
                     g_gpio_irq = NULL;
                     
                     return 1;
                 }
-                gpio_interrupt_deinit();
+                (void)gpio_interrupt_deinit();
                 g_gpio_irq = NULL;
                 
                 return 0;
@@ -211,23 +212,23 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             /* receive test */
             else if (strcmp("receive", argv[2]) == 0)
             {
-                volatile uint8_t res;
+                uint8_t res;
                 
                 res = gpio_interrupt_init();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
                 g_gpio_irq = nrf24l01_interrupt_test_irq_handler;
                 res = nrf24l01_receive_test();
-                if (res)
+                if (res != 0)
                 {
-                    gpio_interrupt_deinit();
+                    (void)gpio_interrupt_deinit();
                     g_gpio_irq = NULL;
                     
                     return 1;
                 }
-                gpio_interrupt_deinit();
+                (void)gpio_interrupt_deinit();
                 g_gpio_irq = NULL;
                 
                 return 0;
@@ -252,33 +253,33 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         {
             if (strcmp("receive", argv[2]) == 0)
             {
-                volatile uint8_t res;
-                volatile uint32_t timeout;
+                uint8_t res;
+                uint32_t timeout;
                 
                 timeout = atoi(argv[3]);
                 nrf24l01_interface_debug_print("nrf24l01: receiving with timeout %d ms.\n", timeout);
                 res = gpio_interrupt_init();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
                 g_gpio_irq = nrf24l01_interrupt_irq_handler;
-                res = nrf24l01_basic_init(NRF24L01_TYPE_RX, _callback);
-                if (res)
+                res = nrf24l01_basic_init(NRF24L01_TYPE_RX, a_callback);
+                if (res != 0)
                 {
-                    gpio_interrupt_deinit();
+                    (void)gpio_interrupt_deinit();
                     g_gpio_irq = NULL;
                     
                     return 1;
                 }
                 nrf24l01_interface_delay_ms(timeout);
-                if (nrf24l01_basic_deinit())
+                if (nrf24l01_basic_deinit() != 0)
                 {
-                    gpio_interrupt_deinit();
+                    (void)gpio_interrupt_deinit();
                     g_gpio_irq = NULL;
                 }
                 
-                gpio_interrupt_deinit();
+                (void)gpio_interrupt_deinit();
                 g_gpio_irq = NULL;
                 
                 nrf24l01_interface_debug_print("nrf24l01: finish receiving.\n");
@@ -304,17 +305,17 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         {
             if (strcmp("sent", argv[2]) == 0)
             {
-                volatile uint8_t res;
-                volatile uint8_t ch;
-                volatile uint8_t *addr;
-                const uint8_t addr0[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
-                const uint8_t addr1[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_1;
-                const uint8_t addr2[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_2;
-                const uint8_t addr3[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_3;
-                const uint8_t addr4[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_4;
-                const uint8_t addr5[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_5;
+                uint8_t res;
+                uint8_t ch;
+                uint8_t *addr;
+                uint8_t addr0[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
+                uint8_t addr1[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_1;
+                uint8_t addr2[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_2;
+                uint8_t addr3[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_3;
+                uint8_t addr4[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_4;
+                uint8_t addr5[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_5;
                 
-                ch = atoi(argv[3]);
+                ch = (uint8_t)atoi(argv[3]);
                 if (ch == 0)
                 {
                     addr = (uint8_t *)addr0;
@@ -344,33 +345,33 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
                     return 5;
                 }
                 res = gpio_interrupt_init();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
                 g_gpio_irq = nrf24l01_interrupt_irq_handler;
-                res = nrf24l01_basic_init(NRF24L01_TYPE_TX, _callback);
-                if (res)
+                res = nrf24l01_basic_init(NRF24L01_TYPE_TX, a_callback);
+                if (res != 0)
                 {
-                    gpio_interrupt_deinit();
+                    (void)gpio_interrupt_deinit();
                     g_gpio_irq = NULL;
                     
                     return 1;
                 }
                 nrf24l01_interface_debug_print("nrf24l01: sent %s.\n", argv[4]);
-                if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)argv[4], strlen(argv[4])))
+                if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)argv[4], (uint8_t)strlen(argv[4])) != 0)
                 {
-                    nrf24l01_basic_deinit();
-                    gpio_interrupt_deinit();
+                    (void)nrf24l01_basic_deinit();
+                    (void)gpio_interrupt_deinit();
                     g_gpio_irq = NULL;
                 }
-                if (nrf24l01_basic_deinit())
+                if (nrf24l01_basic_deinit() != 0)
                 {
-                    gpio_interrupt_deinit();
+                    (void)gpio_interrupt_deinit();
                     g_gpio_irq = NULL;
                 }
                 
-                gpio_interrupt_deinit();
+                (void)gpio_interrupt_deinit();
                 g_gpio_irq = NULL;
                 
                 return 0;

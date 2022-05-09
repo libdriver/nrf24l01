@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver NRF24L01
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/nrf24l01/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/nrf24l01/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 nRF24L01+ 是一款带有嵌入式基带协议引擎 (Enhanced ShockBurst™) 的单芯片 2.4GHz 收发器，适用于超低功耗无线应用。 nRF24L01+ 设计用于在 2.400 - 2.4835GHz 的全球 ISM 频段中运行。要使用 nRF24L01+ 设计无线电系统，您只需要一个 MCU（微控制器）和一些外部无源元件。您可以操作和配置 nRF24L01+通过串行外设接口 (SPI)。寄存器映射，可通过SPI访问，包含nRF24L01+中的所有配置寄存器，可在芯片的所有工作模式下访问。 嵌入式基带协议引擎（Enhanced ShockBurst™）基于数据包通信，支持手动多种模式操作到高级自治协议操作。内部 FIFO 可确保无线电前端和系统 MCU 之间的数据流顺畅。增强型 Shock-Burst™ 通过处理所有高速链路层操作来降低系统成本。无线电前端使用 GFSK 调制。它具有用户可配置的参数，如频道、输出功率和空中数据速率。 nRF24L01+ 支持 250 kbps、1 Mbps 和 2Mbps 的空中数据速率。高空中数据速率结合两种省电模式nRF24L01+ 非常适合超低功耗设计。nRF24L01+ 与 nRF24L01 直接兼容，空中兼容 nRF2401A、nRF2402、nRF24E1 和 nRF24E2。与 nRF24L01 相比，nRF24L01+ 中的互调和宽带阻塞值有了很大改善，并且 nRF24L01+ 的内部滤波增加了满足 RF 监管标准的余量。内部稳压器确保高电源抑制比 (PSRR) 和宽功率供应范围。NRF24L01用于无线PC外设、鼠标、键盘、遥控器、游戏控制器等。
 
-LibDriver NRF24L01是LibDriver推出的NRF24L01全功能驱动，提供无线发送、无线接收等功能。
+LibDriver NRF24L01是LibDriver推出的NRF24L01全功能驱动，提供无线发送、无线接收等功能并且它符合MISRA标准。
 
 ### 目录
 
@@ -52,18 +52,18 @@ LibDriver NRF24L01是LibDriver推出的NRF24L01全功能驱动，提供无线发
 
 ```C
 uint8_t (*g_gpio_irq)(void) = NULL;
-volatile uint8_t res;
-const uint8_t addr[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
+uint8_t res;
+uint8_t addr[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
 
 ...
 
-static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
+static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
 {
     switch (type)
     {
         case NRF24L01_INTERRUPT_RX_DR :
         {
-            volatile uint8_t i;
+            uint8_t i;
             
             nrf24l01_interface_debug_print("nrf24l01: irq receive with pipe %d with %d.\n", num, len);
             for (i = 0; i < len; i++)
@@ -72,27 +72,27 @@ static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
             }
             nrf24l01_interface_debug_print(".\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_MAX_RT :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq reach max retry times.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_FULL :
         {
-            return 0;
+            break;
         }
         default :
         {
-            return 1;
+            break;
         }
     }
 }
@@ -100,32 +100,36 @@ static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
 ...
 
 res = gpio_interrupt_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
 g_gpio_irq = nrf24l01_interrupt_irq_handler;
-res = nrf24l01_basic_init(NRF24L01_TYPE_TX, _callback);
-if (res)
+res = nrf24l01_basic_init(NRF24L01_TYPE_TX, a_callback);
+if (res != 0)
 {
-    gpio_interrupt_deinit();
+    (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
 
     return 1;
 }
-if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)"123", 3);
+if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
 {
-    nrf24l01_basic_deinit();
-    gpio_interrupt_deinit();
+    (void)nrf24l01_basic_deinit();
+    (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
+    
+    return 1;
 }
-if (nrf24l01_basic_deinit())
+if (nrf24l01_basic_deinit() != 0)
 {
-    gpio_interrupt_deinit();
+    (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
+    
+    return 1;
 }
 
-gpio_interrupt_deinit();
+(void)gpio_interrupt_deinit();
 g_gpio_irq = NULL;
 
 return 0;
@@ -135,18 +139,18 @@ return 0;
 
 ```C
 uint8_t (*g_gpio_irq)(void) = NULL;
-volatile uint8_t res;
-volatile uint32_t timeout;
+uint8_t res;
+uint32_t timeout;
 
 ...
 
-static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
+static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
 {
     switch (type)
     {
         case NRF24L01_INTERRUPT_RX_DR :
         {
-            volatile uint8_t i;
+            uint8_t i;
             
 
             nrf24l01_interface_debug_print("nrf24l01: irq receive with pipe %d with %d.\n", num, len);
@@ -156,27 +160,27 @@ static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
             }
             nrf24l01_interface_debug_print(".\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_MAX_RT :
         {
             nrf24l01_interface_debug_print("nrf24l01: irq reach max retry times.\n");
             
-            return 0;
+            break;
         }
         case NRF24L01_INTERRUPT_TX_FULL :
         {
-            return 0;
+            break;
         }
         default :
         {
-            return 1;
+            break;
         }
     }
 
@@ -186,27 +190,29 @@ static uint8_t _callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
 
 timeout = 5000;
 res = gpio_interrupt_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
 g_gpio_irq = nrf24l01_interrupt_irq_handler;
-res = nrf24l01_basic_init(NRF24L01_TYPE_RX, _callback);
-if (res)
+res = nrf24l01_basic_init(NRF24L01_TYPE_RX, a_callback);
+if (res != 0)
 {
-    gpio_interrupt_deinit();
+    (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
 
     return 1;
 }
 nrf24l01_interface_delay_ms(timeout);
-if (nrf24l01_basic_deinit())
+if (nrf24l01_basic_deinit() != 0)
 {
-    gpio_interrupt_deinit();
+    (void)gpio_interrupt_deinit();
     g_gpio_irq = NULL;
+    
+    return 1;
 }
 
-gpio_interrupt_deinit();
+(void)gpio_interrupt_deinit();
 g_gpio_irq = NULL;
 
 return 0;

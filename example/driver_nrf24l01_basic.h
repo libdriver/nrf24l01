@@ -34,8 +34,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_NRF24L01_BASIC_H_
-#define _DRIVER_NRF24L01_BASIC_H_
+#ifndef DRIVER_NRF24L01_BASIC_H
+#define DRIVER_NRF24L01_BASIC_H
 
 #include "driver_nrf24l01_interface.h"
 
@@ -122,7 +122,7 @@ uint8_t nrf24l01_interrupt_irq_handler(void);
  *            - 1 init failed
  * @note      none
  */
-uint8_t nrf24l01_basic_init(nrf24l01_type_t type, uint8_t (*callback)(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len));
+uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len));
 
 /**
  * @brief  basic example deinit
@@ -143,7 +143,7 @@ uint8_t nrf24l01_basic_deinit(void);
  *            - 1 sent failed
  * @note      none
  */
-uint8_t nrf24l01_basic_sent(uint8_t *addr, uint8_t *buf, uint32_t len);
+uint8_t nrf24l01_basic_sent(uint8_t *addr, uint8_t *buf, uint8_t len);
 
 /**
  * @}
