@@ -65,12 +65,12 @@ nrf24l01: min temperature is -40.0C.
 ```shell
 ./nrf24l01 -p
 
-nrf24l01: SCK connected to GPIOA PIN5.
-nrf24l01: MISO connected to GPIOA PIN6.
-nrf24l01: MOSI connected to GPIOA PIN7.
-nrf24l01: CS connected to GPIOA PIN4.
-nrf24l01: CE connected to GPIOA PIN8.
-nrf24l01: INT connected to GPIOB PIN0.
+nrf24l01: SCK connected to GPIO11(BCM).
+nrf24l01: MISO connected to GPIO9(BCM).
+nrf24l01: MOSI connected to GPIO10(BCM).
+nrf24l01: CS connected to GPIO8(BCM).
+nrf24l01: CE connected to GPIO27(BCM.
+nrf24l01: INT connected to GPIO17(BCM).
 ```
 
 ```shell
