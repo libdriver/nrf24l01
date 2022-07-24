@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <fileVersion>5</fileVersion>
-    <fileChecksum>3918995664</fileChecksum>
+    <fileChecksum>2911366105</fileChecksum>
     <configuration>
         <name>Release</name>
         <outputs>
-            <file>$PROJ_DIR$\..\driver\src\stm32f407_driver_nrf24l01_interface.c</file>
-            <file>$PROJ_DIR$\..\..\..\src\driver_nrf24l01.c</file>
+            <file>$PROJ_DIR$\..\hal\asm\startup_stm32f407xx_ew.s</file>
         </outputs>
         <forcedrebuild>
             <name>[REBUILD_ALL]</name>
