@@ -51,6 +51,8 @@ Fügen Sie /src, /interface und /example zu Ihrem Projekt hinzu.
 #### example basic sent
 
 ```C
+#include "driver_nrf24l01_basic.h"
+
 uint8_t (*g_gpio_irq)(void) = NULL;
 uint8_t res;
 uint8_t addr[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
@@ -138,6 +140,8 @@ return 0;
 #### example basic receive
 
 ```c
+#include "driver_nrf24l01_basic.h"
+
 uint8_t (*g_gpio_irq)(void) = NULL;
 uint8_t res;
 uint32_t timeout;

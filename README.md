@@ -28,15 +28,15 @@ LibDriver NRF24L01 is the full function driver of NRF24L01 launched by LibDriver
 
 /src includes LibDriver NRF24L01 source files.
 
-/interface includes LibDriver NRF24L01 SPI platform independent template。
+/interface includes LibDriver NRF24L01 SPI platform independent template.
 
-/test includes LibDriver NRF24L01 driver test code and this code can test the chip necessary function simply。
+/test includes LibDriver NRF24L01 driver test code and this code can test the chip necessary function simply.
 
 /example includes LibDriver NRF24L01 sample code.
 
 /doc includes LibDriver NRF24L01 offline document.
 
-/datasheet includes NRF24L01 datasheet。
+/datasheet includes NRF24L01 datasheet.
 
 /project includes the common Linux and MCU development board sample code. All projects use the shell script to debug the driver and the detail instruction can be found in each project's README.md.
 
@@ -51,6 +51,8 @@ Add /src, /interface and /example to your project.
 #### example basic sent
 
 ```C
+#include "driver_nrf24l01_basic.h"
+
 uint8_t (*g_gpio_irq)(void) = NULL;
 uint8_t res;
 uint8_t addr[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
@@ -137,6 +139,8 @@ return 0;
 #### example basic receive
 
 ```c
+#include "driver_nrf24l01_basic.h"
+
 uint8_t (*g_gpio_irq)(void) = NULL;
 uint8_t res;
 uint32_t timeout;
