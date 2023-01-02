@@ -1,14 +1,14 @@
-### 1. Chip
+### 1. Board
 
-#### 1.1 Chip Info
+#### 1.1 Board Info
 
-chip name : Raspberry Pi 4B.
+Board Name: Raspberry Pi 4B.
 
-spi pin: SCLK/MOSI/MISO/CS GPIO11/GPIO10/GPIO9/GPIO8.
+SPI Pin: SCLK/MOSI/MISO/CS GPIO11/GPIO10/GPIO9/GPIO8.
 
-gpio pin: INT GPIO17.
+GPIO Pin: INT GPIO17.
 
-ce pin: CE GPIO 27.
+CE Pin: CE GPIO 27.
 
 ### 2. Install
 
@@ -79,27 +79,53 @@ find_package(nrf24l01 REQUIRED)
 
 #### 3.1 Command Instruction
 
-​           nrf24l01 is a basic command which can test all nrf24l01 driver function:
+1. Show nrf24l01 chip and driver information.
 
-​           -i        show nrf24l01 chip and driver information.
+   ```shell
+   nrf24l01 (-i | --information)
+   ```
 
-​           -h       show nrf24l01 help.
+2. Show nrf24l01 help.
 
-​           -p       show nrf24l01 pin connections of the current board.
+   ```shell
+   nrf24l01 (-h | --help)
+   ```
 
-​           -t (reg | sent | receive)
+3. Show nrf24l01 pin connections of the current board.
 
-​           -t  reg        run nrf24l01 register test.
+   ```shell
+   nrf24l01 (-p | --port)
+   ```
 
-​           -t sent        run nrf24l01 sent test.
+4. Run nrf24l01 register test.
 
-​           -t receive        run nrf24l01 receive test. 
+   ```shell
+   nrf24l01 (-t reg | --test=reg)
+   ```
 
-​           -c (sent <channel> <data> | receive <timeout>)
+5. Run nrf24l01 sent test.
 
-​           -c sent <channel> <data>        run nrf24l01 sent function. channel is the rf channel and it can be "0" -"5". data is the send data and it's length must be less 32.
+   ```shell
+   nrf24l01 (-t sent | --test=sent)
+   ```
 
-​           -c receive <timeout>        run nrf24l01 receive function. timeout is the timeout time.
+6. Run nrf24l01 receive test.
+
+   ```shell
+   nrf24l01 (-t receive | --test=receive)
+   ```
+
+7. Run nrf24l01 sent function, str is the send data and it's length must be less 32.
+
+   ```shell
+   nrf24l01 (-e sent | --example=sent) (--channel=<0 | 1 | 2 | 3 | 4 | 5>) --data=<str>
+   ```
+
+8. Run nrf24l01 receive function, ms is the timeout in ms.
+
+   ```shell
+   nrf24l01 (-e receive | --example=receive) (--timeout=<ms>)
+   ```
 
 #### 3.2 Command Example
 
@@ -234,12 +260,12 @@ nrf24l01: nrf24l01_set_address_width/nrf24l01_get_address_width test.
 nrf24l01: set auto retransmit delay 13.
 nrf24l01: check auto retransmit delay ok.
 nrf24l01: nrf24l01_auto_retransmit_delay_convert_to_register/nrf24l01_auto_retransmit_delay_convert_to_data test.
-nrf24l01: check auto retransmit delay convert 3000 12 3000.
+nrf24l01: check auto retransmit delay convert 250 1 250.
 nrf24l01: nrf24l01_set_auto_retransmit_count/nrf24l01_get_auto_retransmit_count test.
-nrf24l01: set auto retransmit count 4.
+nrf24l01: set auto retransmit count 12.
 nrf24l01: check auto retransmit count ok.
 nrf24l01: nrf24l01_set_channel_frequency/nrf24l01_get_channel_frequency test.
-nrf24l01: set channel frequency 5.
+nrf24l01: set channel frequency 10.
 nrf24l01: check channel frequency ok.
 nrf24l01: nrf24l01_set_continuous_carrier_transmit/nrf24l01_get_continuous_carrier_transmit test.
 nrf24l01: disable continuous carrier transmit.
@@ -268,43 +294,43 @@ nrf24l01: check output power ok.
 nrf24l01: set output power 0 dBm.
 nrf24l01: check output power ok.
 nrf24l01: nrf24l01_set_rx_pipe_0_address/nrf24l01_get_rx_pipe_0_address test.
-nrf24l01: set rx pipe 0 addr 0x07 0x45 0xC8 0x7F 0x13.
+nrf24l01: set rx pipe 0 addr 0x51 0xFF 0x4A 0xEC 0x29.
 nrf24l01: check address ok with 5.
 nrf24l01: nrf24l01_set_rx_pipe_1_address/nrf24l01_get_rx_pipe_1_address test.
-nrf24l01: set rx pipe 1 addr 0xC4 0x6C 0x2B 0xBA 0x61.
+nrf24l01: set rx pipe 1 addr 0xCD 0xBA 0xAB 0xF2 0xFB.
 nrf24l01: check address ok with 5.
 nrf24l01: nrf24l01_set_rx_pipe_2_address/nrf24l01_get_rx_pipe_2_address test.
-nrf24l01: set rx pipe 2 addr 0x65.
+nrf24l01: set rx pipe 2 addr 0xE3.
 nrf24l01: check address ok.
 nrf24l01: nrf24l01_set_rx_pipe_3_address/nrf24l01_get_rx_pipe_3_address test.
-nrf24l01: set rx pipe 3 addr 0xA1.
+nrf24l01: set rx pipe 3 addr 0x46.
 nrf24l01: check address ok.
 nrf24l01: nrf24l01_set_rx_pipe_4_address/nrf24l01_get_rx_pipe_4_address test.
-nrf24l01: set rx pipe 4 addr 0x72.
+nrf24l01: set rx pipe 4 addr 0x7C.
 nrf24l01: check address ok.
 nrf24l01: nrf24l01_set_rx_pipe_5_address/nrf24l01_get_rx_pipe_5_address test.
-nrf24l01: set rx pipe 5 addr 0x64.
+nrf24l01: set rx pipe 5 addr 0xC2.
 nrf24l01: check address ok.
 nrf24l01: nrf24l01_set_tx_address/nrf24l01_get_tx_address test.
-nrf24l01: set tx addr 0x39 0x3D 0xEE 0xD2 0xB5.
+nrf24l01: set tx addr 0x54 0xF8 0x1B 0xE8 0xE7.
 nrf24l01: check address ok with 5.
 nrf24l01: nrf24l01_set_pipe_0_payload_number/nrf24l01_get_pipe_0_payload_number test.
-nrf24l01: set pipe 0 payload number 26.
+nrf24l01: set pipe 0 payload number 13.
 nrf24l01: check payload number ok.
 nrf24l01: nrf24l01_set_pipe_1_payload_number/nrf24l01_get_pipe_1_payload_number test.
-nrf24l01: set pipe 1 payload number 25.
+nrf24l01: set pipe 1 payload number 22.
 nrf24l01: check payload number ok.
 nrf24l01: nrf24l01_set_pipe_2_payload_number/nrf24l01_get_pipe_2_payload_number test.
-nrf24l01: set pipe 2 payload number 8.
+nrf24l01: set pipe 2 payload number 26.
 nrf24l01: check payload number ok.
 nrf24l01: nrf24l01_set_pipe_3_payload_number/nrf24l01_get_pipe_3_payload_number test.
-nrf24l01: set pipe 3 payload number 8.
+nrf24l01: set pipe 3 payload number 14.
 nrf24l01: check payload number ok.
 nrf24l01: nrf24l01_set_pipe_4_payload_number/nrf24l01_get_pipe_4_payload_number test.
-nrf24l01: set pipe 4 payload number 9.
+nrf24l01: set pipe 4 payload number 3.
 nrf24l01: check payload number ok.
 nrf24l01: nrf24l01_set_pipe_5_payload_number/nrf24l01_get_pipe_5_payload_number test.
-nrf24l01: set pipe 5 payload number 10.
+nrf24l01: set pipe 5 payload number 19.
 nrf24l01: check payload number ok.
 nrf24l01: nrf24l01_set_pipe_dynamic_payload/nrf24l01_get_pipe_dynamic_payload test.
 nrf24l01: disable pipe 0 dynamic payload.
@@ -367,7 +393,7 @@ nrf24l01: get lost packet count 0.
 nrf24l01: nrf24l01_get_retransmitted_packet_count test.
 nrf24l01: get retransmitted packet count 0.
 nrf24l01: nrf24l01_get_received_power_detector test.
-nrf24l01: get received power detector enable.
+nrf24l01: get received power detector disable.
 nrf24l01: nrf24l01_get_fifo_status test.
 nrf24l01: get fifo status 0x01.
 nrf24l01: nrf24l01_get_rx_payload_width test.
@@ -443,39 +469,45 @@ nrf24l01: finish receive test.
 ```
 
 ```shell
-./nrf24l01 -c sent 0 libdriver-nrf24l01  
+./nrf24l01 -e sent --channel=0 --data=libdriver-nrf24l01
 
 nrf24l01: sent libdriver-nrf24l01.
 nrf24l01: irq sent ok.
 ```
 
 ```shell
-./nrf24l01 -c receive 5000
+./nrf24l01 -e receive --timeout=5000
 
 nrf24l01: receiving with timeout 5000 ms.
-nrf24l01: irq receive with pipe 0 with 32.
-0x4F 0x67 0xE9 0xBE 0x00 0x00 0x00 0x00 0x68 0xD1 0x8E 0x00 0x60 0x40 0xF2 0xB6 0x03 0x00 0x00 0x00 0x00 0x10 0x80 0x00 0x00 0x70 0x52 0xB6 0x00 0x00 0x00 0x00 .
+nrf24l01: irq receive with pipe 0 with 18.
+0x6C 0x69 0x62 0x64 0x72 0x69 0x76 0x65 0x72 0x2D 0x6E 0x72 0x66 0x32 0x34 0x6C 0x30 0x31 .
 nrf24l01: finish receiving.
 ```
 
 ```shell
 ./nrf24l01 -h
 
-nrf24l01 -i
-	show nrf24l01 chip and driver information.
-nrf24l01 -h
-	show nrf24l01 help.
-nrf24l01 -p
-	show nrf24l01 pin connections of the current board.
-nrf24l01 -t reg
-	run nrf24l01 register test.
-nrf24l01 -t sent
-	run nrf24l01 sent test.
-nrf24l01 -t receive
-	run nrf24l01 receive test.
-nrf24l01 -c sent <channel> <data>
-	run nrf24l01 sent function.channel is the rf channel and it can be "0" - "5".data is the send data and it's length must be less 32.
-nrf24l01 -c receive <timeout>
-	run nrf24l01 receive function.timeout is the timeout time.
+Usage:
+  nrf24l01 (-i | --information)
+  nrf24l01 (-h | --help)
+  nrf24l01 (-p | --port)
+  nrf24l01 (-t reg | --test=reg)
+  nrf24l01 (-t sent | --test=sent)
+  nrf24l01 (-t receive | --test=receive)
+  nrf24l01 (-e sent | --example=sent) [--channel=<0 | 1 | 2 | 3 | 4 | 5>] [--data=<str>]
+  nrf24l01 (-e receive | --example=receive) [--timeout=<ms>]
+
+Options:
+      --channel=<0 | 1 | 2 | 3 | 4 | 5>
+                        Set the send channel.([default: 0])
+      --data=<str>      Set the send data and the length of data must be less 32.([default: LibDriver])
+  -e <sent | receive>, --example=<sent | receive>
+                        Run the driver example.
+  -h, --help            Show the help.
+  -i, --information     Show the chip information.
+  -p, --port            Display the pin connections of the current board.
+  -t <reg | sent | receive>, --test=<reg | sent | receive>
+                        Run the driver test.
+      --timeout=<ms>    Set the receive timeout in ms.([default: 5000])
 ```
 

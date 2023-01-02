@@ -38,9 +38,9 @@
 #include "driver_nrf24l01_register_test.h"
 #include "driver_nrf24l01_basic.h"
 #include "gpio.h"
+#include <getopt.h>
 #include <stdlib.h>
 
-uint8_t g_flag;                            /**< interrupt flag */
 uint8_t (*g_gpio_irq)(void) = NULL;        /**< gpio irq function address */
 
 /**
@@ -107,236 +107,127 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
  */
 uint8_t nrf24l01(uint8_t argc, char **argv)
 {
+    int c;
+    int longindex = 0;
+    const char short_options[] = "hipe:t:";
+    const struct option long_options[] =
+    {
+        {"help", no_argument, NULL, 'h'},
+        {"information", no_argument, NULL, 'i'},
+        {"port", no_argument, NULL, 'p'},
+        {"example", required_argument, NULL, 'e'},
+        {"test", required_argument, NULL, 't'},
+        {"channel", required_argument, NULL, 1},
+        {"data", required_argument, NULL, 2},
+        {"timeout", required_argument, NULL, 3},
+        {NULL, 0, NULL, 0},
+    };
+    char type[32] = "unknow";
+    char data[32] = "LibDriver";
+    uint32_t timeout = 1000;
+    uint8_t addr0[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
+    uint8_t addr1[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_1;
+    uint8_t addr2[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_2;
+    uint8_t addr3[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_3;
+    uint8_t addr4[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_4;
+    uint8_t addr5[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_5;
+    uint8_t *addr = addr0;
+    
+    /* if no params */
     if (argc == 1)
     {
+        /* goto the help */
         goto help;
     }
-    else if (argc == 2)
+    
+    /* init 0 */
+    optind = 0;
+    
+    /* parse */
+    do
     {
-        if (strcmp("-i", argv[1]) == 0)
+        /* parse the args */
+        c = getopt_long(argc, argv, short_options, long_options, &longindex);
+        
+        /* judge the result */
+        switch (c)
         {
-            nrf24l01_info_t info;
-            
-            /* print nrf24l01 info */
-            nrf24l01_info(&info);
-            nrf24l01_interface_debug_print("nrf24l01: chip is %s.\n", info.chip_name);
-            nrf24l01_interface_debug_print("nrf24l01: manufacturer is %s.\n", info.manufacturer_name);
-            nrf24l01_interface_debug_print("nrf24l01: interface is %s.\n", info.interface);
-            nrf24l01_interface_debug_print("nrf24l01: driver version is %d.%d.\n", info.driver_version / 1000, (info.driver_version % 1000)/100);
-            nrf24l01_interface_debug_print("nrf24l01: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
-            nrf24l01_interface_debug_print("nrf24l01: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
-            nrf24l01_interface_debug_print("nrf24l01: max current is %0.2fmA.\n", info.max_current_ma);
-            nrf24l01_interface_debug_print("nrf24l01: max temperature is %0.1fC.\n", info.temperature_max);
-            nrf24l01_interface_debug_print("nrf24l01: min temperature is %0.1fC.\n", info.temperature_min);
-            
-            return 0;
-        }
-        else if (strcmp("-p", argv[1]) == 0)
-        {
-            /* print pin connection */
-            nrf24l01_interface_debug_print("nrf24l01: SCK connected to GPIO11(BCM).\n");
-            nrf24l01_interface_debug_print("nrf24l01: MISO connected to GPIO9(BCM).\n");
-            nrf24l01_interface_debug_print("nrf24l01: MOSI connected to GPIO10(BCM).\n");
-            nrf24l01_interface_debug_print("nrf24l01: CS connected to GPIO8(BCM).\n");
-            nrf24l01_interface_debug_print("nrf24l01: CE connected to GPIO27(BCM.\n");
-            nrf24l01_interface_debug_print("nrf24l01: INT connected to GPIO17(BCM).\n");
-            
-            return 0;
-        }
-        else if (strcmp("-h", argv[1]) == 0)
-        {
-            /* show nrf24l01 help */
-            
-            help:
-            nrf24l01_interface_debug_print("nrf24l01 -i\n\tshow nrf24l01 chip and driver information.\n");
-            nrf24l01_interface_debug_print("nrf24l01 -h\n\tshow nrf24l01 help.\n");
-            nrf24l01_interface_debug_print("nrf24l01 -p\n\tshow nrf24l01 pin connections of the current board.\n");
-            nrf24l01_interface_debug_print("nrf24l01 -t reg\n\trun nrf24l01 register test.\n");
-            nrf24l01_interface_debug_print("nrf24l01 -t sent\n\trun nrf24l01 sent test.\n");
-            nrf24l01_interface_debug_print("nrf24l01 -t receive\n\trun nrf24l01 receive test.\n");
-            nrf24l01_interface_debug_print("nrf24l01 -c sent <channel> <data>\n\trun nrf24l01 sent function."
-                                           "channel is the rf channel and it can be \"0\" - \"5\".data is the send data and it's length must be less 32.\n");
-            nrf24l01_interface_debug_print("nrf24l01 -c receive <timeout>\n\trun nrf24l01 receive function.timeout is the timeout time.\n");
-            
-            return 0;
-        }
-        else
-        {
-            return 5;
-        }
-    }
-    else if (argc == 3)
-    {
-        /* run test */
-        if (strcmp("-t", argv[1]) == 0)
-        {
-            /* reg test */
-            if (strcmp("reg", argv[2]) == 0)
+            /* help */
+            case 'h' :
             {
-                uint8_t res;
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "h");
                 
-                res = nrf24l01_register_test();
-                if (res != 0)
-                {
-                    return 1;
-                }
-                
-                return 0;
+                break;
             }
             
-            /* sent test */
-            else if (strcmp("sent", argv[2]) == 0)
+            /* information */
+            case 'i' :
             {
-                uint8_t res;
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "i");
                 
-                res = gpio_interrupt_init();
-                if (res != 0)
-                {
-                    return 1;
-                }
-                g_gpio_irq = nrf24l01_interrupt_test_irq_handler;
-                res = nrf24l01_sent_test();
-                if (res != 0)
-                {
-                    (void)gpio_interrupt_deinit();
-                    g_gpio_irq = NULL;
-                    
-                    return 1;
-                }
-                (void)gpio_interrupt_deinit();
-                g_gpio_irq = NULL;
-                
-                return 0;
+                break;
             }
             
-            /* receive test */
-            else if (strcmp("receive", argv[2]) == 0)
+            /* port */
+            case 'p' :
             {
-                uint8_t res;
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "p");
                 
-                res = gpio_interrupt_init();
-                if (res != 0)
-                {
-                    return 1;
-                }
-                g_gpio_irq = nrf24l01_interrupt_test_irq_handler;
-                res = nrf24l01_receive_test();
-                if (res != 0)
-                {
-                    (void)gpio_interrupt_deinit();
-                    g_gpio_irq = NULL;
-                    
-                    return 1;
-                }
-                (void)gpio_interrupt_deinit();
-                g_gpio_irq = NULL;
-                
-                return 0;
+                break;
             }
             
-            /* param is invalid */
-            else
+            /* example */
+            case 'e' :
             {
-                return 5;
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "e_%s", optarg);
+                
+                break;
             }
-        }
-        /* param is invalid */
-        else
-        {
-            return 5;
-        }
-    }
-    else if (argc == 4)
-    {
-        /* run the function */
-        if (strcmp("-c", argv[1]) == 0)
-        {
-            if (strcmp("receive", argv[2]) == 0)
+            
+            /* test */
+            case 't' :
             {
-                uint8_t res;
-                uint32_t timeout;
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "t_%s", optarg);
                 
-                timeout = atoi(argv[3]);
-                nrf24l01_interface_debug_print("nrf24l01: receiving with timeout %d ms.\n", timeout);
-                res = gpio_interrupt_init();
-                if (res != 0)
-                {
-                    return 1;
-                }
-                g_gpio_irq = nrf24l01_interrupt_irq_handler;
-                res = nrf24l01_basic_init(NRF24L01_TYPE_RX, a_callback);
-                if (res != 0)
-                {
-                    (void)gpio_interrupt_deinit();
-                    g_gpio_irq = NULL;
-                    
-                    return 1;
-                }
-                nrf24l01_interface_delay_ms(timeout);
-                if (nrf24l01_basic_deinit() != 0)
-                {
-                    (void)gpio_interrupt_deinit();
-                    g_gpio_irq = NULL;
-                }
-                
-                (void)gpio_interrupt_deinit();
-                g_gpio_irq = NULL;
-                
-                nrf24l01_interface_debug_print("nrf24l01: finish receiving.\n");
-                
-                return 0;
+                break;
             }
-            /* param is invalid */
-            else
+            
+            /* channel */
+            case 1 :
             {
-                return 5;
-            }
-        }
-        /* param is invalid */
-        else
-        {
-            return 5;
-        }
-    }
-    else if (argc == 5)
-    {
-        /* run the function */
-        if (strcmp("-c", argv[1]) == 0)
-        {
-            if (strcmp("sent", argv[2]) == 0)
-            {
-                uint8_t res;
-                uint8_t ch;
-                uint8_t *addr;
-                uint8_t addr0[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
-                uint8_t addr1[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_1;
-                uint8_t addr2[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_2;
-                uint8_t addr3[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_3;
-                uint8_t addr4[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_4;
-                uint8_t addr5[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_5;
+                /* copy data */
                 
-                ch = (uint8_t)atoi(argv[3]);
-                if (ch == 0)
+                if (strcmp("0", optarg) == 0)
                 {
                     addr = (uint8_t *)addr0;
                 }
-                else if (ch == 1)
+                else if (strcmp("1", optarg) == 0)
                 {
                     addr = (uint8_t *)addr1;
                 }
-                else if (ch == 2)
+                else if (strcmp("2", optarg) == 0)
                 {
                     addr = (uint8_t *)addr2;
                 }
-                else if (ch == 3)
+                else if (strcmp("3", optarg) == 0)
                 {
                     addr = (uint8_t *)addr3;
                 }
-                else if (ch == 4)
+                else if (strcmp("4", optarg) == 0)
                 {
                     addr = (uint8_t *)addr4;
                 }
-                else if (ch == 5)
+                else if (strcmp("5", optarg) == 0)
                 {
                     addr = (uint8_t *)addr5;
                 }
@@ -344,51 +235,275 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
                 {
                     return 5;
                 }
-                res = gpio_interrupt_init();
-                if (res != 0)
-                {
-                    return 1;
-                }
-                g_gpio_irq = nrf24l01_interrupt_irq_handler;
-                res = nrf24l01_basic_init(NRF24L01_TYPE_TX, a_callback);
-                if (res != 0)
-                {
-                    (void)gpio_interrupt_deinit();
-                    g_gpio_irq = NULL;
-                    
-                    return 1;
-                }
-                nrf24l01_interface_debug_print("nrf24l01: sent %s.\n", argv[4]);
-                if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)argv[4], (uint8_t)strlen(argv[4])) != 0)
-                {
-                    (void)nrf24l01_basic_deinit();
-                    (void)gpio_interrupt_deinit();
-                    g_gpio_irq = NULL;
-                }
-                if (nrf24l01_basic_deinit() != 0)
-                {
-                    (void)gpio_interrupt_deinit();
-                    g_gpio_irq = NULL;
-                }
                 
-                (void)gpio_interrupt_deinit();
-                g_gpio_irq = NULL;
-                
-                return 0;
+                break;
             }
-            /* param is invalid */
-            else
+            
+            /* data */
+            case 2 :
+            {
+                /* check the length */
+                if (strlen(optarg) > 32)
+                {
+                    return 5;
+                }
+                
+                /* copy data */
+                memset(data, 0, sizeof(char) * 32);
+                strncpy(data, optarg, 32);
+                
+                break;
+            }
+            
+            /* timeout */
+            case 3 :
+            {
+                /* set the timeout */
+                timeout = atol(optarg);
+                
+                break;
+            } 
+            
+            /* the end */
+            case -1 :
+            {
+                break;
+            }
+            
+            /* others */
+            default :
             {
                 return 5;
             }
         }
-        /* param is invalid */
-        else
+    } while (c != -1);
+
+    /* run the function */
+    if (strcmp("t_reg", type) == 0)
+    {
+        uint8_t res;
+        
+        /* run reg test */
+        res = nrf24l01_register_test();
+        if (res != 0)
         {
-            return 5;
+            return 1;
         }
+        
+        return 0;
     }
-    /* param is invalid */
+    else if (strcmp("t_sent", type) == 0)
+    {
+        uint8_t res;
+        
+        /* gpio init */
+        res = gpio_interrupt_init();
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        /* set gpio irq */
+        g_gpio_irq = nrf24l01_interrupt_test_irq_handler;
+        
+        /* run sent test */
+        res = nrf24l01_sent_test();
+        if (res != 0)
+        {
+            (void)gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+            
+            return 1;
+        }
+        
+        /* gpio deinit */
+        (void)gpio_interrupt_deinit();
+        g_gpio_irq = NULL;
+        
+        return 0;
+    }
+    else if (strcmp("t_receive", type) == 0)
+    {
+        uint8_t res;
+        
+        /* gpio init */
+        res = gpio_interrupt_init();
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        /* set gpio irq */
+        g_gpio_irq = nrf24l01_interrupt_test_irq_handler;
+        
+        /* run receive test */
+        res = nrf24l01_receive_test();
+        if (res != 0)
+        {
+            (void)gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+            
+            return 1;
+        }
+        
+        /* gpio deinit */
+        (void)gpio_interrupt_deinit();
+        g_gpio_irq = NULL;
+        
+        return 0;
+    }
+    else if (strcmp("e_sent", type) == 0)
+    {
+        uint8_t res;
+        
+        /* gpio init */
+        res = gpio_interrupt_init();
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        /* set gpio irq */
+        g_gpio_irq = nrf24l01_interrupt_irq_handler;
+        
+        /* basic init */
+        res = nrf24l01_basic_init(NRF24L01_TYPE_TX, a_callback);
+        if (res != 0)
+        {
+            (void)gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+            
+            return 1;
+        }
+        
+        /* output */
+        nrf24l01_interface_debug_print("nrf24l01: sent %s.\n", data);
+        
+        /* basic sent */
+        if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)data, (uint8_t)strlen(data)) != 0)
+        {
+            (void)nrf24l01_basic_deinit();
+            (void)gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+        }
+        
+        /* basic deinit */
+        if (nrf24l01_basic_deinit() != 0)
+        {
+            (void)gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+        }
+        
+        /* deinit */
+        (void)gpio_interrupt_deinit();
+        g_gpio_irq = NULL;
+        
+        return 0;
+    }
+    else if (strcmp("e_receive", type) == 0)
+    {
+        uint8_t res;
+        
+        /* output */
+        nrf24l01_interface_debug_print("nrf24l01: receiving with timeout %d ms.\n", timeout);
+        
+        /* gpio init */
+        res = gpio_interrupt_init();
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        /* set gpio irq */
+        g_gpio_irq = nrf24l01_interrupt_irq_handler;
+        
+        /* basic init */
+        res = nrf24l01_basic_init(NRF24L01_TYPE_RX, a_callback);
+        if (res != 0)
+        {
+            (void)gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+            
+            return 1;
+        }
+        
+        /* delay timeout */
+        nrf24l01_interface_delay_ms(timeout);
+        
+        /* basic deinit */
+        if (nrf24l01_basic_deinit() != 0)
+        {
+            (void)gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+        }
+        
+        /* gpio deinit */
+        (void)gpio_interrupt_deinit();
+        g_gpio_irq = NULL;
+        
+        /* output */
+        nrf24l01_interface_debug_print("nrf24l01: finish receiving.\n");
+        
+        return 0;
+    }
+    else if (strcmp("h", type) == 0)
+    {
+        help:
+        nrf24l01_interface_debug_print("Usage:\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-i | --information)\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-h | --help)\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-p | --port)\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-t reg | --test=reg)\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-t sent | --test=sent)\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-t receive | --test=receive)\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-e sent | --example=sent) [--channel=<0 | 1 | 2 | 3 | 4 | 5>] [--data=<str>]\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-e receive | --example=receive) [--timeout=<ms>]\n");
+        nrf24l01_interface_debug_print("\n");
+        nrf24l01_interface_debug_print("Options:\n");
+        nrf24l01_interface_debug_print("      --channel=<0 | 1 | 2 | 3 | 4 | 5>\n");
+        nrf24l01_interface_debug_print("                        Set the send channel.([default: 0])\n");
+        nrf24l01_interface_debug_print("      --data=<str>      Set the send data and it's length must be less 32.([default: LibDriver])\n");
+        nrf24l01_interface_debug_print("  -e <sent | receive>, --example=<sent | receive>\n");
+        nrf24l01_interface_debug_print("                        Run the driver example.\n");
+        nrf24l01_interface_debug_print("  -h, --help            Show the help.\n");
+        nrf24l01_interface_debug_print("  -i, --information     Show the chip information.\n");
+        nrf24l01_interface_debug_print("  -p, --port            Display the pin connections of the current board.\n");
+        nrf24l01_interface_debug_print("  -t <reg | sent | receive>, --test=<reg | sent | receive>\n");
+        nrf24l01_interface_debug_print("                        Run the driver test.\n");
+        nrf24l01_interface_debug_print("      --timeout=<ms>    Set the receive timeout in ms.([default: 5000])\n");
+
+        return 0;
+    }
+    else if (strcmp("i", type) == 0)
+    {
+        nrf24l01_info_t info;
+        
+        /* print nrf24l01 info */
+        nrf24l01_info(&info);
+        nrf24l01_interface_debug_print("nrf24l01: chip is %s.\n", info.chip_name);
+        nrf24l01_interface_debug_print("nrf24l01: manufacturer is %s.\n", info.manufacturer_name);
+        nrf24l01_interface_debug_print("nrf24l01: interface is %s.\n", info.interface);
+        nrf24l01_interface_debug_print("nrf24l01: driver version is %d.%d.\n", info.driver_version / 1000, (info.driver_version % 1000) / 100);
+        nrf24l01_interface_debug_print("nrf24l01: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
+        nrf24l01_interface_debug_print("nrf24l01: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
+        nrf24l01_interface_debug_print("nrf24l01: max current is %0.2fmA.\n", info.max_current_ma);
+        nrf24l01_interface_debug_print("nrf24l01: max temperature is %0.1fC.\n", info.temperature_max);
+        nrf24l01_interface_debug_print("nrf24l01: min temperature is %0.1fC.\n", info.temperature_min);
+        
+        return 0;
+    }
+    else if (strcmp("p", type) == 0)
+    {
+        /* print pin connection */
+        nrf24l01_interface_debug_print("nrf24l01: SCK connected to GPIO11(BCM).\n");
+        nrf24l01_interface_debug_print("nrf24l01: MISO connected to GPIO9(BCM).\n");
+        nrf24l01_interface_debug_print("nrf24l01: MOSI connected to GPIO10(BCM).\n");
+        nrf24l01_interface_debug_print("nrf24l01: CS connected to GPIO8(BCM).\n");
+        nrf24l01_interface_debug_print("nrf24l01: CE connected to GPIO27(BCM.\n");
+        nrf24l01_interface_debug_print("nrf24l01: INT connected to GPIO17(BCM).\n");
+        
+        return 0;
+    }
     else
     {
         return 5;
