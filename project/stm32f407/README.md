@@ -2,57 +2,95 @@
 
 #### 1.1 Chip Info
 
-chip name : STM32F407ZGT6.
+Chip Name: STM32F407ZGT6.
 
-extern oscillator : 8MHz.
+Extern Oscillator: 8MHz.
 
-uart pin: TX/RX PA9/PA10.
+UART Pin: TX/RX PA9/PA10.
 
-spi pin: SCK/MISO/MOSI/CS  PA5/PA6/PA7/PA4.
+SPI Pin: SCK/MISO/MOSI/CS  PA5/PA6/PA7/PA4.
 
-ce pin: CE PA8.
+CE Pin: CE PA8.
 
-int pin: INT PB0.
+INT Pin: INT PB0.
 
-### 2. Shell
+### 2. Development and Debugging
 
-#### 2.1 Shell Parameter
+#### 2.1 Integrated Development Environment
 
-baud rate: 115200.
+LidDriver provides both Keil and IAR integrated development environment projects.
 
-data bits : 8.
+MDK is the Keil ARM project and your Keil version must be 5 or higher.Keil ARM project needs STMicroelectronics STM32F4 Series Device Family Pack and you can download from https://www.keil.com/dd2/stmicroelectronics/stm32f407zgtx.
 
-stop bits: 1.
+EW is the IAR ARM project and your IAR version must be 9 or higher.
 
-parity: none.
+#### 2.2 Serial Port Parameter
 
-flow control: none.
+Baud Rate: 115200.
+
+Data Bits : 8.
+
+Stop Bits: 1.
+
+Parity: None.
+
+Flow Control: None.
+
+#### 2.3 Serial Port Assistant
+
+We use '\n' to wrap lines.If your serial port assistant displays exceptions (e.g. the displayed content does not divide lines), please modify the configuration of your serial port assistant or replace one that supports '\n' parsing.
 
 ### 3. NRF24L01
 
 #### 3.1 Command Instruction
 
-​           nrf24l01 is a basic command which can test all nrf24l01 driver function:
+1. Show nrf24l01 chip and driver information.
 
-​           -i        show nrf24l01 chip and driver information.
+   ```shell
+   nrf24l01 (-i | --information)
+   ```
 
-​           -h       show nrf24l01 help.
+2. Show nrf24l01 help.
 
-​           -p       show nrf24l01 pin connections of the current board.
+   ```shell
+   nrf24l01 (-h | --help)
+   ```
 
-​           -t (reg | sent | receive)
+3. Show nrf24l01 pin connections of the current board.
 
-​           -t  reg        run nrf24l01 register test.
+   ```shell
+   nrf24l01 (-p | --port)
+   ```
 
-​           -t sent        run nrf24l01 sent test.
+4. Run nrf24l01 register test.
 
-​           -t receive        run nrf24l01 receive test. 
+   ```shell
+   nrf24l01 (-t reg | --test=reg)
+   ```
 
-​           -c (sent <channel> <data> | receive <timeout>)
+5. Run nrf24l01 sent test.
 
-​           -c sent <channel> <data>        run nrf24l01 sent function. channel is the rf channel and it can be "0" -"5". data is the send data and it's length must be less 32.
+   ```shell
+   nrf24l01 (-t sent | --test=sent)
+   ```
 
-​           -c receive <timeout>        run nrf24l01 receive function. timeout is the timeout time.
+6. Run nrf24l01 receive test.
+
+   ```shell
+   nrf24l01 (-t receive | --test=receive)
+   ```
+
+7. Run nrf24l01 sent function, str is the send data and it's length must be less 32.
+
+   ```shell
+   nrf24l01 (-e sent | --example=sent) (--channel=<0 | 1 | 2 | 3 | 4 | 5>) --data=<str>
+   ```
+
+8. Run nrf24l01 receive function, ms is the timeout in ms.
+
+   ```shell
+   nrf24l01 (-e receive | --example=receive) (--timeout=<ms>)
+   ```
 
 #### 3.2 Command Example
 
@@ -320,7 +358,7 @@ nrf24l01: get lost packet count 0.
 nrf24l01: nrf24l01_get_retransmitted_packet_count test.
 nrf24l01: get retransmitted packet count 0.
 nrf24l01: nrf24l01_get_received_power_detector test.
-nrf24l01: get received power detector enable.
+nrf24l01: get received power detector disable.
 nrf24l01: nrf24l01_get_fifo_status test.
 nrf24l01: get fifo status 0x01.
 nrf24l01: nrf24l01_get_rx_payload_width test.
@@ -380,55 +418,67 @@ nrf24l01: max current is 13.50mA.
 nrf24l01: max temperature is 85.0C.
 nrf24l01: min temperature is -40.0C.
 nrf24l01: start receive test.
+nrf24l01: irq tx full.
 nrf24l01: irq receive with pipe 0 with 32.
 0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F 0x10 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1A 0x1B 0x1C 0x1D 0x1E 0x1F .
+nrf24l01: irq tx full.
 nrf24l01: irq receive with pipe 1 with 32.
 0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F 0x10 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1A 0x1B 0x1C 0x1D 0x1E 0x1F .
+nrf24l01: irq tx full.
 nrf24l01: irq receive with pipe 2 with 32.
 0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F 0x10 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1A 0x1B 0x1C 0x1D 0x1E 0x1F .
+nrf24l01: irq tx full.
 nrf24l01: irq receive with pipe 3 with 32.
 0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F 0x10 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1A 0x1B 0x1C 0x1D 0x1E 0x1F .
+nrf24l01: irq tx full.
 nrf24l01: irq receive with pipe 4 with 32.
 0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F 0x10 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1A 0x1B 0x1C 0x1D 0x1E 0x1F .
+nrf24l01: irq tx full.
 nrf24l01: irq receive with pipe 5 with 32.
 0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0A 0x0B 0x0C 0x0D 0x0E 0x0F 0x10 0x11 0x12 0x13 0x14 0x15 0x16 0x17 0x18 0x19 0x1A 0x1B 0x1C 0x1D 0x1E 0x1F .
 nrf24l01: finish receive test.
 ```
 
 ```shell
-nrf24l01 -c sent 0 libdriver-nrf24l01  
+nrf24l01 -e sent --channel=0 --data=libdriver-nrf24l01
 
 nrf24l01: sent libdriver-nrf24l01.
 nrf24l01: irq sent ok.
 ```
 
 ```shell
-nrf24l01 -c receive 5000
+nrf24l01 -e receive --timeout=5000
 
 nrf24l01: receiving with timeout 5000 ms.
-nrf24l01: irq receive with pipe 0 with 32.
-0x4F 0x67 0xE9 0xBE 0x00 0x00 0x00 0x00 0x68 0xD1 0x8E 0x00 0x60 0x40 0xF2 0xB6 0x03 0x00 0x00 0x00 0x00 0x10 0x80 0x00 0x00 0x70 0x52 0xB6 0x00 0x00 0x00 0x00 .
+nrf24l01: irq receive with pipe 0 with 18.
+0x6C 0x69 0x62 0x64 0x72 0x69 0x76 0x65 0x72 0x2D 0x6E 0x72 0x66 0x32 0x34 0x6C 0x30 0x31 .
 nrf24l01: finish receiving.
 ```
 
 ```shell
 nrf24l01 -h
 
-nrf24l01 -i
-	show nrf24l01 chip and driver information.
-nrf24l01 -h
-	show nrf24l01 help.
-nrf24l01 -p
-	show nrf24l01 pin connections of the current board.
-nrf24l01 -t reg
-	run nrf24l01 register test.
-nrf24l01 -t sent
-	run nrf24l01 sent test.
-nrf24l01 -t receive
-	run nrf24l01 receive test.
-nrf24l01 -c sent <channel> <data>
-	run nrf24l01 sent function.channel is the rf channel and it can be "0" - "5".data is the send data and it's length must be less 32.
-nrf24l01 -c receive <timeout>
-	run nrf24l01 receive function.timeout is the timeout time.
+Usage:
+  nrf24l01 (-i | --information)
+  nrf24l01 (-h | --help)
+  nrf24l01 (-p | --port)
+  nrf24l01 (-t reg | --test=reg)
+  nrf24l01 (-t sent | --test=sent)
+  nrf24l01 (-t receive | --test=receive)
+  nrf24l01 (-e sent | --example=sent) [--channel=<0 | 1 | 2 | 3 | 4 | 5>] [--data=<str>]
+  nrf24l01 (-e receive | --example=receive) [--timeout=<ms>]
+
+Options:
+      --channel=<0 | 1 | 2 | 3 | 4 | 5>
+                        Set the send channel.([default: 0])
+      --data=<str>      Set the send data and it's length must be less 32.([default: LibDriver])
+  -e <sent | receive>, --example=<sent | receive>
+                        Run the driver example.
+  -h, --help            Show the help.
+  -i, --information     Show the chip information.
+  -p, --port            Display the pin connections of the current board.
+  -t <reg | sent | receive>, --test=<reg | sent | receive>
+                        Run the driver test.
+      --timeout=<ms>    Set the receive timeout in ms.([default: 5000])
 ```
 

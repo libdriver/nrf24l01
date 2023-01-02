@@ -763,7 +763,7 @@ Functions</h2></td></tr>
 <p>convert the register raw data to the delay </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">reg</td><td>is the register raw data </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*us</td><td>points to a delay buffer </td></tr>
   </table>
@@ -816,7 +816,7 @@ Functions</h2></td></tr>
 <p>convert the delay to the register raw data </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">us</td><td>is the delay </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*reg</td><td>points to a register raw buffer </td></tr>
   </table>
@@ -863,7 +863,7 @@ Functions</h2></td></tr>
 <p>clear the interrupt status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>is the interrupt type </td></tr>
   </table>
   </dd>
@@ -900,7 +900,7 @@ Functions</h2></td></tr>
 <p>close the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -938,7 +938,7 @@ Functions</h2></td></tr>
 <p>flush rx </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -974,7 +974,7 @@ Functions</h2></td></tr>
 <p>flush tx </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -1020,8 +1020,8 @@ Functions</h2></td></tr>
 <p>get the address width </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*width</td><td>points to a address width buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*width</td><td>points to an address width buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -1073,7 +1073,7 @@ Functions</h2></td></tr>
 <p>get the auto acknowledgment status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pipe</td><td>is the rf pipe </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
@@ -1121,8 +1121,8 @@ Functions</h2></td></tr>
 <p>get the auto retransmit count </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*count</td><td>points to a auto retransmit count buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*count</td><td>points to an auto retransmit count buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -1168,8 +1168,8 @@ Functions</h2></td></tr>
 <p>get the auto retransmit delay </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*delay</td><td>points to a auto retransmit delay buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*delay</td><td>points to an auto retransmit delay buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -1215,7 +1215,7 @@ Functions</h2></td></tr>
 <p>get the channel frequency </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*freq</td><td>points to a channel freq buffer </td></tr>
   </table>
   </dd>
@@ -1268,7 +1268,7 @@ Functions</h2></td></tr>
 <p>get the configure </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>is the config type </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
@@ -1316,7 +1316,7 @@ Functions</h2></td></tr>
 <p>get the continuous carrier transmit status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
   </dd>
@@ -1363,7 +1363,7 @@ Functions</h2></td></tr>
 <p>get the data pipe number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*number</td><td>points to a number buffer </td></tr>
   </table>
   </dd>
@@ -1410,7 +1410,7 @@ Functions</h2></td></tr>
 <p>get the data rate </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*rate</td><td>points to a data rate buffer </td></tr>
   </table>
   </dd>
@@ -1457,7 +1457,7 @@ Functions</h2></td></tr>
 <p>get the dynamic payload status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
   </dd>
@@ -1504,7 +1504,7 @@ Functions</h2></td></tr>
 <p>get the fifo status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>points to a fifo status buffer </td></tr>
   </table>
   </dd>
@@ -1551,7 +1551,7 @@ Functions</h2></td></tr>
 <p>get the force pll lock signal status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
   </dd>
@@ -1604,7 +1604,7 @@ Functions</h2></td></tr>
 <p>get the interrupt status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>is the interrupt type </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool buffer </td></tr>
   </table>
@@ -1652,7 +1652,7 @@ Functions</h2></td></tr>
 <p>get the lost packet count </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*count</td><td>points to a count buffer </td></tr>
   </table>
   </dd>
@@ -1699,7 +1699,7 @@ Functions</h2></td></tr>
 <p>get the chip mode </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*mode</td><td>points to a chip mode buffer </td></tr>
   </table>
   </dd>
@@ -1746,8 +1746,8 @@ Functions</h2></td></tr>
 <p>get the output power </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*power</td><td>points to a output power buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*power</td><td>points to an output power buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -1793,7 +1793,7 @@ Functions</h2></td></tr>
 <p>get the payload with ack status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
   </dd>
@@ -1840,7 +1840,7 @@ Functions</h2></td></tr>
 <p>get the pipe 0 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*num</td><td>points to a payload number buffer </td></tr>
   </table>
   </dd>
@@ -1887,7 +1887,7 @@ Functions</h2></td></tr>
 <p>get the pipe 1 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*num</td><td>points to a payload number buffer </td></tr>
   </table>
   </dd>
@@ -1934,7 +1934,7 @@ Functions</h2></td></tr>
 <p>get the pipe 2 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*num</td><td>points to a payload number buffer </td></tr>
   </table>
   </dd>
@@ -1981,7 +1981,7 @@ Functions</h2></td></tr>
 <p>get the pipe 3 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*num</td><td>points to a payload number buffer </td></tr>
   </table>
   </dd>
@@ -2028,7 +2028,7 @@ Functions</h2></td></tr>
 <p>get the pipe 4 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*num</td><td>points to a payload number buffer </td></tr>
   </table>
   </dd>
@@ -2075,7 +2075,7 @@ Functions</h2></td></tr>
 <p>get the pipe 5 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*num</td><td>points to a payload number buffer </td></tr>
   </table>
   </dd>
@@ -2128,7 +2128,7 @@ Functions</h2></td></tr>
 <p>get the pipe dynamic payload status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pipe</td><td>is the pipe number </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
@@ -2176,7 +2176,7 @@ Functions</h2></td></tr>
 <p>get the received power detector </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool buffer </td></tr>
   </table>
   </dd>
@@ -2223,7 +2223,7 @@ Functions</h2></td></tr>
 <p>get the retransmitted packet count </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*count</td><td>points to a count buffer </td></tr>
   </table>
   </dd>
@@ -2270,7 +2270,7 @@ Functions</h2></td></tr>
 <p>get the rx payload width </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*width</td><td>points to a width buffer </td></tr>
   </table>
   </dd>
@@ -2323,7 +2323,7 @@ Functions</h2></td></tr>
 <p>get the rx pipe status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pipe</td><td>is the rf pipe </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
@@ -2377,9 +2377,9 @@ Functions</h2></td></tr>
 <p>get the rx pipe 0 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to a address buffer </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">*len</td><td>points to a address length buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to an address buffer </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">*len</td><td>points to an address length buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -2432,9 +2432,9 @@ Functions</h2></td></tr>
 <p>get the rx pipe 1 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to a address buffer </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">*len</td><td>points to a address length buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to an address buffer </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">*len</td><td>points to an address length buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -2481,8 +2481,8 @@ Functions</h2></td></tr>
 <p>get the rx pipe 2 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to a rx pipe 2 address buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to an rx pipe 2 address buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -2528,8 +2528,8 @@ Functions</h2></td></tr>
 <p>get the rx pipe 3 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to a rx pipe 3 address buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to an rx pipe 3 address buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -2575,8 +2575,8 @@ Functions</h2></td></tr>
 <p>get the rx pipe 4 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to a rx pipe 4 address buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to an rx pipe 4 address buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -2622,8 +2622,8 @@ Functions</h2></td></tr>
 <p>get the rx pipe 5 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to a rx pipe 5 address buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*addr</td><td>points to an rx pipe 5 address buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -2675,9 +2675,9 @@ Functions</h2></td></tr>
 <p>get the tx address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to a address buffer </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">*len</td><td>points to a address length buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to an address buffer </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">*len</td><td>points to an address length buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -2724,7 +2724,7 @@ Functions</h2></td></tr>
 <p>get the tx payload with no ack status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
   </table>
   </dd>
@@ -2761,7 +2761,7 @@ Functions</h2></td></tr>
 <p>get chip's information </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>points to a nrf24l01 info structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>points to an nrf24l01 info structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -2795,7 +2795,7 @@ Functions</h2></td></tr>
 <p>initialize the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -2832,7 +2832,7 @@ Functions</h2></td></tr>
 <p>irq handler </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -2868,7 +2868,7 @@ Functions</h2></td></tr>
 <p>nop </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -2920,7 +2920,7 @@ Functions</h2></td></tr>
 <p>read the rx payload </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">*buf</td><td>points to a data buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the buffer length </td></tr>
   </table>
@@ -2959,7 +2959,7 @@ Functions</h2></td></tr>
 <p>reuse the tx payload </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -3011,7 +3011,7 @@ Functions</h2></td></tr>
 <p>sent data </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">*buf</td><td>points to a data buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the buffer length </td></tr>
   </table>
@@ -3061,7 +3061,7 @@ Functions</h2></td></tr>
 <p>enable or disable the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
   </dd>
@@ -3108,7 +3108,7 @@ Functions</h2></td></tr>
 <p>set the address width </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>is the address width </td></tr>
   </table>
   </dd>
@@ -3161,7 +3161,7 @@ Functions</h2></td></tr>
 <p>enable or disable auto acknowledgment </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pipe</td><td>is the rf pipe </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
@@ -3209,7 +3209,7 @@ Functions</h2></td></tr>
 <p>set the auto retransmit count </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">count</td><td>is the auto retransmit count </td></tr>
   </table>
   </dd>
@@ -3257,7 +3257,7 @@ Functions</h2></td></tr>
 <p>set the auto retransmit delay </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">delay</td><td>is the auto retransmit delay </td></tr>
   </table>
   </dd>
@@ -3305,7 +3305,7 @@ Functions</h2></td></tr>
 <p>set the channel frequency </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">freq</td><td>is the channel freq </td></tr>
   </table>
   </dd>
@@ -3359,7 +3359,7 @@ Functions</h2></td></tr>
 <p>enable or disable configure </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">config</td><td>is the config type </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
@@ -3407,7 +3407,7 @@ Functions</h2></td></tr>
 <p>enable or disable continuous carrier transmit </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
   </dd>
@@ -3454,7 +3454,7 @@ Functions</h2></td></tr>
 <p>set the data rate </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">rate</td><td>is the data rate </td></tr>
   </table>
   </dd>
@@ -3501,7 +3501,7 @@ Functions</h2></td></tr>
 <p>enable or disable the dynamic payload </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
   </dd>
@@ -3548,7 +3548,7 @@ Functions</h2></td></tr>
 <p>enable or disable force pll lock signal </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
   </dd>
@@ -3595,7 +3595,7 @@ Functions</h2></td></tr>
 <p>set the chip mode </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>is the chip mode </td></tr>
   </table>
   </dd>
@@ -3642,7 +3642,7 @@ Functions</h2></td></tr>
 <p>set the output power </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">power</td><td>is the output power </td></tr>
   </table>
   </dd>
@@ -3689,7 +3689,7 @@ Functions</h2></td></tr>
 <p>enable or disable the payload with ack </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
   </dd>
@@ -3736,7 +3736,7 @@ Functions</h2></td></tr>
 <p>set the pipe 0 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num</td><td>is the payload number </td></tr>
   </table>
   </dd>
@@ -3784,7 +3784,7 @@ Functions</h2></td></tr>
 <p>set the pipe 1 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num</td><td>is the payload number </td></tr>
   </table>
   </dd>
@@ -3832,7 +3832,7 @@ Functions</h2></td></tr>
 <p>set the pipe 2 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num</td><td>is the payload number </td></tr>
   </table>
   </dd>
@@ -3880,7 +3880,7 @@ Functions</h2></td></tr>
 <p>set the pipe 3 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num</td><td>is the payload number </td></tr>
   </table>
   </dd>
@@ -3928,7 +3928,7 @@ Functions</h2></td></tr>
 <p>set the pipe 4 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num</td><td>is the payload number </td></tr>
   </table>
   </dd>
@@ -3976,7 +3976,7 @@ Functions</h2></td></tr>
 <p>set the pipe 5 payload number </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">num</td><td>is the payload number </td></tr>
   </table>
   </dd>
@@ -4030,7 +4030,7 @@ Functions</h2></td></tr>
 <p>enable or disable the pipe dynamic payload </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pipe</td><td>is the pipe number </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
@@ -4084,7 +4084,7 @@ Functions</h2></td></tr>
 <p>enable or disable rx pipe </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pipe</td><td>is the rf pipe </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
@@ -4138,8 +4138,8 @@ Functions</h2></td></tr>
 <p>set the rx pipe 0 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to a address buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to an address buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the address length </td></tr>
   </table>
   </dd>
@@ -4193,8 +4193,8 @@ Functions</h2></td></tr>
 <p>set the rx pipe 1 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to a address buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to an address buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the address length </td></tr>
   </table>
   </dd>
@@ -4242,7 +4242,7 @@ Functions</h2></td></tr>
 <p>set the rx pipe 2 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">addr</td><td>is the rx pipe 2 address </td></tr>
   </table>
   </dd>
@@ -4289,7 +4289,7 @@ Functions</h2></td></tr>
 <p>set the rx pipe 3 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">addr</td><td>is the rx pipe 3 address </td></tr>
   </table>
   </dd>
@@ -4336,7 +4336,7 @@ Functions</h2></td></tr>
 <p>set the rx pipe 4 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">addr</td><td>is the rx pipe 4 address </td></tr>
   </table>
   </dd>
@@ -4383,7 +4383,7 @@ Functions</h2></td></tr>
 <p>set the rx pipe 5 address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">addr</td><td>is the rx pipe 5 address </td></tr>
   </table>
   </dd>
@@ -4436,8 +4436,8 @@ Functions</h2></td></tr>
 <p>set the tx address </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to a address buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*addr</td><td>points to an address buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the address length </td></tr>
   </table>
   </dd>
@@ -4485,7 +4485,7 @@ Functions</h2></td></tr>
 <p>enable or disable the tx payload with no ack </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
   </table>
   </dd>
@@ -4544,7 +4544,7 @@ Functions</h2></td></tr>
 <p>write the payload with ack </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">pipe</td><td>is the pipe number </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">*buf</td><td>points to a data buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the buffer length </td></tr>
@@ -4600,7 +4600,7 @@ Functions</h2></td></tr>
 <p>write the payload with no ack </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">*buf</td><td>points to a data buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the buffer length </td></tr>
   </table>
@@ -4655,7 +4655,7 @@ Functions</h2></td></tr>
 <p>write the tx payload </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a nrf24l01 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">*buf</td><td>points to a data buffer </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>is the buffer length </td></tr>
   </table>
