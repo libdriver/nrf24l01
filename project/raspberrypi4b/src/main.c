@@ -122,8 +122,8 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         {"timeout", required_argument, NULL, 3},
         {NULL, 0, NULL, 0},
     };
-    char type[32] = "unknow";
-    char data[32] = "LibDriver";
+    char type[33] = "unknow";
+    char data[33] = "LibDriver";
     uint32_t timeout = 1000;
     uint8_t addr0[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
     uint8_t addr1[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_1;
@@ -156,7 +156,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             case 'h' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "h");
                 
                 break;
@@ -166,7 +166,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             case 'i' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "i");
                 
                 break;
@@ -176,7 +176,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             case 'p' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "p");
                 
                 break;
@@ -186,7 +186,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             case 'e' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "e_%s", optarg);
                 
                 break;
@@ -196,7 +196,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             case 't' :
             {
                 /* set the type */
-                memset(type, 0, sizeof(char) * 32);
+                memset(type, 0, sizeof(char) * 33);
                 snprintf(type, 32, "t_%s", optarg);
                 
                 break;
@@ -242,14 +242,8 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
             /* data */
             case 2 :
             {
-                /* check the length */
-                if (strlen(optarg) > 32)
-                {
-                    return 5;
-                }
-                
                 /* copy data */
-                memset(data, 0, sizeof(char) * 32);
+                memset(data, 0, sizeof(char) * 33);
                 strncpy(data, optarg, 32);
                 
                 break;
