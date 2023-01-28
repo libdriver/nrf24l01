@@ -40,6 +40,8 @@ LibDriver NRF24L01 ist der Treiber mit vollem Funktionsumfang von NRF24L01, der 
 
 /project enthält den allgemeinen Beispielcode für Linux- und MCU-Entwicklungsboards. Alle Projekte verwenden das Shell-Skript, um den Treiber zu debuggen, und die detaillierten Anweisungen finden Sie in der README.md jedes Projekts.
 
+/misra enthält die Ergebnisse des LibDriver MISRA Code Scans.
+
 ### Installieren
 
 Verweisen Sie auf eine plattformunabhängige SPI-Schnittstellenvorlage und stellen Sie Ihren Plattform-SPI-Treiber fertig.
