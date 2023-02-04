@@ -448,7 +448,7 @@ uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type,
     res = nrf24l01_set_pipe_0_payload_number(&gs_handle, NRF24L01_BASIC_DEFAULT_PIPE_0_PAYLOAD);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: set pipe 0 playload number failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: set pipe 0 payload number failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -458,7 +458,7 @@ uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type,
     res = nrf24l01_set_pipe_1_payload_number(&gs_handle, NRF24L01_BASIC_DEFAULT_PIPE_1_PAYLOAD);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: set pipe 1 playload number failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: set pipe 1 payload number failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -468,7 +468,7 @@ uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type,
     res = nrf24l01_set_pipe_2_payload_number(&gs_handle, NRF24L01_BASIC_DEFAULT_PIPE_2_PAYLOAD);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: set pipe 2 playload number failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: set pipe 2 payload number failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -478,7 +478,7 @@ uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type,
     res = nrf24l01_set_pipe_3_payload_number(&gs_handle, NRF24L01_BASIC_DEFAULT_PIPE_3_PAYLOAD);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: set pipe 3 playload number failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: set pipe 3 payload number failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -488,7 +488,7 @@ uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type,
     res = nrf24l01_set_pipe_4_payload_number(&gs_handle, NRF24L01_BASIC_DEFAULT_PIPE_4_PAYLOAD);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: set pipe 4 playload number failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: set pipe 4 payload number failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -498,7 +498,7 @@ uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type,
     res = nrf24l01_set_pipe_5_payload_number(&gs_handle, NRF24L01_BASIC_DEFAULT_PIPE_5_PAYLOAD);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: set pipe 5 playload number failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: set pipe 5 payload number failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
