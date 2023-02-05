@@ -122,7 +122,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         {"timeout", required_argument, NULL, 3},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     char data[33] = "LibDriver";
     uint32_t timeout = 1000;
     uint8_t addr0[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
@@ -531,7 +531,7 @@ int main(uint8_t argc, char **argv)
     }
     else
     {
-        nrf24l01_interface_debug_print("nrf24l01: unknow status code.\n");
+        nrf24l01_interface_debug_print("nrf24l01: unknown status code.\n");
     }
 
     return 0;

@@ -156,7 +156,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         {"timeout", required_argument, NULL, 3},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     char data[33] = "LibDriver";
     uint32_t timeout = 1000;
     uint8_t addr0[5] = NRF24L01_BASIC_DEFAULT_RX_ADDR_0;
@@ -555,7 +555,7 @@ int main(void)
     /* uart init */
     uart_init(115200);
     
-    /* shell init && register nrf24l01 fuction */
+    /* shell init && register nrf24l01 function */
     shell_init();
     shell_register("nrf24l01", nrf24l01);
     uart_print("nrf24l01: welcome to libdriver nrf24l01.\n");
@@ -578,7 +578,7 @@ int main(void)
             }
             else if (res == 2)
             {
-                uart_print("nrf24l01: unknow command.\n");
+                uart_print("nrf24l01: unknown command.\n");
             }
             else if (res == 3)
             {
@@ -594,7 +594,7 @@ int main(void)
             }
             else
             {
-                uart_print("nrf24l01: unknow status code.\n");
+                uart_print("nrf24l01: unknown status code.\n");
             }
             uart_flush();
         }

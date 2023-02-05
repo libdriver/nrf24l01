@@ -403,7 +403,7 @@ uint8_t nrf24l01_sent(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
     while ((timeout != 0) && (handle->finished == 0))                                      /* wait time */
     {
         handle->delay_ms(1);                                                               /* delay 1 ms */
-        timeout--;                                                                         /* tiemout-- */
+        timeout--;                                                                         /* timeout-- */
     }
     if (timeout == 0)                                                                      /* check timeout */
     {
@@ -475,7 +475,7 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
     {
         if (handle->receive_callback != NULL)                                                               /* if receive callback */
         {
-            handle->receive_callback(NRF24L01_INTERRUPT_TX_FULL, 0, NULL, 0);                               /* run the receive callback */
+            handle->receive_callback(NRF24L01_INTERRUPT_TX_FULL, 0, NULL, 0);                               /* run receive callback */
         }
     }
     if (((prev >> 4) & 0x01) != 0)                                                                          /* max rt */
@@ -491,7 +491,7 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
         handle->finished = 2;                                                                               /* set timeout */
         if (handle->receive_callback != NULL)                                                               /* if receive callback */
         {
-            handle->receive_callback(NRF24L01_INTERRUPT_MAX_RT, 0, NULL, 0);                                /* run the receive callback */
+            handle->receive_callback(NRF24L01_INTERRUPT_MAX_RT, 0, NULL, 0);                                /* run receive callback */
         }
     }
     if (((prev >> 5) & 0x01) != 0)                                                                          /* send ok */
@@ -499,7 +499,7 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
         handle->finished = 1;                                                                               /* set finished */
         if (handle->receive_callback != NULL)                                                               /* if receive callback */
         {
-            handle->receive_callback(NRF24L01_INTERRUPT_TX_DS, 0, NULL, 0);                                 /* run the receive callback */
+            handle->receive_callback(NRF24L01_INTERRUPT_TX_DS, 0, NULL, 0);                                 /* run receive callback */
         }
     }
     if (((prev >> 6) & 0x01) != 0)                                                                          /* receive */
@@ -548,7 +548,7 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
         num = (prev >> 1) & 0x7;                                                                            /* get number */
         if (handle->receive_callback != NULL)                                                               /* if receive callback */
         {
-            handle->receive_callback(NRF24L01_INTERRUPT_RX_DR, num, (uint8_t *)buffer, width);              /* run the receive callback */
+            handle->receive_callback(NRF24L01_INTERRUPT_RX_DR, num, (uint8_t *)buffer, width);              /* run receive callback */
         }
     }
     res = handle->gpio_write(1);                                                                            /* set gpio write */
@@ -3905,7 +3905,7 @@ uint8_t nrf24l01_info(nrf24l01_info_t *info)
     info->max_current_ma = MAX_CURRENT;                             /* set maximum current */
     info->temperature_max = TEMPERATURE_MAX;                        /* set minimal temperature */
     info->temperature_min = TEMPERATURE_MIN;                        /* set maximum temperature */
-    info->driver_version = DRIVER_VERSION;                          /* set driver verison */
+    info->driver_version = DRIVER_VERSION;                          /* set driver version */
     
     return 0;                                                       /* success return 0 */
 }

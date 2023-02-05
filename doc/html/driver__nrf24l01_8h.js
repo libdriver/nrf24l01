@@ -54,9 +54,9 @@ var driver__nrf24l01_8h =
       [ "NRF24L01_MODE_RX", "group__nrf24l01__basic__driver.html#gga7666e7ed838bb91500a0b0312f034ab1a9f1638ad27a6ed6dfc156a65e11106a7", null ]
     ] ],
     [ "nrf24l01_output_power_t", "group__nrf24l01__basic__driver.html#ga01710c2015240365b92fe9898f8e151d", [
-      [ "NRF24L01_OUTPUT_POWER_NEGTIVE_18_DBM", "group__nrf24l01__basic__driver.html#gga01710c2015240365b92fe9898f8e151dae2ca3868fa27383aa318d3c416a8a23e", null ],
-      [ "NRF24L01_OUTPUT_POWER_NEGTIVE_12_DBM", "group__nrf24l01__basic__driver.html#gga01710c2015240365b92fe9898f8e151da534adaa28771c8c15d716c282873e11e", null ],
-      [ "NRF24L01_OUTPUT_POWER_NEGTIVE_6_DBM", "group__nrf24l01__basic__driver.html#gga01710c2015240365b92fe9898f8e151dacf3e1d9649b830631df107ab769b245e", null ],
+      [ "NRF24L01_OUTPUT_POWER_NEGATIVE_18_DBM", "group__nrf24l01__basic__driver.html#gga01710c2015240365b92fe9898f8e151daadb5876e8408c11aa01165089677e361", null ],
+      [ "NRF24L01_OUTPUT_POWER_NEGATIVE_12_DBM", "group__nrf24l01__basic__driver.html#gga01710c2015240365b92fe9898f8e151da576d647d0b41a52a20d459200a75f1b6", null ],
+      [ "NRF24L01_OUTPUT_POWER_NEGATIVE_6_DBM", "group__nrf24l01__basic__driver.html#gga01710c2015240365b92fe9898f8e151da38068ab7738a17ef3aae512fd6a628e4", null ],
       [ "NRF24L01_OUTPUT_POWER_0_DBM", "group__nrf24l01__basic__driver.html#gga01710c2015240365b92fe9898f8e151da7afabd06a8f5fb53fdd015c4433a3986", null ]
     ] ],
     [ "nrf24l01_pipe_t", "group__nrf24l01__basic__driver.html#gac835ed70d839160974a8a370302ceda4", [
