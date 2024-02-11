@@ -1,6 +1,6 @@
 /**
  * @mainpage  LibDriver NRF24L01
- * @brief     libdriver nrf24l01 is a full function driver of nrf24l01 and it can run in both MCU and Linux platform.
+ * @brief     LibDriver NRF24L01 is a full function driver of NRF24L01 and it can run in both MCU and Linux platform.
  * @version   1.0.0
  * @author    Shifeng Li
  *
