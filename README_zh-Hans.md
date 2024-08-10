@@ -8,7 +8,7 @@
 
 [![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/nrf24l01/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
-nRF24L01+ 是一款带有嵌入式基带协议引擎 (Enhanced ShockBurst™) 的单芯片 2.4GHz 收发器，适用于超低功耗无线应用。 nRF24L01+ 设计用于在 2.400 - 2.4835GHz 的全球 ISM 频段中运行。要使用 nRF24L01+ 设计无线电系统，您只需要一个 MCU（微控制器）和一些外部无源元件。您可以操作和配置 nRF24L01+通过串行外设接口 (SPI)。寄存器映射，可通过SPI访问，包含nRF24L01+中的所有配置寄存器，可在芯片的所有工作模式下访问。 嵌入式基带协议引擎（Enhanced ShockBurst™）基于数据包通信，支持手动多种模式操作到高级自治协议操作。内部 FIFO 可确保无线电前端和系统 MCU 之间的数据流顺畅。增强型 Shock-Burst™ 通过处理所有高速链路层操作来降低系统成本。无线电前端使用 GFSK 调制。它具有用户可配置的参数，如频道、输出功率和空中数据速率。 nRF24L01+ 支持 250 kbps、1 Mbps 和 2Mbps 的空中数据速率。高空中数据速率结合两种省电模式nRF24L01+ 非常适合超低功耗设计。nRF24L01+ 与 nRF24L01 直接兼容，空中兼容 nRF2401A、nRF2402、nRF24E1 和 nRF24E2。与 nRF24L01 相比，nRF24L01+ 中的互调和宽带阻塞值有了很大改善，并且 nRF24L01+ 的内部滤波增加了满足 RF 监管标准的余量。内部稳压器确保高电源抑制比 (PSRR) 和宽功率供应范围。NRF24L01用于无线PC外设、鼠标、键盘、遥控器、游戏控制器等。
+nRF24L01+ 是一款带有嵌入式基带协议引擎 (Enhanced ShockBurst™) 的单芯片 2.4GHz 收发器，适用于超低功耗无线应用。 nRF24L01+ 设计用于在 2.400 - 2.4835GHz 的全球 ISM 频段中运行。要使用 nRF24L01+ 设计无线电系统，您只需要一个 MCU（微控制器）和一些外部无源元件。您可以通过串行外设接口 (SPI)操作和配置 nRF24L01+。寄存器映射表可通过SPI访问，它包含nRF24L01+中的所有配置寄存器，可在芯片的所有工作模式下访问。 嵌入式基带协议引擎（Enhanced ShockBurst™）基于数据包通信，支持手动多种模式操作到高级自治协议操作。内部 FIFO 可确保无线电前端和系统 MCU 之间的数据流顺畅。增强型 Shock-Burst™ 通过处理所有高速链路层操作来降低系统成本。无线电前端使用 GFSK 调制。它具有用户可配置的参数，如通道、输出功率和空中数据速率。 nRF24L01+ 支持 250 kbps、1 Mbps 和 2Mbps 的空中数据速率。nRF24L01+ 与 nRF24L01 直接兼容，空中兼容 nRF2401A、nRF2402、nRF24E1 和 nRF24E2。与 nRF24L01 相比，nRF24L01+ 中的互调和宽带阻塞值有了很大改善，并且 nRF24L01+ 的内部滤波增加了满足 RF 监管标准的余量。内部稳压器确保高电源抑制比 (PSRR) 和宽功率供应范围。NRF24L01用于无线PC外设、鼠标、键盘、遥控器、游戏控制器等。
 
 LibDriver NRF24L01是LibDriver推出的NRF24L01全功能驱动，提供无线发送、无线接收等功能并且它符合MISRA标准。
 
