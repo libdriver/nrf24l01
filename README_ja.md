@@ -17,7 +17,7 @@ LibDriver NRF24L01は、LibDriverによって起動されたNRF24L01の全機能
   - [説明](#説明)
   - [インストール](#インストール)
   - [使用](#使用)
-    - [example basic sent](#example-basic-sent)
+    - [example basic send](#example-basic-send)
     - [example basic receive](#example-basic-receive)
   - [ドキュメント](#ドキュメント)
   - [貢献](#貢献)
@@ -52,7 +52,7 @@ LibDriver NRF24L01は、LibDriverによって起動されたNRF24L01の全機能
 
 /example ディレクトリ内のサンプルを参照して、独自のドライバーを完成させることができます。 デフォルトのプログラミング例を使用したい場合の使用方法は次のとおりです。
 
-#### example basic sent
+#### example basic send
 
 ```C
 #include "driver_nrf24l01_basic.h"
@@ -82,7 +82,7 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }
@@ -119,7 +119,7 @@ if (res != 0)
 
     return 1;
 }
-if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
+if (nrf24l01_basic_send((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
 {
     (void)nrf24l01_basic_deinit();
     (void)gpio_interrupt_deinit();
@@ -172,7 +172,7 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }

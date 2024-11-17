@@ -21,8 +21,8 @@ var searchData=
   ['driver_5fnrf24l01_5flink_5fspi_5fwrite_20',['DRIVER_NRF24L01_LINK_SPI_WRITE',['../group__nrf24l01__link__driver.html#ga91ddfcdb8250e4208d5d095d30576df0',1,'driver_nrf24l01.h']]],
   ['driver_5fnrf24l01_5fregister_5ftest_2ec_21',['driver_nrf24l01_register_test.c',['../driver__nrf24l01__register__test_8c.html',1,'']]],
   ['driver_5fnrf24l01_5fregister_5ftest_2eh_22',['driver_nrf24l01_register_test.h',['../driver__nrf24l01__register__test_8h.html',1,'']]],
-  ['driver_5fnrf24l01_5fsent_5freceive_5ftest_2ec_23',['driver_nrf24l01_sent_receive_test.c',['../driver__nrf24l01__sent__receive__test_8c.html',1,'']]],
-  ['driver_5fnrf24l01_5fsent_5freceive_5ftest_2eh_24',['driver_nrf24l01_sent_receive_test.h',['../driver__nrf24l01__sent__receive__test_8h.html',1,'']]],
+  ['driver_5fnrf24l01_5fsend_5freceive_5ftest_2ec_23',['driver_nrf24l01_send_receive_test.c',['../driver__nrf24l01__send__receive__test_8c.html',1,'']]],
+  ['driver_5fnrf24l01_5fsend_5freceive_5ftest_2eh_24',['driver_nrf24l01_send_receive_test.h',['../driver__nrf24l01__send__receive__test_8h.html',1,'']]],
   ['driver_5fversion_25',['driver_version',['../structnrf24l01__info__s.html#a41b0bd442708b70d252c50b92c75265a',1,'nrf24l01_info_s']]],
   ['driver_5fversion_26',['DRIVER_VERSION',['../driver__nrf24l01_8c.html#ae578001fe043b4cca7a0edd801cfe9c4',1,'driver_nrf24l01.c']]]
 ];

@@ -103,10 +103,10 @@ find_package(nrf24l01 REQUIRED)
    nrf24l01 (-t reg | --test=reg)
    ```
 
-5. Run nrf24l01 sent test.
+5. Run nrf24l01 send test.
 
    ```shell
-   nrf24l01 (-t sent | --test=sent)
+   nrf24l01 (-t send | --test=send)
    ```
 
 6. Run nrf24l01 receive test.
@@ -115,10 +115,10 @@ find_package(nrf24l01 REQUIRED)
    nrf24l01 (-t receive | --test=receive)
    ```
 
-7. Run nrf24l01 sent function, str is the send data and it's length must be less 32.
+7. Run nrf24l01 send function, str is the send data and it's length must be less 32.
 
    ```shell
-   nrf24l01 (-e sent | --example=sent) (--channel=<0 | 1 | 2 | 3 | 4 | 5>) --data=<str>
+   nrf24l01 (-e send | --example=send) (--channel=<0 | 1 | 2 | 3 | 4 | 5>) --data=<str>
    ```
 
 8. Run nrf24l01 receive function, ms is the timeout in ms.
@@ -419,7 +419,7 @@ nrf24l01: finish register test.
 ```
 
 ```shell
-./nrf24l01 -t sent  
+./nrf24l01 -t send  
 
 nrf24l01: chip is Nordic nRF24L01.
 nrf24l01: manufacturer is Nordic.
@@ -430,14 +430,14 @@ nrf24l01: max supply voltage is 3.6V.
 nrf24l01: max current is 13.50mA.
 nrf24l01: max temperature is 85.0C.
 nrf24l01: min temperature is -40.0C.
-nrf24l01: start sent test.
-nrf24l01: irq sent ok.
-nrf24l01: irq sent ok.
-nrf24l01: irq sent ok.
-nrf24l01: irq sent ok.
-nrf24l01: irq sent ok.
-nrf24l01: irq sent ok.
-nrf24l01: finish sent test.
+nrf24l01: start send test.
+nrf24l01: irq send ok.
+nrf24l01: irq send ok.
+nrf24l01: irq send ok.
+nrf24l01: irq send ok.
+nrf24l01: irq send ok.
+nrf24l01: irq send ok.
+nrf24l01: finish send test.
 ```
 
 ```shell
@@ -469,10 +469,10 @@ nrf24l01: finish receive test.
 ```
 
 ```shell
-./nrf24l01 -e sent --channel=0 --data=libdriver-nrf24l01
+./nrf24l01 -e send --channel=0 --data=libdriver-nrf24l01
 
-nrf24l01: sent libdriver-nrf24l01.
-nrf24l01: irq sent ok.
+nrf24l01: send libdriver-nrf24l01.
+nrf24l01: irq send ok.
 ```
 
 ```shell
@@ -492,21 +492,21 @@ Usage:
   nrf24l01 (-h | --help)
   nrf24l01 (-p | --port)
   nrf24l01 (-t reg | --test=reg)
-  nrf24l01 (-t sent | --test=sent)
+  nrf24l01 (-t send | --test=send)
   nrf24l01 (-t receive | --test=receive)
-  nrf24l01 (-e sent | --example=sent) [--channel=<0 | 1 | 2 | 3 | 4 | 5>] [--data=<str>]
+  nrf24l01 (-e send | --example=send) [--channel=<0 | 1 | 2 | 3 | 4 | 5>] [--data=<str>]
   nrf24l01 (-e receive | --example=receive) [--timeout=<ms>]
 
 Options:
       --channel=<0 | 1 | 2 | 3 | 4 | 5>
                         Set the send channel.([default: 0])
       --data=<str>      Set the send data and the length of data must be less 32.([default: LibDriver])
-  -e <sent | receive>, --example=<sent | receive>
+  -e <send | receive>, --example=<send | receive>
                         Run the driver example.
   -h, --help            Show the help.
   -i, --information     Show the chip information.
   -p, --port            Display the pin connections of the current board.
-  -t <reg | sent | receive>, --test=<reg | sent | receive>
+  -t <reg | send | receive>, --test=<reg | send | receive>
                         Run the driver test.
       --timeout=<ms>    Set the receive timeout in ms.([default: 5000])
 ```

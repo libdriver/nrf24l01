@@ -94,7 +94,7 @@ var driver__nrf24l01_8c =
     [ "nrf24l01_nop", "group__nrf24l01__basic__driver.html#ga3520243e920e4dbf8846cf5016255b6f", null ],
     [ "nrf24l01_read_rx_payload", "group__nrf24l01__basic__driver.html#gaa3841453ced28cbb4cdef1a6144e32f7", null ],
     [ "nrf24l01_reuse_tx_payload", "group__nrf24l01__basic__driver.html#gafa55163d50332c4e5cd134a670ae2ea7", null ],
-    [ "nrf24l01_sent", "group__nrf24l01__basic__driver.html#ga22cc44dbeaa686a48067432ae160d202", null ],
+    [ "nrf24l01_send", "group__nrf24l01__basic__driver.html#ga4d16ffba1278d7350757277cffbbbdd0", null ],
     [ "nrf24l01_set_active", "group__nrf24l01__basic__driver.html#gab267d4890252f71ebe1f3c53de4869c2", null ],
     [ "nrf24l01_set_address_width", "group__nrf24l01__basic__driver.html#gaaaf2630fff7c441851f6abf6c6d2d06f", null ],
     [ "nrf24l01_set_auto_acknowledgment", "group__nrf24l01__basic__driver.html#ga828178ab257acd0b00ddacf804785ce3", null ],

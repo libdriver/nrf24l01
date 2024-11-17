@@ -34,7 +34,7 @@
  * </table>
  */
 
-#include "driver_nrf24l01_sent_receive_test.h"
+#include "driver_nrf24l01_send_receive_test.h"
 #include "driver_nrf24l01_register_test.h"
 #include "driver_nrf24l01_basic.h"
 #include "gpio.h"
@@ -70,7 +70,7 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }
@@ -286,7 +286,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         
         return 0;
     }
-    else if (strcmp("t_sent", type) == 0)
+    else if (strcmp("t_send", type) == 0)
     {
         uint8_t res;
         
@@ -300,8 +300,8 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         /* set gpio irq */
         g_gpio_irq = nrf24l01_interrupt_test_irq_handler;
         
-        /* run sent test */
-        res = nrf24l01_sent_test();
+        /* run send test */
+        res = nrf24l01_send_test();
         if (res != 0)
         {
             (void)gpio_interrupt_deinit();
@@ -346,7 +346,7 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         
         return 0;
     }
-    else if (strcmp("e_sent", type) == 0)
+    else if (strcmp("e_send", type) == 0)
     {
         uint8_t res;
         
@@ -371,10 +371,10 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         }
         
         /* output */
-        nrf24l01_interface_debug_print("nrf24l01: sent %s.\n", data);
+        nrf24l01_interface_debug_print("nrf24l01: send %s.\n", data);
         
-        /* basic sent */
-        if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)data, (uint8_t)strlen(data)) != 0)
+        /* basic send */
+        if (nrf24l01_basic_send((uint8_t *)addr, (uint8_t *)data, (uint8_t)strlen(data)) != 0)
         {
             (void)nrf24l01_basic_deinit();
             (void)gpio_interrupt_deinit();
@@ -448,21 +448,21 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
         nrf24l01_interface_debug_print("  nrf24l01 (-h | --help)\n");
         nrf24l01_interface_debug_print("  nrf24l01 (-p | --port)\n");
         nrf24l01_interface_debug_print("  nrf24l01 (-t reg | --test=reg)\n");
-        nrf24l01_interface_debug_print("  nrf24l01 (-t sent | --test=sent)\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-t send | --test=send)\n");
         nrf24l01_interface_debug_print("  nrf24l01 (-t receive | --test=receive)\n");
-        nrf24l01_interface_debug_print("  nrf24l01 (-e sent | --example=sent) [--channel=<0 | 1 | 2 | 3 | 4 | 5>] [--data=<str>]\n");
+        nrf24l01_interface_debug_print("  nrf24l01 (-e send | --example=send) [--channel=<0 | 1 | 2 | 3 | 4 | 5>] [--data=<str>]\n");
         nrf24l01_interface_debug_print("  nrf24l01 (-e receive | --example=receive) [--timeout=<ms>]\n");
         nrf24l01_interface_debug_print("\n");
         nrf24l01_interface_debug_print("Options:\n");
         nrf24l01_interface_debug_print("      --channel=<0 | 1 | 2 | 3 | 4 | 5>\n");
         nrf24l01_interface_debug_print("                        Set the send channel.([default: 0])\n");
         nrf24l01_interface_debug_print("      --data=<str>      Set the send data and it's length must be less 32.([default: LibDriver])\n");
-        nrf24l01_interface_debug_print("  -e <sent | receive>, --example=<sent | receive>\n");
+        nrf24l01_interface_debug_print("  -e <send | receive>, --example=<send | receive>\n");
         nrf24l01_interface_debug_print("                        Run the driver example.\n");
         nrf24l01_interface_debug_print("  -h, --help            Show the help.\n");
         nrf24l01_interface_debug_print("  -i, --information     Show the chip information.\n");
         nrf24l01_interface_debug_print("  -p, --port            Display the pin connections of the current board.\n");
-        nrf24l01_interface_debug_print("  -t <reg | sent | receive>, --test=<reg | sent | receive>\n");
+        nrf24l01_interface_debug_print("  -t <reg | send | receive>, --test=<reg | send | receive>\n");
         nrf24l01_interface_debug_print("                        Run the driver test.\n");
         nrf24l01_interface_debug_print("      --timeout=<ms>    Set the receive timeout in ms.([default: 5000])\n");
 

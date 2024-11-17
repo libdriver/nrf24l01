@@ -17,7 +17,7 @@ LibDriver NRF24L01是LibDriver推出的NRF24L01全功能驱动，提供无线发
   - [说明](#说明)
   - [安装](#安装)
   - [使用](#使用)
-    - [example basic sent](#example-basic-sent)
+    - [example basic send](#example-basic-send)
     - [example basic receive](#example-basic-receive)
   - [文档](#文档)
   - [贡献](#贡献)
@@ -52,7 +52,7 @@ LibDriver NRF24L01是LibDriver推出的NRF24L01全功能驱动，提供无线发
 
 您可以参考/example目录下的编程范例完成适合您的驱动，如果您想要使用默认的编程范例，以下是它们的使用方法。
 
-#### example basic sent
+#### example basic send
 
 ```C
 #include "driver_nrf24l01_basic.h"
@@ -82,7 +82,7 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }
@@ -119,7 +119,7 @@ if (res != 0)
 
     return 1;
 }
-if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
+if (nrf24l01_basic_send((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
 {
     (void)nrf24l01_basic_deinit();
     (void)gpio_interrupt_deinit();
@@ -172,7 +172,7 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }

@@ -707,16 +707,16 @@ uint8_t nrf24l01_basic_deinit(void)
 }
 
 /**
- * @brief     basic example sent
+ * @brief     basic example send
  * @param[in] *addr points to a address buffer
  * @param[in] *buf points to a data buffer
  * @param[in] len is the buffer length
  * @return    status code
  *            - 0 success
- *            - 1 sent failed
+ *            - 1 send failed
  * @note      none
  */
-uint8_t nrf24l01_basic_sent(uint8_t *addr, uint8_t *buf, uint8_t len)
+uint8_t nrf24l01_basic_send(uint8_t *addr, uint8_t *buf, uint8_t len)
 {
     uint8_t res;
     
@@ -741,8 +741,8 @@ uint8_t nrf24l01_basic_sent(uint8_t *addr, uint8_t *buf, uint8_t len)
         return 1;
     }
     
-    /* sent data */
-    res = nrf24l01_sent(&gs_handle, (uint8_t *)buf, len);
+    /* send data */
+    res = nrf24l01_send(&gs_handle, (uint8_t *)buf, len);
     if (res != 0)
     {
         return 1;

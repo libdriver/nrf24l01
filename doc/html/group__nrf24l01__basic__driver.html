@@ -204,9 +204,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf21360d88844722c8c65f5b21cff9d48"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nrf24l01__basic__driver.html#gaf21360d88844722c8c65f5b21cff9d48">nrf24l01_deinit</a> (<a class="el" href="group__nrf24l01__basic__driver.html#ga14622225dc15b2e77111c2ffd7fe6aa2">nrf24l01_handle_t</a> *handle)</td></tr>
 <tr class="memdesc:gaf21360d88844722c8c65f5b21cff9d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">close the chip  <a href="group__nrf24l01__basic__driver.html#gaf21360d88844722c8c65f5b21cff9d48">More...</a><br /></td></tr>
 <tr class="separator:gaf21360d88844722c8c65f5b21cff9d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga22cc44dbeaa686a48067432ae160d202"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nrf24l01__basic__driver.html#ga22cc44dbeaa686a48067432ae160d202">nrf24l01_sent</a> (<a class="el" href="group__nrf24l01__basic__driver.html#ga14622225dc15b2e77111c2ffd7fe6aa2">nrf24l01_handle_t</a> *handle, uint8_t *buf, uint8_t len)</td></tr>
-<tr class="memdesc:ga22cc44dbeaa686a48067432ae160d202"><td class="mdescLeft">&#160;</td><td class="mdescRight">sent data  <a href="group__nrf24l01__basic__driver.html#ga22cc44dbeaa686a48067432ae160d202">More...</a><br /></td></tr>
-<tr class="separator:ga22cc44dbeaa686a48067432ae160d202"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4d16ffba1278d7350757277cffbbbdd0"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nrf24l01__basic__driver.html#ga4d16ffba1278d7350757277cffbbbdd0">nrf24l01_send</a> (<a class="el" href="group__nrf24l01__basic__driver.html#ga14622225dc15b2e77111c2ffd7fe6aa2">nrf24l01_handle_t</a> *handle, uint8_t *buf, uint8_t len)</td></tr>
+<tr class="memdesc:ga4d16ffba1278d7350757277cffbbbdd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">send data  <a href="group__nrf24l01__basic__driver.html#ga4d16ffba1278d7350757277cffbbbdd0">More...</a><br /></td></tr>
+<tr class="separator:ga4d16ffba1278d7350757277cffbbbdd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab267d4890252f71ebe1f3c53de4869c2"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__nrf24l01__basic__driver.html#gab267d4890252f71ebe1f3c53de4869c2">nrf24l01_set_active</a> (<a class="el" href="group__nrf24l01__basic__driver.html#ga14622225dc15b2e77111c2ffd7fe6aa2">nrf24l01_handle_t</a> *handle, <a class="el" href="group__nrf24l01__basic__driver.html#gaf7c2c9c79ad318ac9227392c46c3d4cb">nrf24l01_bool_t</a> enable)</td></tr>
 <tr class="memdesc:gab267d4890252f71ebe1f3c53de4869c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">enable or disable the chip  <a href="group__nrf24l01__basic__driver.html#gab267d4890252f71ebe1f3c53de4869c2">More...</a><br /></td></tr>
 <tr class="separator:gab267d4890252f71ebe1f3c53de4869c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -631,7 +631,7 @@ Functions</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaa9cd0eba4f0fcd6e65ccb37d06dea723adc574cc64d6838defd2ea0c91e59623f"></a>NRF24L01_INTERRUPT_RX_DR&#160;</td><td class="fielddoc"><p>data ready rx fifo interrupt </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggaa9cd0eba4f0fcd6e65ccb37d06dea723a92345895996ca134a50d26ade70e9792"></a>NRF24L01_INTERRUPT_TX_DS&#160;</td><td class="fielddoc"><p>data sent rx fifo interrupt </p>
+<tr><td class="fieldname"><a id="ggaa9cd0eba4f0fcd6e65ccb37d06dea723a92345895996ca134a50d26ade70e9792"></a>NRF24L01_INTERRUPT_TX_DS&#160;</td><td class="fielddoc"><p>data send rx fifo interrupt </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ggaa9cd0eba4f0fcd6e65ccb37d06dea723abfdffadb0e24444c50121c5d75c88009"></a>NRF24L01_INTERRUPT_MAX_RT&#160;</td><td class="fielddoc"><p>maximum number of tx retransmits interrupt </p>
 </td></tr>
@@ -2976,14 +2976,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga22cc44dbeaa686a48067432ae160d202"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga22cc44dbeaa686a48067432ae160d202">&#9670;&nbsp;</a></span>nrf24l01_sent()</h2>
+<a id="ga4d16ffba1278d7350757277cffbbbdd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4d16ffba1278d7350757277cffbbbdd0">&#9670;&nbsp;</a></span>nrf24l01_send()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t nrf24l01_sent </td>
+          <td class="memname">uint8_t nrf24l01_send </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__nrf24l01__basic__driver.html#ga14622225dc15b2e77111c2ffd7fe6aa2">nrf24l01_handle_t</a> *&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
@@ -3008,7 +3008,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>sent data </p>
+<p>send data </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an nrf24l01 handle structure </td></tr>
@@ -3019,11 +3019,11 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>status code<ul>
 <li>0 success</li>
-<li>1 sent failed</li>
+<li>1 send failed</li>
 <li>2 handle is NULL</li>
 <li>3 handle is not initialized</li>
 <li>4 len is over 32</li>
-<li>5 sent timeout </li>
+<li>5 send timeout </li>
 </ul>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>

@@ -198,7 +198,7 @@ void nrf24l01_interface_receive_callback(uint8_t type, uint8_t num, uint8_t *buf
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }

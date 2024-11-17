@@ -134,16 +134,16 @@ uint8_t nrf24l01_basic_init(nrf24l01_type_t type, void (*callback)(uint8_t type,
 uint8_t nrf24l01_basic_deinit(void);
 
 /**
- * @brief     basic example sent
+ * @brief     basic example send
  * @param[in] *addr points to a address buffer
  * @param[in] *buf points to a data buffer
  * @param[in] len is the buffer length
  * @return    status code
  *            - 0 success
- *            - 1 sent failed
+ *            - 1 send failed
  * @note      none
  */
-uint8_t nrf24l01_basic_sent(uint8_t *addr, uint8_t *buf, uint8_t len);
+uint8_t nrf24l01_basic_send(uint8_t *addr, uint8_t *buf, uint8_t len);
 
 /**
  * @}
