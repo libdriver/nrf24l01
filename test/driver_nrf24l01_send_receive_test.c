@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
  *
- * @file      driver_nrf24l01_sent_receive_test.c
- * @brief     driver nrf24l01 sent receive test source file
+ * @file      driver_nrf24l01_send_receive_test.c
+ * @brief     driver nrf24l01 send receive test source file
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2021-11-28
@@ -34,7 +34,7 @@
  * </table>
  */
 
-#include "driver_nrf24l01_sent_receive_test.h"
+#include "driver_nrf24l01_send_receive_test.h"
 
 static nrf24l01_handle_t gs_handle;        /**< nrf24l01 handle */
 
@@ -58,13 +58,13 @@ uint8_t nrf24l01_interrupt_test_irq_handler(void)
 }
 
 /**
- * @brief  sent test
+ * @brief  send test
  * @return status code
  *         - 0 success
  *         - 1 test failed
  * @note   none
  */
-uint8_t nrf24l01_sent_test(void)
+uint8_t nrf24l01_send_test(void)
 {
     uint8_t res;
     uint8_t reg;
@@ -113,8 +113,8 @@ uint8_t nrf24l01_sent_test(void)
         nrf24l01_interface_debug_print("nrf24l01: min temperature is %0.1fC.\n", info.temperature_min);
     }
     
-    /* start sent test */
-    nrf24l01_interface_debug_print("nrf24l01: start sent test.\n");
+    /* start send test */
+    nrf24l01_interface_debug_print("nrf24l01: start send test.\n");
     
     /* init */
     res = nrf24l01_init(&gs_handle);
@@ -701,11 +701,11 @@ uint8_t nrf24l01_sent_test(void)
         data[i] = i;
     }
     
-    /* sent data */
-    res = nrf24l01_sent(&gs_handle, (uint8_t *)data, 32);
+    /* send data */
+    res = nrf24l01_send(&gs_handle, (uint8_t *)data, 32);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: sent data failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: send data failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -744,11 +744,11 @@ uint8_t nrf24l01_sent_test(void)
         return 1;
     }
 
-    /* sent data */
-    res = nrf24l01_sent(&gs_handle, (uint8_t *)data, 32);
+    /* send data */
+    res = nrf24l01_send(&gs_handle, (uint8_t *)data, 32);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: sent data failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: send data failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -787,11 +787,11 @@ uint8_t nrf24l01_sent_test(void)
         return 1;
     }
     
-    /* sent data */
-    res = nrf24l01_sent(&gs_handle, (uint8_t *)data, 32);
+    /* send data */
+    res = nrf24l01_send(&gs_handle, (uint8_t *)data, 32);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: sent data failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: send data failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -830,11 +830,11 @@ uint8_t nrf24l01_sent_test(void)
         return 1;
     }
     
-    /* sent data */
-    res = nrf24l01_sent(&gs_handle, (uint8_t *)data, 32);
+    /* send data */
+    res = nrf24l01_send(&gs_handle, (uint8_t *)data, 32);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: sent data failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: send data failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -873,11 +873,11 @@ uint8_t nrf24l01_sent_test(void)
         return 1;
     }
     
-    /* sent data */
-    res = nrf24l01_sent(&gs_handle, (uint8_t *)data, 32);
+    /* send data */
+    res = nrf24l01_send(&gs_handle, (uint8_t *)data, 32);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: sent data failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: send data failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
@@ -916,18 +916,18 @@ uint8_t nrf24l01_sent_test(void)
         return 1;
     }
     
-    /* sent data */
-    res = nrf24l01_sent(&gs_handle, (uint8_t *)data, 32);
+    /* send data */
+    res = nrf24l01_send(&gs_handle, (uint8_t *)data, 32);
     if (res != 0)
     {
-        nrf24l01_interface_debug_print("nrf24l01: sent data failed.\n");
+        nrf24l01_interface_debug_print("nrf24l01: send data failed.\n");
         (void)nrf24l01_deinit(&gs_handle);
         
         return 1;
     }
     
-    /* finish sent test */
-    nrf24l01_interface_debug_print("nrf24l01: finish sent test.\n");
+    /* finish send test */
+    nrf24l01_interface_debug_print("nrf24l01: finish send test.\n");
     (void)nrf24l01_deinit(&gs_handle);
     
     return 0;

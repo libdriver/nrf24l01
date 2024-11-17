@@ -138,7 +138,7 @@ typedef enum
 typedef enum
 {
     NRF24L01_INTERRUPT_RX_DR   = 6,        /**< data ready rx fifo interrupt */
-    NRF24L01_INTERRUPT_TX_DS   = 5,        /**< data sent rx fifo interrupt */
+    NRF24L01_INTERRUPT_TX_DS   = 5,        /**< data send rx fifo interrupt */
     NRF24L01_INTERRUPT_MAX_RT  = 4,        /**< maximum number of tx retransmits interrupt */
     NRF24L01_INTERRUPT_TX_FULL = 0,        /**< tx fifo full flag */
 } nrf24l01_interrupt_t;
@@ -350,20 +350,20 @@ uint8_t nrf24l01_init(nrf24l01_handle_t *handle);
 uint8_t nrf24l01_deinit(nrf24l01_handle_t *handle);
 
 /**
- * @brief     sent data
+ * @brief     send data
  * @param[in] *handle points to an nrf24l01 handle structure
  * @param[in] *buf points to a data buffer
  * @param[in] len is the buffer length
  * @return    status code
  *            - 0 success
- *            - 1 sent failed
+ *            - 1 send failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
  *            - 4 len is over 32
- *            - 5 sent timeout
+ *            - 5 send timeout
  * @note      none
  */
-uint8_t nrf24l01_sent(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len);
+uint8_t nrf24l01_send(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len);
 
 /**
  * @brief     enable or disable the chip

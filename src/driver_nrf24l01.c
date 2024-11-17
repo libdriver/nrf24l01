@@ -334,20 +334,20 @@ uint8_t nrf24l01_set_active(nrf24l01_handle_t *handle, nrf24l01_bool_t enable)
 }
 
 /**
- * @brief     sent data
+ * @brief     send data
  * @param[in] *handle points to an nrf24l01 handle structure
  * @param[in] *buf points to a data buffer
  * @param[in] len is the buffer length
  * @return    status code
  *            - 0 success
- *            - 1 sent failed
+ *            - 1 send failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
  *            - 4 len is over 32
- *            - 5 sent timeout
+ *            - 5 send timeout
  * @note      none
  */
-uint8_t nrf24l01_sent(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
+uint8_t nrf24l01_send(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
 {
     uint8_t res;
     uint8_t i;
@@ -407,7 +407,7 @@ uint8_t nrf24l01_sent(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
     }
     if (timeout == 0)                                                                      /* check timeout */
     {
-        handle->debug_print("nrf24l01: sent timeout.\n");                                  /* sent timeout failed */
+        handle->debug_print("nrf24l01: send timeout.\n");                                  /* send timeout failed */
        
         return 5;                                                                          /* return error */
     }
@@ -417,7 +417,7 @@ uint8_t nrf24l01_sent(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
     }
     else
     {
-        handle->debug_print("nrf24l01: sent failed.\n");                                   /* sent failed */
+        handle->debug_print("nrf24l01: send failed.\n");                                   /* send failed */
        
         return 1;                                                                          /* return error */
     }

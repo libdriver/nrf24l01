@@ -17,7 +17,7 @@ LibDriver NRF24L01 ist der Treiber mit vollem Funktionsumfang von NRF24L01, der 
   - [Anweisung](#Anweisung)
   - [Installieren](#Installieren)
   - [Nutzung](#Nutzung)
-    - [example basic sent](#example-basic-sent)
+    - [example basic send](#example-basic-send)
     - [example basic receive](#example-basic-receive)
   - [Dokument](#Dokument)
   - [Beitrag](#Beitrag)
@@ -52,7 +52,7 @@ Fügen Sie das Verzeichnis /src, den Schnittstellentreiber für Ihre Plattform u
 
 Sie können auf die Beispiele im Verzeichnis /example zurückgreifen, um Ihren eigenen Treiber zu vervollständigen. Wenn Sie die Standardprogrammierbeispiele verwenden möchten, erfahren Sie hier, wie Sie diese verwenden.
 
-#### example basic sent
+#### example basic send
 
 ```C
 #include "driver_nrf24l01_basic.h"
@@ -82,7 +82,7 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }
@@ -119,7 +119,7 @@ if (res != 0)
 
     return 1;
 }
-if (nrf24l01_basic_sent((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
+if (nrf24l01_basic_send((uint8_t *)addr, (uint8_t *)"123", 3) != 0);
 {
     (void)nrf24l01_basic_deinit();
     (void)gpio_interrupt_deinit();
@@ -143,7 +143,7 @@ return 0;
 
 #### example basic receive
 
-```c
+```C
 #include "driver_nrf24l01_basic.h"
 
 uint8_t (*g_gpio_irq)(void) = NULL;
@@ -172,7 +172,7 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
         }
         case NRF24L01_INTERRUPT_TX_DS :
         {
-            nrf24l01_interface_debug_print("nrf24l01: irq sent ok.\n");
+            nrf24l01_interface_debug_print("nrf24l01: irq send ok.\n");
             
             break;
         }

@@ -1742,7 +1742,7 @@
             <name>$PROJ_DIR$\..\..\..\test\driver_nrf24l01_register_test.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\test\driver_nrf24l01_sent_receive_test.c</name>
+            <name>$PROJ_DIR$\..\..\..\test\driver_nrf24l01_send_receive_test.c</name>
         </file>
     </group>
     <group>
