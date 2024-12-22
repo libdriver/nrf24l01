@@ -45,10 +45,10 @@ uint8_t (*g_gpio_irq)(void) = NULL;        /**< gpio irq function address */
 
 /**
  * @brief     interface callback
- * @param[in] type is the receive callback type
- * @param[in] num is the pipe number
- * @param[in] *buf points to a data buffer
- * @param[in] len is the buffer length
+ * @param[in] type receive callback type
+ * @param[in] num pipe number
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len buffer length
  * @note      none
  */
 static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
@@ -97,8 +97,8 @@ static void a_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)
 
 /**
  * @brief     nrf24l01 full function
- * @param[in] argc is arg numbers
- * @param[in] **argv is the arg address
+ * @param[in] argc arg numbers
+ * @param[in] **argv arg address
  * @return    status code
  *            - 0 success
  *            - 1 run failed
@@ -506,8 +506,8 @@ uint8_t nrf24l01(uint8_t argc, char **argv)
 
 /**
  * @brief     main function
- * @param[in] argc is arg numbers
- * @param[in] **argv is the arg address
+ * @param[in] argc arg numbers
+ * @param[in] **argv arg address
  * @return    status code
  *             - 0 success
  * @note      none

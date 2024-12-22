@@ -67,9 +67,9 @@ uint8_t nrf24l01_interface_spi_deinit(void)
 
 /**
  * @brief      interface spi bus read
- * @param[in]  reg is the register address
- * @param[out] *buf points to a data buffer
- * @param[in]  len is the length of data buffer
+ * @param[in]  reg register address
+ * @param[out] *buf pointer to a data buffer
+ * @param[in]  len length of data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed
@@ -82,9 +82,9 @@ uint8_t nrf24l01_interface_spi_read(uint8_t reg, uint8_t *buf, uint16_t len)
 
 /**
  * @brief     interface spi bus write
- * @param[in] reg is the register address
- * @param[in] *buf points to a data buffer
- * @param[in] len is the length of data buffer
+ * @param[in] reg register address
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len length of data buffer
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -121,7 +121,7 @@ uint8_t nrf24l01_interface_gpio_deinit(void)
 
 /**
  * @brief     interface gpio write
- * @param[in] data is the written data
+ * @param[in] data written data
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -134,7 +134,7 @@ uint8_t nrf24l01_interface_gpio_write(uint8_t data)
 
 /**
  * @brief     interface delay ms
- * @param[in] ms
+ * @param[in] ms time
  * @note      none
  */
 void nrf24l01_interface_delay_ms(uint32_t ms)
@@ -144,7 +144,7 @@ void nrf24l01_interface_delay_ms(uint32_t ms)
 
 /**
  * @brief     interface print format data
- * @param[in] fmt is the format data
+ * @param[in] fmt format data
  * @note      none
  */
 void nrf24l01_interface_debug_print(const char *const fmt, ...)
@@ -164,10 +164,10 @@ void nrf24l01_interface_debug_print(const char *const fmt, ...)
 
 /**
  * @brief     interface receive callback
- * @param[in] type is the receive callback type
- * @param[in] num is the pipe number
- * @param[in] *buf points to a data buffer
- * @param[in] len is the buffer length
+ * @param[in] type receive callback type
+ * @param[in] num pipe number
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len buffer length
  * @note      none
  */
 void nrf24l01_interface_receive_callback(uint8_t type, uint8_t num, uint8_t *buf, uint8_t len)

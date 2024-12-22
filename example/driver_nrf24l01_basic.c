@@ -59,8 +59,8 @@ uint8_t nrf24l01_interrupt_irq_handler(void)
 
 /**
  * @brief     basic example init
- * @param[in] type is the chip working mode
- * @param[in] *callback points to a callback function
+ * @param[in] type chip working mode
+ * @param[in] *callback pointer to a callback function
  * @return    status code
  *            - 0 success
  *            - 1 init failed
@@ -708,9 +708,9 @@ uint8_t nrf24l01_basic_deinit(void)
 
 /**
  * @brief     basic example send
- * @param[in] *addr points to a address buffer
- * @param[in] *buf points to a data buffer
- * @param[in] len is the buffer length
+ * @param[in] *addr pointer to a address buffer
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len buffer length
  * @return    status code
  *            - 0 success
  *            - 1 send failed
