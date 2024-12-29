@@ -203,88 +203,88 @@ typedef struct nrf24l01_info_s
 
 /**
  * @brief     initialize nrf24l01_handle_t structure
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] STRUCTURE is nrf24l01_handle_t
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] STRUCTURE nrf24l01_handle_t
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_INIT(HANDLE, STRUCTURE)         memset(HANDLE, 0, sizeof(STRUCTURE))
 
 /**
  * @brief     link spi_init function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a spi_init function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a spi_init function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_SPI_INIT(HANDLE, FUC)          (HANDLE)->spi_init = FUC
 
 /**
  * @brief     link spi_deinit function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a spi_deinit function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a spi_deinit function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_SPI_DEINIT(HANDLE, FUC)        (HANDLE)->spi_deinit = FUC
 
 /**
  * @brief     link spi_read function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a spi_read function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a spi_read function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_SPI_READ(HANDLE, FUC)          (HANDLE)->spi_read = FUC
 
 /**
  * @brief     link gpio_write function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a gpio_write function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a gpio_write function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_SPI_WRITE(HANDLE, FUC)         (HANDLE)->spi_write = FUC
 
 /**
  * @brief     link gpio_init function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a gpio_init function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a gpio_init function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_GPIO_INIT(HANDLE, FUC)         (HANDLE)->gpio_init = FUC
 
 /**
  * @brief     link gpio_deinit function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a gpio_deinit function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a gpio_deinit function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_GPIO_DEINIT(HANDLE, FUC)       (HANDLE)->gpio_deinit = FUC
 
 /**
  * @brief     link gpio_write function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a gpio_write function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a gpio_write function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_GPIO_WRITE(HANDLE, FUC)        (HANDLE)->gpio_write = FUC
 
 /**
  * @brief     link delay_ms function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a delay_ms function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a delay_ms function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_DELAY_MS(HANDLE, FUC)          (HANDLE)->delay_ms = FUC
 
 /**
  * @brief     link debug_print function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a debug_print function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a debug_print function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_DEBUG_PRINT(HANDLE, FUC)       (HANDLE)->debug_print = FUC
 
 /**
  * @brief     link receive_callback function
- * @param[in] HANDLE points to an nrf24l01 handle structure
- * @param[in] FUC points to a receive_callback function address
+ * @param[in] HANDLE pointer to an nrf24l01 handle structure
+ * @param[in] FUC pointer to a receive_callback function address
  * @note      none
  */
 #define DRIVER_NRF24L01_LINK_RECEIVE_CALLBACK(HANDLE, FUC)  (HANDLE)->receive_callback = FUC
@@ -302,7 +302,7 @@ typedef struct nrf24l01_info_s
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to an nrf24l01 info structure
+ * @param[out] *info pointer to an nrf24l01 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -312,7 +312,7 @@ uint8_t nrf24l01_info(nrf24l01_info_t *info);
 
 /**
  * @brief     irq handler
- * @param[in] *handle points to an nrf24l01 handle structure
+ * @param[in] *handle pointer to an nrf24l01 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 run failed
@@ -324,7 +324,7 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle);
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to an nrf24l01 handle structure
+ * @param[in] *handle pointer to an nrf24l01 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 spi initialization failed
@@ -337,7 +337,7 @@ uint8_t nrf24l01_init(nrf24l01_handle_t *handle);
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to an nrf24l01 handle structure
+ * @param[in] *handle pointer to an nrf24l01 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 nop failed
@@ -351,9 +351,9 @@ uint8_t nrf24l01_deinit(nrf24l01_handle_t *handle);
 
 /**
  * @brief     send data
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] *buf points to a data buffer
- * @param[in] len is the buffer length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len buffer length
  * @return    status code
  *            - 0 success
  *            - 1 send failed
@@ -367,8 +367,8 @@ uint8_t nrf24l01_send(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len);
 
 /**
  * @brief     enable or disable the chip
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set active failed
@@ -380,9 +380,9 @@ uint8_t nrf24l01_set_active(nrf24l01_handle_t *handle, nrf24l01_bool_t enable);
 
 /**
  * @brief     enable or disable configure
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] config is the config type
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] config config type
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set config failed
@@ -394,9 +394,9 @@ uint8_t nrf24l01_set_config(nrf24l01_handle_t *handle, nrf24l01_config_t config,
 
 /**
  * @brief      get the configure
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  config is the config type
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  config config type
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get config failed
@@ -408,8 +408,8 @@ uint8_t nrf24l01_get_config(nrf24l01_handle_t *handle, nrf24l01_config_t config,
 
 /**
  * @brief     set the chip mode
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] mode is the chip mode
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] mode chip mode
  * @return    status code
  *            - 0 success
  *            - 1 set mode failed
@@ -421,8 +421,8 @@ uint8_t nrf24l01_set_mode(nrf24l01_handle_t *handle, nrf24l01_mode_t mode);
 
 /**
  * @brief      get the chip mode
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *mode points to a chip mode buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *mode pointer to a chip mode buffer
  * @return     status code
  *             - 0 success
  *             - 1 get mode failed
@@ -434,9 +434,9 @@ uint8_t nrf24l01_get_mode(nrf24l01_handle_t *handle, nrf24l01_mode_t *mode);
 
 /**
  * @brief     enable or disable auto acknowledgment
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] pipe is the rf pipe
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] pipe rf pipe
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set auto acknowledgment failed
@@ -448,9 +448,9 @@ uint8_t nrf24l01_set_auto_acknowledgment(nrf24l01_handle_t *handle, nrf24l01_pip
 
 /**
  * @brief      get the auto acknowledgment status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  pipe is the rf pipe
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  pipe rf pipe
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get auto acknowledgment failed
@@ -462,9 +462,9 @@ uint8_t nrf24l01_get_auto_acknowledgment(nrf24l01_handle_t *handle, nrf24l01_pip
 
 /**
  * @brief     enable or disable rx pipe
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] pipe is the rf pipe
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] pipe rf pipe
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set rx pipe failed
@@ -476,9 +476,9 @@ uint8_t nrf24l01_set_rx_pipe(nrf24l01_handle_t *handle, nrf24l01_pipe_t pipe, nr
 
 /**
  * @brief      get the rx pipe status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  pipe is the rf pipe
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  pipe rf pipe
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get rx pipe failed
@@ -490,8 +490,8 @@ uint8_t nrf24l01_get_rx_pipe(nrf24l01_handle_t *handle, nrf24l01_pipe_t pipe, nr
 
 /**
  * @brief     set the address width
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] width is the address width
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] width address width
  * @return    status code
  *            - 0 success
  *            - 1 set address width failed
@@ -503,8 +503,8 @@ uint8_t nrf24l01_set_address_width(nrf24l01_handle_t *handle, nrf24l01_address_w
 
 /**
  * @brief      get the address width
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *width points to an address width buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *width pointer to an address width buffer
  * @return     status code
  *             - 0 success
  *             - 1 get address width failed
@@ -516,8 +516,8 @@ uint8_t nrf24l01_get_address_width(nrf24l01_handle_t *handle, nrf24l01_address_w
 
 /**
  * @brief     set the auto retransmit delay
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] delay is the auto retransmit delay
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] delay auto retransmit delay
  * @return    status code
  *            - 0 success
  *            - 1 set auto retransmit delay failed
@@ -530,8 +530,8 @@ uint8_t nrf24l01_set_auto_retransmit_delay(nrf24l01_handle_t *handle, uint8_t de
 
 /**
  * @brief      get the auto retransmit delay
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *delay points to an auto retransmit delay buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *delay pointer to an auto retransmit delay buffer
  * @return     status code
  *             - 0 success
  *             - 1 get auto retransmit delay failed
@@ -543,9 +543,9 @@ uint8_t nrf24l01_get_auto_retransmit_delay(nrf24l01_handle_t *handle, uint8_t *d
 
 /**
  * @brief      convert the delay to the register raw data
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  us is the delay
- * @param[out] *reg points to a register raw buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  us delay
+ * @param[out] *reg pointer to a register raw buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -556,9 +556,9 @@ uint8_t nrf24l01_auto_retransmit_delay_convert_to_register(nrf24l01_handle_t *ha
 
 /**
  * @brief      convert the register raw data to the delay
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  reg is the register raw data
- * @param[out] *us points to a delay buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  reg register raw data
+ * @param[out] *us pointer to a delay buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -569,8 +569,8 @@ uint8_t nrf24l01_auto_retransmit_delay_convert_to_data(nrf24l01_handle_t *handle
 
 /**
  * @brief     set the auto retransmit count
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] count is the auto retransmit count
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] count auto retransmit count
  * @return    status code
  *            - 0 success
  *            - 1 set auto retransmit count failed
@@ -583,8 +583,8 @@ uint8_t nrf24l01_set_auto_retransmit_count(nrf24l01_handle_t *handle, uint8_t co
 
 /**
  * @brief      get the auto retransmit count
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *count points to an auto retransmit count buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *count pointer to an auto retransmit count buffer
  * @return     status code
  *             - 0 success
  *             - 1 get auto retransmit count failed
@@ -596,8 +596,8 @@ uint8_t nrf24l01_get_auto_retransmit_count(nrf24l01_handle_t *handle, uint8_t *c
 
 /**
  * @brief     set the channel frequency
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] freq is the channel freq
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] freq channel freq
  * @return    status code
  *            - 0 success
  *            - 1 set channel frequency failed
@@ -610,8 +610,8 @@ uint8_t nrf24l01_set_channel_frequency(nrf24l01_handle_t *handle, uint8_t freq);
 
 /**
  * @brief      get the channel frequency
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *freq points to a channel freq buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *freq pointer to a channel freq buffer
  * @return     status code
  *             - 0 success
  *             - 1 get channel frequency failed
@@ -623,8 +623,8 @@ uint8_t nrf24l01_get_channel_frequency(nrf24l01_handle_t *handle, uint8_t *freq)
 
 /**
  * @brief     enable or disable continuous carrier transmit
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set continuous carrier transmit failed
@@ -636,8 +636,8 @@ uint8_t nrf24l01_set_continuous_carrier_transmit(nrf24l01_handle_t *handle, nrf2
 
 /**
  * @brief      get the continuous carrier transmit status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get continuous carrier transmit failed
@@ -649,8 +649,8 @@ uint8_t nrf24l01_get_continuous_carrier_transmit(nrf24l01_handle_t *handle, nrf2
 
 /**
  * @brief     enable or disable force pll lock signal
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set force pll lock signal failed
@@ -662,8 +662,8 @@ uint8_t nrf24l01_set_force_pll_lock_signal(nrf24l01_handle_t *handle, nrf24l01_b
 
 /**
  * @brief      get the force pll lock signal status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get force pll lock signal failed
@@ -675,8 +675,8 @@ uint8_t nrf24l01_get_force_pll_lock_signal(nrf24l01_handle_t *handle, nrf24l01_b
 
 /**
  * @brief     set the data rate
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] rate is the data rate
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] rate data rate
  * @return    status code
  *            - 0 success
  *            - 1 set data rate failed
@@ -688,8 +688,8 @@ uint8_t nrf24l01_set_data_rate(nrf24l01_handle_t *handle, nrf24l01_data_rate_t r
 
 /**
  * @brief      get the data rate
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *rate points to a data rate buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *rate pointer to a data rate buffer
  * @return     status code
  *             - 0 success
  *             - 1 get data rate failed
@@ -701,8 +701,8 @@ uint8_t nrf24l01_get_data_rate(nrf24l01_handle_t *handle, nrf24l01_data_rate_t *
 
 /**
  * @brief     set the output power
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] power is the output power
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] power output power
  * @return    status code
  *            - 0 success
  *            - 1 set output power failed
@@ -714,8 +714,8 @@ uint8_t nrf24l01_set_output_power(nrf24l01_handle_t *handle, nrf24l01_output_pow
 
 /**
  * @brief      get the output power
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *power points to an output power buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *power pointer to an output power buffer
  * @return     status code
  *             - 0 success
  *             - 1 get output power failed
@@ -727,9 +727,9 @@ uint8_t nrf24l01_get_output_power(nrf24l01_handle_t *handle, nrf24l01_output_pow
 
 /**
  * @brief      get the interrupt status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  type is the interrupt type
- * @param[out] *enable points to a bool buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  type interrupt type
+ * @param[out] *enable pointer to a bool buffer
  * @return     status code
  *             - 0 success
  *             - 1 get interrupt failed
@@ -741,8 +741,8 @@ uint8_t nrf24l01_get_interrupt(nrf24l01_handle_t *handle, nrf24l01_interrupt_t t
 
 /**
  * @brief     clear the interrupt status
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] type is the interrupt type
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] type interrupt type
  * @return    status code
  *            - 0 success
  *            - 1 clear interrupt failed
@@ -754,8 +754,8 @@ uint8_t nrf24l01_clear_interrupt(nrf24l01_handle_t *handle, nrf24l01_interrupt_t
 
 /**
  * @brief      get the data pipe number
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *number points to a number buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *number pointer to a number buffer
  * @return     status code
  *             - 0 success
  *             - 1 get data pipe number failed
@@ -767,8 +767,8 @@ uint8_t nrf24l01_get_data_pipe_number(nrf24l01_handle_t *handle, uint8_t *number
 
 /**
  * @brief      get the lost packet count
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *count points to a count buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *count pointer to a count buffer
  * @return     status code
  *             - 0 success
  *             - 1 get lost packet count failed
@@ -780,8 +780,8 @@ uint8_t nrf24l01_get_lost_packet_count(nrf24l01_handle_t *handle, uint8_t *count
 
 /**
  * @brief      get the retransmitted packet count
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *count points to a count buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *count pointer to a count buffer
  * @return     status code
  *             - 0 success
  *             - 1 get retransmitted packet count failed
@@ -793,8 +793,8 @@ uint8_t nrf24l01_get_retransmitted_packet_count(nrf24l01_handle_t *handle, uint8
 
 /**
  * @brief      get the received power detector
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *enable points to a bool buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *enable pointer to a bool buffer
  * @return     status code
  *             - 0 success
  *             - 1 get received power detector failed
@@ -806,9 +806,9 @@ uint8_t nrf24l01_get_received_power_detector(nrf24l01_handle_t *handle, nrf24l01
 
 /**
  * @brief     set the rx pipe 0 address
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] *addr points to an address buffer
- * @param[in] len is the address length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] *addr pointer to an address buffer
+ * @param[in] len address length
  * @return    status code
  *            - 0 success
  *            - 1 set rx pipe 0 address failed
@@ -821,9 +821,9 @@ uint8_t nrf24l01_set_rx_pipe_0_address(nrf24l01_handle_t *handle, uint8_t *addr,
 
 /**
  * @brief         get the rx pipe 0 address
- * @param[in]     *handle points to an nrf24l01 handle structure
- * @param[in]     *addr points to an address buffer
- * @param[in,out] *len points to an address length buffer
+ * @param[in]     *handle pointer to an nrf24l01 handle structure
+ * @param[in]     *addr pointer to an address buffer
+ * @param[in,out] *len pointer to an address length buffer
  * @return        status code
  *                - 0 success
  *                - 1 get rx pipe 0 address failed
@@ -836,9 +836,9 @@ uint8_t nrf24l01_get_rx_pipe_0_address(nrf24l01_handle_t *handle, uint8_t *addr,
 
 /**
  * @brief     set the rx pipe 1 address
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] *addr points to an address buffer
- * @param[in] len is the address length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] *addr pointer to an address buffer
+ * @param[in] len address length
  * @return    status code
  *            - 0 success
  *            - 1 set rx pipe 1 address failed
@@ -851,9 +851,9 @@ uint8_t nrf24l01_set_rx_pipe_1_address(nrf24l01_handle_t *handle, uint8_t *addr,
 
 /**
  * @brief         get the rx pipe 1 address
- * @param[in]     *handle points to an nrf24l01 handle structure
- * @param[in]     *addr points to an address buffer
- * @param[in,out] *len points to an address length buffer
+ * @param[in]     *handle pointer to an nrf24l01 handle structure
+ * @param[in]     *addr pointer to an address buffer
+ * @param[in,out] *len pointer to an address length buffer
  * @return        status code
  *                - 0 success
  *                - 1 get rx pipe 1 address failed
@@ -866,8 +866,8 @@ uint8_t nrf24l01_get_rx_pipe_1_address(nrf24l01_handle_t *handle, uint8_t *addr,
 
 /**
  * @brief     set the rx pipe 2 address
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] addr is the rx pipe 2 address
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] addr rx pipe 2 address
  * @return    status code
  *            - 0 success
  *            - 1 set rx pipe 2 address failed
@@ -879,8 +879,8 @@ uint8_t nrf24l01_set_rx_pipe_2_address(nrf24l01_handle_t *handle, uint8_t addr);
 
 /**
  * @brief      get the rx pipe 2 address
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *addr points to an rx pipe 2 address buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *addr pointer to an rx pipe 2 address buffer
  * @return     status code
  *             - 0 success
  *             - 1 get rx pipe 2 address failed
@@ -892,8 +892,8 @@ uint8_t nrf24l01_get_rx_pipe_2_address(nrf24l01_handle_t *handle, uint8_t *addr)
 
 /**
  * @brief     set the rx pipe 3 address
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] addr is the rx pipe 3 address
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] addr rx pipe 3 address
  * @return    status code
  *            - 0 success
  *            - 1 set rx pipe 3 address failed
@@ -905,8 +905,8 @@ uint8_t nrf24l01_set_rx_pipe_3_address(nrf24l01_handle_t *handle, uint8_t addr);
 
 /**
  * @brief      get the rx pipe 3 address
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *addr points to an rx pipe 3 address buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *addr pointer to an rx pipe 3 address buffer
  * @return     status code
  *             - 0 success
  *             - 1 get rx pipe 3 address failed
@@ -918,8 +918,8 @@ uint8_t nrf24l01_get_rx_pipe_3_address(nrf24l01_handle_t *handle, uint8_t *addr)
 
 /**
  * @brief     set the rx pipe 4 address
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] addr is the rx pipe 4 address
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] addr rx pipe 4 address
  * @return    status code
  *            - 0 success
  *            - 1 set rx pipe 4 address failed
@@ -931,8 +931,8 @@ uint8_t nrf24l01_set_rx_pipe_4_address(nrf24l01_handle_t *handle, uint8_t addr);
 
 /**
  * @brief      get the rx pipe 4 address
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *addr points to an rx pipe 4 address buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *addr pointer to an rx pipe 4 address buffer
  * @return     status code
  *             - 0 success
  *             - 1 get rx pipe 4 address failed
@@ -944,8 +944,8 @@ uint8_t nrf24l01_get_rx_pipe_4_address(nrf24l01_handle_t *handle, uint8_t *addr)
 
 /**
  * @brief     set the rx pipe 5 address
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] addr is the rx pipe 5 address
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] addr rx pipe 5 address
  * @return    status code
  *            - 0 success
  *            - 1 set rx pipe 5 address failed
@@ -957,8 +957,8 @@ uint8_t nrf24l01_set_rx_pipe_5_address(nrf24l01_handle_t *handle, uint8_t addr);
 
 /**
  * @brief      get the rx pipe 5 address
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *addr points to an rx pipe 5 address buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *addr pointer to an rx pipe 5 address buffer
  * @return     status code
  *             - 0 success
  *             - 1 get rx pipe 5 address failed
@@ -970,9 +970,9 @@ uint8_t nrf24l01_get_rx_pipe_5_address(nrf24l01_handle_t *handle, uint8_t *addr)
 
 /**
  * @brief     set the tx address
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] *addr points to an address buffer
- * @param[in] len is the address length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] *addr pointer to an address buffer
+ * @param[in] len address length
  * @return    status code
  *            - 0 success
  *            - 1 set tx address failed
@@ -985,9 +985,9 @@ uint8_t nrf24l01_set_tx_address(nrf24l01_handle_t *handle, uint8_t *addr, uint8_
 
 /**
  * @brief         get the tx address
- * @param[in]     *handle points to an nrf24l01 handle structure
- * @param[in]     *addr points to an address buffer
- * @param[in,out] *len points to an address length buffer
+ * @param[in]     *handle pointer to an nrf24l01 handle structure
+ * @param[in]     *addr pointer to an address buffer
+ * @param[in,out] *len pointer to an address length buffer
  * @return        status code
  *                - 0 success
  *                - 1 get tx address failed
@@ -1000,8 +1000,8 @@ uint8_t nrf24l01_get_tx_address(nrf24l01_handle_t *handle, uint8_t *addr, uint8_
 
 /**
  * @brief     set the pipe 0 payload number
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] num is the payload number
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] num payload number
  * @return    status code
  *            - 0 success
  *            - 1 set pipe 0 payload number failed
@@ -1014,8 +1014,8 @@ uint8_t nrf24l01_set_pipe_0_payload_number(nrf24l01_handle_t *handle, uint8_t nu
 
 /**
  * @brief      get the pipe 0 payload number
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *num points to a payload number buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *num pointer to a payload number buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pipe 0 payload number failed
@@ -1027,8 +1027,8 @@ uint8_t nrf24l01_get_pipe_0_payload_number(nrf24l01_handle_t *handle, uint8_t *n
 
 /**
  * @brief     set the pipe 1 payload number
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] num is the payload number
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] num payload number
  * @return    status code
  *            - 0 success
  *            - 1 set pipe 1 payload number failed
@@ -1041,8 +1041,8 @@ uint8_t nrf24l01_set_pipe_1_payload_number(nrf24l01_handle_t *handle, uint8_t nu
 
 /**
  * @brief      get the pipe 1 payload number
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *num points to a payload number buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *num pointer to a payload number buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pipe 1 payload number failed
@@ -1054,8 +1054,8 @@ uint8_t nrf24l01_get_pipe_1_payload_number(nrf24l01_handle_t *handle, uint8_t *n
 
 /**
  * @brief     set the pipe 2 payload number
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] num is the payload number
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] num payload number
  * @return    status code
  *            - 0 success
  *            - 1 set pipe 2 payload number failed
@@ -1068,8 +1068,8 @@ uint8_t nrf24l01_set_pipe_2_payload_number(nrf24l01_handle_t *handle, uint8_t nu
 
 /**
  * @brief      get the pipe 2 payload number
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *num points to a payload number buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *num pointer to a payload number buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pipe 2 payload number failed
@@ -1081,8 +1081,8 @@ uint8_t nrf24l01_get_pipe_2_payload_number(nrf24l01_handle_t *handle, uint8_t *n
 
 /**
  * @brief     set the pipe 3 payload number
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] num is the payload number
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] num payload number
  * @return    status code
  *            - 0 success
  *            - 1 set pipe 3 payload number failed
@@ -1095,8 +1095,8 @@ uint8_t nrf24l01_set_pipe_3_payload_number(nrf24l01_handle_t *handle, uint8_t nu
 
 /**
  * @brief      get the pipe 3 payload number
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *num points to a payload number buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *num pointer to a payload number buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pipe 3 payload number failed
@@ -1108,8 +1108,8 @@ uint8_t nrf24l01_get_pipe_3_payload_number(nrf24l01_handle_t *handle, uint8_t *n
 
 /**
  * @brief     set the pipe 4 payload number
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] num is the payload number
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] num payload number
  * @return    status code
  *            - 0 success
  *            - 1 set pipe 4 payload number failed
@@ -1122,8 +1122,8 @@ uint8_t nrf24l01_set_pipe_4_payload_number(nrf24l01_handle_t *handle, uint8_t nu
 
 /**
  * @brief      get the pipe 4 payload number
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *num points to a payload number buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *num pointer to a payload number buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pipe 4 payload number failed
@@ -1135,8 +1135,8 @@ uint8_t nrf24l01_get_pipe_4_payload_number(nrf24l01_handle_t *handle, uint8_t *n
 
 /**
  * @brief     set the pipe 5 payload number
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] num is the payload number
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] num payload number
  * @return    status code
  *            - 0 success
  *            - 1 set pipe 5 payload number failed
@@ -1149,8 +1149,8 @@ uint8_t nrf24l01_set_pipe_5_payload_number(nrf24l01_handle_t *handle, uint8_t nu
 
 /**
  * @brief      get the pipe 5 payload number
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *num points to a payload number buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *num pointer to a payload number buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pipe 5 payload number failed
@@ -1162,8 +1162,8 @@ uint8_t nrf24l01_get_pipe_5_payload_number(nrf24l01_handle_t *handle, uint8_t *n
 
 /**
  * @brief      get the fifo status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *status points to a fifo status buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *status pointer to a fifo status buffer
  * @return     status code
  *             - 0 success
  *             - 1 get fifo status failed
@@ -1175,9 +1175,9 @@ uint8_t nrf24l01_get_fifo_status(nrf24l01_handle_t *handle, uint8_t *status);
 
 /**
  * @brief     enable or disable the pipe dynamic payload
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] pipe is the pipe number
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] pipe pipe number
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set pipe dynamic payload failed
@@ -1189,9 +1189,9 @@ uint8_t nrf24l01_set_pipe_dynamic_payload(nrf24l01_handle_t *handle, nrf24l01_pi
 
 /**
  * @brief      get the pipe dynamic payload status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  pipe is the pipe number
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  pipe pipe number
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get pipe dynamic payload failed
@@ -1203,8 +1203,8 @@ uint8_t nrf24l01_get_pipe_dynamic_payload(nrf24l01_handle_t *handle, nrf24l01_pi
 
 /**
  * @brief     enable or disable the dynamic payload
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set dynamic payload failed
@@ -1216,8 +1216,8 @@ uint8_t nrf24l01_set_dynamic_payload(nrf24l01_handle_t *handle, nrf24l01_bool_t 
 
 /**
  * @brief      get the dynamic payload status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get dynamic payload failed
@@ -1229,8 +1229,8 @@ uint8_t nrf24l01_get_dynamic_payload(nrf24l01_handle_t *handle, nrf24l01_bool_t 
 
 /**
  * @brief     enable or disable the payload with ack
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set payload with ack failed
@@ -1242,8 +1242,8 @@ uint8_t nrf24l01_set_payload_with_ack(nrf24l01_handle_t *handle, nrf24l01_bool_t
 
 /**
  * @brief      get the payload with ack status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get payload with ack failed
@@ -1255,8 +1255,8 @@ uint8_t nrf24l01_get_payload_with_ack(nrf24l01_handle_t *handle, nrf24l01_bool_t
 
 /**
  * @brief     enable or disable the tx payload with no ack
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set tx payload with no ack failed
@@ -1268,8 +1268,8 @@ uint8_t nrf24l01_set_tx_payload_with_no_ack(nrf24l01_handle_t *handle, nrf24l01_
 
 /**
  * @brief      get the tx payload with no ack status
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get tx payload with no ack failed
@@ -1281,9 +1281,9 @@ uint8_t nrf24l01_get_tx_payload_with_no_ack(nrf24l01_handle_t *handle, nrf24l01_
 
 /**
  * @brief      read the rx payload
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *buf points to a data buffer
- * @param[in]  len is the buffer length
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *buf pointer to a data buffer
+ * @param[in]  len buffer length
  * @return     status code
  *             - 0 success
  *             - 1 read rx payload failed
@@ -1296,9 +1296,9 @@ uint8_t nrf24l01_read_rx_payload(nrf24l01_handle_t *handle, uint8_t *buf, uint8_
 
 /**
  * @brief     write the tx payload
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] *buf points to a data buffer
- * @param[in] len is the buffer length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len buffer length
  * @return    status code
  *            - 0 success
  *            - 1 write tx payload failed
@@ -1311,7 +1311,7 @@ uint8_t nrf24l01_write_tx_payload(nrf24l01_handle_t *handle, uint8_t *buf, uint8
 
 /**
  * @brief     flush tx
- * @param[in] *handle points to an nrf24l01 handle structure
+ * @param[in] *handle pointer to an nrf24l01 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 flush tx failed
@@ -1323,7 +1323,7 @@ uint8_t nrf24l01_flush_tx(nrf24l01_handle_t *handle);
 
 /**
  * @brief     flush rx
- * @param[in] *handle points to an nrf24l01 handle structure
+ * @param[in] *handle pointer to an nrf24l01 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 flush rx failed
@@ -1335,7 +1335,7 @@ uint8_t nrf24l01_flush_rx(nrf24l01_handle_t *handle);
 
 /**
  * @brief     reuse the tx payload
- * @param[in] *handle points to an nrf24l01 handle structure
+ * @param[in] *handle pointer to an nrf24l01 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 reuse tx payload failed
@@ -1347,8 +1347,8 @@ uint8_t nrf24l01_reuse_tx_payload(nrf24l01_handle_t *handle);
 
 /**
  * @brief      get the rx payload width
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[out] *width points to a width buffer
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[out] *width pointer to a width buffer
  * @return     status code
  *             - 0 success
  *             - 1 get rx payload width failed
@@ -1360,10 +1360,10 @@ uint8_t nrf24l01_get_rx_payload_width(nrf24l01_handle_t *handle, uint8_t *width)
 
 /**
  * @brief     write the payload with ack
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] pipe is the pipe number
- * @param[in] *buf points to a data buffer
- * @param[in] len is the buffer length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] pipe pipe number
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len buffer length
  * @return    status code
  *            - 0 success
  *            - 1 write payload with ack failed
@@ -1376,9 +1376,9 @@ uint8_t nrf24l01_write_payload_with_ack(nrf24l01_handle_t *handle, nrf24l01_pipe
 
 /**
  * @brief     write the payload with no ack
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] *buf points to a data buffer
- * @param[in] len is the buffer length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len buffer length
  * @return    status code
  *            - 0 success
  *            - 1 write payload with no ack failed
@@ -1391,7 +1391,7 @@ uint8_t nrf24l01_write_payload_with_no_ack(nrf24l01_handle_t *handle, uint8_t *b
 
 /**
  * @brief     nop
- * @param[in] *handle points to an nrf24l01 handle structure
+ * @param[in] *handle pointer to an nrf24l01 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 nop failed
@@ -1414,10 +1414,10 @@ uint8_t nrf24l01_nop(nrf24l01_handle_t *handle);
 
 /**
  * @brief     set the chip register
- * @param[in] *handle points to an nrf24l01 handle structure
- * @param[in] reg is the register address
- * @param[in] *buf points to a data buffer
- * @param[in] len is the data buffer length
+ * @param[in] *handle pointer to an nrf24l01 handle structure
+ * @param[in] reg register address
+ * @param[in] *buf pointer to a data buffer
+ * @param[in] len data buffer length
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -1429,10 +1429,10 @@ uint8_t nrf24l01_set_reg(nrf24l01_handle_t *handle, uint8_t reg, uint8_t *buf, u
 
 /**
  * @brief      get the chip register
- * @param[in]  *handle points to an nrf24l01 handle structure
- * @param[in]  reg is the register address
- * @param[out] *buf points to a data buffer
- * @param[in]  len is the data buffer length
+ * @param[in]  *handle pointer to an nrf24l01 handle structure
+ * @param[in]  reg register address
+ * @param[out] *buf pointer to a data buffer
+ * @param[in]  len data buffer length
  * @return     status code
  *             - 0 success
  *             - 1 read failed
