@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "LibDriver NRF24L01", "index.html", [
-    [ "Modules", "modules.html", "modules" ],
+    [ "Topics", "topics.html", "topics" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -51,9 +51,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"group__nrf24l01__basic__driver.html#ga99294702a4d1ba8db445bdb6bb09cd3d",
-"group__nrf24l01__example__driver.html#gac118f0320a4b01070f65edd714d45a11"
+"group__nrf24l01__example__driver.html#gaaef5d1a24677d528c125a734c7fb4e5d"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';
