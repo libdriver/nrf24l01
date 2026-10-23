@@ -138,7 +138,7 @@ typedef enum
 typedef enum
 {
     NRF24L01_INTERRUPT_RX_DR   = 6,        /**< data ready rx fifo interrupt */
-    NRF24L01_INTERRUPT_TX_DS   = 5,        /**< data send rx fifo interrupt */
+    NRF24L01_INTERRUPT_TX_DS   = 5,        /**< data send tx fifo interrupt */
     NRF24L01_INTERRUPT_MAX_RT  = 4,        /**< maximum number of tx retransmits interrupt */
     NRF24L01_INTERRUPT_TX_FULL = 0,        /**< tx fifo full flag */
 } nrf24l01_interrupt_t;
@@ -1007,7 +1007,7 @@ uint8_t nrf24l01_get_tx_address(nrf24l01_handle_t *handle, uint8_t *addr, uint8_
  *            - 1 set pipe 0 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_0_payload_number(nrf24l01_handle_t *handle, uint8_t num);
@@ -1034,7 +1034,7 @@ uint8_t nrf24l01_get_pipe_0_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 1 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_1_payload_number(nrf24l01_handle_t *handle, uint8_t num);
@@ -1061,7 +1061,7 @@ uint8_t nrf24l01_get_pipe_1_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 2 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_2_payload_number(nrf24l01_handle_t *handle, uint8_t num);
@@ -1088,7 +1088,7 @@ uint8_t nrf24l01_get_pipe_2_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 3 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_3_payload_number(nrf24l01_handle_t *handle, uint8_t num);
@@ -1115,7 +1115,7 @@ uint8_t nrf24l01_get_pipe_3_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 4 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_4_payload_number(nrf24l01_handle_t *handle, uint8_t num);
@@ -1142,7 +1142,7 @@ uint8_t nrf24l01_get_pipe_4_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 5 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_5_payload_number(nrf24l01_handle_t *handle, uint8_t num);

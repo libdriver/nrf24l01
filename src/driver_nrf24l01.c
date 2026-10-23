@@ -60,7 +60,7 @@
 #define NRF24L01_COMMAND_REUSE_TX_PL                0xE3        /**< reuse tx payload command */
 #define NRF24L01_COMMAND_R_RX_PL_WID                0x60        /**< read rx payload width for the top command */
 #define NRF24L01_COMMAND_W_ACK_PAYLOAD              0xA8        /**< write ack payload command */
-#define NRF24L01_COMMAND_W_TX_PAYLOAD_NO_ACK        0xB0        /**< write ack payload with ack command */
+#define NRF24L01_COMMAND_W_TX_PAYLOAD_NO_ACK        0xB0        /**< write tx paylaod no ack command */
 #define NRF24L01_COMMAND_NOP                        0xFF        /**< nop command */
 
 /**
@@ -228,7 +228,15 @@ uint8_t nrf24l01_init(nrf24l01_handle_t *handle)
         
         return 1;                                                            /* return error */
     }
-    
+    if (handle->gpio_write(0) != 0)                                          /* drive ce low */
+    {
+        handle->debug_print("nrf24l01: gpio write failed.\n");               /* gpio write failed */
+        (void)handle->spi_deinit();                                          /* spi deinit */
+        (void)handle->gpio_deinit();                                         /* gpio deinit */
+
+        return 1;                                                            /* return error */
+    }
+    handle->delay_ms(2);                                                     /* wait tpd2stby */
     handle->inited = 1;                                                      /* flag finish initialization */
     
     return 0;                                                                /* success return 0 */
@@ -350,9 +358,6 @@ uint8_t nrf24l01_set_active(nrf24l01_handle_t *handle, nrf24l01_bool_t enable)
 uint8_t nrf24l01_send(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
 {
     uint8_t res;
-    uint8_t i;
-    uint8_t k;
-    uint8_t tmp;
     uint8_t buffer[32];
     uint32_t timeout;
     
@@ -372,13 +377,6 @@ uint8_t nrf24l01_send(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
     }
 
     memcpy((uint8_t *)buffer, buf, len);                                                   /* copy the data */
-    k = len / 2;                                                                           /* get the half */
-    for (i = 0; i < k; i++)                                                                /* run k times */
-    {
-        tmp = buffer[i];                                                                   /* copy to tmp */
-        buffer[i] = buffer[len - 1 - i];                                                   /* buffer[i] = buffer[n - 1 - i] */
-        buffer[len - 1 - i] = tmp;                                                         /* set buffer[n - 1 - i]*/
-    }
     handle->finished = 0;                                                                  /* clear finished */
     if (handle->gpio_write(0) != 0)                                                        /* gpio write */
     {
@@ -437,7 +435,15 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
 {
     uint8_t res;
     uint8_t prev;
-    
+    uint8_t cfg;
+    uint8_t feature;
+    uint8_t ce_level;
+    uint8_t num;
+    uint8_t width;
+    uint8_t fifo;
+    uint8_t buffer[33];
+    uint8_t loop;
+
     if (handle == NULL)                                                                                     /* check handle */
     {
         return 2;                                                                                           /* return error */
@@ -446,12 +452,12 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
     {
         return 3;                                                                                           /* return error */
     }
-    
-    res = handle->gpio_write(0);                                                                            /* set gpio */
+
+    res = handle->gpio_write(0);                                                                            /* set ce low, enter standby-i */
     if (res != 0)                                                                                           /* check result */
     {
         handle->debug_print("nrf24l01: gpio write failed.\n");                                              /* gpio write failed */
-       
+
         return 1;                                                                                           /* return error */
     }
     res = a_nrf24l01_spi_read(handle, NRF24L01_REG_STATUS, (uint8_t *)&prev, 1);                            /* get status register */
@@ -459,18 +465,35 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
     {
         handle->debug_print("nrf24l01: get status register failed.\n");                                     /* get status register failed */
         (void)handle->gpio_write(1);                                                                        /* set gpio */
-       
+
         return 1;                                                                                           /* return error */
     }
+    res = a_nrf24l01_spi_read(handle, NRF24L01_REG_CONFIG, (uint8_t *)&cfg, 1);                             /* get config register */
+    if (res != 0)                                                                                           /* check result */
+    {
+        handle->debug_print("nrf24l01: get config register failed.\n");                                     /* get config register failed */
+        (void)handle->gpio_write(1);                                                                        /* set gpio */
+
+        return 1;                                                                                           /* return error */
+    }
+    res = a_nrf24l01_spi_read(handle, NRF24L01_REG_FEATURE, (uint8_t *)&feature, 1);                        /* get feature register */
+    if (res != 0)                                                                                           /* check result */
+    {
+        handle->debug_print("nrf24l01: get feature register failed.\n");                                    /* get feature register failed */
+        (void)handle->gpio_write(1);                                                                        /* set gpio */
+
+        return 1;                                                                                           /* return error */
+    }
+    ce_level = cfg & 0x01;                                                                                  /* prx re-enables rx, ptx stays in standby-i */
     res = a_nrf24l01_spi_write(handle, NRF24L01_REG_STATUS, (uint8_t *)&prev, 1);                           /* clear status register */
     if (res != 0)                                                                                           /* check result */
     {
         handle->debug_print("nrf24l01: set status register failed.\n");                                     /* set status register failed */
-        (void)handle->gpio_write(1);                                                                        /* set gpio */
-        
+        (void)handle->gpio_write(ce_level);                                                                 /* set gpio */
+
         return 1;                                                                                           /* return error */
     }
-    
+
     if (((prev >> 0) & 0x01) != 0)                                                                          /* tx full */
     {
         if (handle->receive_callback != NULL)                                                               /* if receive callback */
@@ -484,8 +507,8 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
         if (res != 0)                                                                                       /* check result */
         {
             handle->debug_print("nrf24l01: flush tx failed.\n");                                            /* flush tx failed */
-            (void)handle->gpio_write(1);                                                                    /* set gpio */
-            
+            (void)handle->gpio_write(ce_level);                                                             /* set gpio */
+
             return 1;                                                                                       /* return error */
         }
         handle->finished = 2;                                                                               /* set timeout */
@@ -502,63 +525,113 @@ uint8_t nrf24l01_irq_handler(nrf24l01_handle_t *handle)
             handle->receive_callback(NRF24L01_INTERRUPT_TX_DS, 0, NULL, 0);                                 /* run receive callback */
         }
     }
-    if (((prev >> 6) & 0x01) != 0)                                                                          /* receive */
+    if (((prev >> 6) & 0x01) != 0)                                                                          /* receive data ready */
     {
-        uint8_t num;
-        uint8_t width;
-        uint8_t i;
-        uint8_t k;
-        uint8_t tmp;
-        uint8_t buffer[33];
-        
-        res = handle->spi_read(NRF24L01_COMMAND_R_RX_PL_WID, (uint8_t *)&width, 1);                         /* get payload width */
-        if (res != 0)                                                                                       /* check result */
+        loop = 0;                                                                                           /* rx fifo is 3 levels deep */
+        while (loop < 3)                                                                                    /* empty the whole rx fifo */
         {
-            handle->debug_print("nrf24l01: get payload width failed.\n");                                   /* get payload width failed */
-            (void)handle->gpio_write(1);                                                                    /* set gpio */
-            
-            return 1;                                                                                       /* return error */
-        }
-        if (width > 32)                                                                                     /* check width */
-        {
-            res = handle->spi_write(NRF24L01_COMMAND_FLUSH_RX, NULL, 0);                                    /* flush rx */
+            res = a_nrf24l01_spi_read(handle, NRF24L01_REG_STATUS, (uint8_t *)&prev, 1);                    /* get status register */
             if (res != 0)                                                                                   /* check result */
             {
-                handle->debug_print("nrf24l01: flush rx failed.\n");                                        /* flush rx failed */
-                (void)handle->gpio_write(1);                                                                /* set gpio */
-                
+                handle->debug_print("nrf24l01: get status register failed.\n");                             /* get status register failed */
+                (void)handle->gpio_write(ce_level);                                                         /* set gpio */
+
                 return 1;                                                                                   /* return error */
             }
-        }
-        res = handle->spi_read(NRF24L01_COMMAND_R_RX_PAYLOAD, (uint8_t *)buffer, width);                    /* get rx payload */
-        if (res != 0)                                                                                       /* check result */
-        {
-            handle->debug_print("nrf24l01: get rx payload failed.\n");                                      /* get rx payload failed */
-            (void)handle->gpio_write(1);                                                                    /* set gpio */
-            
-            return 1;                                                                                       /* return error */
-        }
-        k = width / 2;                                                                                      /* get the half */
-        for (i = 0; i < k; i++)                                                                             /* run k times */
-        {
-            tmp = buffer[i];                                                                                /* copy to tmp */
-            buffer[i] = buffer[width - 1 - i];                                                              /* buffer[i] = buffer[n - 1 - i] */
-            buffer[width - 1 - i] = tmp;                                                                    /* set buffer[n - 1 - i]*/
-        }
-        num = (prev >> 1) & 0x7;                                                                            /* get number */
-        if (handle->receive_callback != NULL)                                                               /* if receive callback */
-        {
-            handle->receive_callback(NRF24L01_INTERRUPT_RX_DR, num, (uint8_t *)buffer, width);              /* run receive callback */
+            num = (prev >> 1) & 0x07;                                                                       /* get data pipe number */
+            if ((num == 6) || (num == 7))                                                                   /* 110 unused, 111 means rx fifo empty */
+            {
+                break;                                                                                      /* no more valid packet */
+            }
+            if ((feature & (1 << 2)) != 0)                                                                  /* dynamic payload length enabled */
+            {
+                res = handle->spi_read(NRF24L01_COMMAND_R_RX_PL_WID, (uint8_t *)&width, 1);                 /* get payload width */
+                if (res != 0)                                                                               /* check result */
+                {
+                    handle->debug_print("nrf24l01: get payload width failed.\n");                           /* get payload width failed */
+                    (void)handle->gpio_write(ce_level);                                                     /* set gpio */
+
+                    return 1;                                                                               /* return error */
+                }
+                if (width > 32)                                                                             /* check width */
+                {
+                    res = handle->spi_write(NRF24L01_COMMAND_FLUSH_RX, NULL, 0);                            /* flush rx */
+                    if (res != 0)                                                                           /* check result */
+                    {
+                        handle->debug_print("nrf24l01: flush rx failed.\n");                                /* flush rx failed */
+                        (void)handle->gpio_write(ce_level);                                                 /* set gpio */
+
+                        return 1;                                                                           /* return error */
+                    }
+                    
+                    break;                                                                                  /* discard erroneous packet, flush rx empties the whole fifo */
+                }
+                if (width == 0)                                                                             /* invalid width, the packet can not be read out */
+                {
+                    res = handle->spi_write(NRF24L01_COMMAND_FLUSH_RX, NULL, 0);                            /* flush rx */
+                    if (res != 0)                                                                           /* check result */
+                    {
+                        handle->debug_print("nrf24l01: flush rx failed.\n");                                /* flush rx failed */
+                        (void)handle->gpio_write(ce_level);                                                 /* set gpio */
+
+                        return 1;                                                                           /* return error */
+                    }
+                    
+                    break;                                                                                  /* discard invalid packet */
+                }
+            }
+            else                                                                                            /* static payload length */
+            {
+                res = a_nrf24l01_spi_read(handle, (uint8_t)(NRF24L01_REG_RX_PW_P0 + num),
+                                          (uint8_t *)&width, 1);                                            /* get payload width from rx_pw_px */
+                if (res != 0)                                                                               /* check result */
+                {
+                    handle->debug_print("nrf24l01: get rx payload width failed.\n");                        /* get rx payload width failed */
+                    (void)handle->gpio_write(ce_level);                                                     /* set gpio */
+
+                    return 1;                                                                               /* return error */
+                }
+                width &= 0x3F;                                                                              /* width is 6 bits */
+                if (width == 0)                                                                             /* pipe not used, no valid payload */
+                {
+                    break;                                                                                  /* break */
+                }
+            }
+            res = handle->spi_read(NRF24L01_COMMAND_R_RX_PAYLOAD, (uint8_t *)buffer, width);                /* get rx payload */
+            if (res != 0)                                                                                   /* check result */
+            {
+                handle->debug_print("nrf24l01: get rx payload failed.\n");                                  /* get rx payload failed */
+                (void)handle->gpio_write(ce_level);                                                         /* set gpio */
+
+                return 1;                                                                                   /* return error */
+            }
+            if (handle->receive_callback != NULL)                                                           /* if receive callback */
+            {
+                handle->receive_callback(NRF24L01_INTERRUPT_RX_DR, num, (uint8_t *)buffer, width);          /* run receive callback */
+            }
+            loop++;
+            res = a_nrf24l01_spi_read(handle, NRF24L01_REG_FIFO_STATUS, (uint8_t *)&fifo, 1);               /* get fifo status */
+            if (res != 0)                                                                                   /* check result */
+            {
+                handle->debug_print("nrf24l01: get fifo status failed.\n");                                 /* get fifo status failed */
+                (void)handle->gpio_write(ce_level);                                                         /* set gpio */
+
+                return 1;                                                                                   /* return error */
+            }
+            if ((fifo & (1 << NRF24L01_FIFO_STATUS_RX_EMPTY)) != 0)                                         /* check rx empty */
+            {
+                break;                                                                                      /* rx fifo is empty */
+            }
         }
     }
-    res = handle->gpio_write(1);                                                                            /* set gpio write */
+    res = handle->gpio_write(ce_level);                                                                     /* set gpio write */
     if (res != 0)                                                                                           /* check result */
     {
         handle->debug_print("nrf24l01: gpio write failed.\n");                                              /* gpio write failed */
-       
+
         return 1;                                                                                           /* return error */
     }
-    
+
     return 0;                                                                                               /* success return 0 */
 }
 
@@ -1089,7 +1162,7 @@ uint8_t nrf24l01_auto_retransmit_delay_convert_to_register(nrf24l01_handle_t *ha
         return 3;                      /* return error */
     }
     
-    *reg = (uint8_t)(us / 250);        /* convert real data to register data */
+    *reg = (uint8_t)(us / 250 - 1);    /* convert real data to register data */
     
     return 0;                          /* success return 0 */
 }
@@ -1116,7 +1189,7 @@ uint8_t nrf24l01_auto_retransmit_delay_convert_to_data(nrf24l01_handle_t *handle
         return 3;                       /* return error */
     }
     
-    *us = (uint32_t)(reg) * 250;        /* convert raw data to real data */
+    *us = (uint32_t)(reg + 1) * 250;    /* convert raw data to real data */
     
     return 0;                           /* success return 0 */
 }
@@ -1692,15 +1765,7 @@ uint8_t nrf24l01_clear_interrupt(nrf24l01_handle_t *handle, nrf24l01_interrupt_t
         return 3;                                                                       /* return error */
     }
     
-    res = a_nrf24l01_spi_read(handle, NRF24L01_REG_STATUS, (uint8_t *)&prev, 1);        /* get status register */
-    if (res != 0)                                                                       /* check result */
-    {
-        handle->debug_print("nrf24l01: get status register failed.\n");                 /* get status register failed */
-       
-        return 1;                                                                       /* return error */
-    }
-    prev &= ~(1 << type);                                                               /* clear config */
-    prev |= 1 << type;                                                                  /* set interrupt */
+    prev = 1 << type;                                                                   /* set interrupt */
     res = a_nrf24l01_spi_write(handle, NRF24L01_REG_STATUS, (uint8_t *)&prev, 1);       /* set status register */
     if (res != 0)                                                                       /* check result */
     {
@@ -2602,7 +2667,7 @@ uint8_t nrf24l01_get_tx_address(nrf24l01_handle_t *handle, uint8_t *addr, uint8_
  *            - 1 set pipe 0 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_0_payload_number(nrf24l01_handle_t *handle, uint8_t num)
@@ -2617,9 +2682,9 @@ uint8_t nrf24l01_set_pipe_0_payload_number(nrf24l01_handle_t *handle, uint8_t nu
     {
         return 3;                                                                        /* return error */
     }
-    if (num > 0x3F)                                                                      /* check num */
+    if (num > 32)                                                                        /* check num */
     {
-        handle->debug_print("nrf24l01: num is over 0x3F.\n");                            /* num is over 0x3F */
+        handle->debug_print("nrf24l01: num is over 32.\n");                              /* num is over 32 */
        
         return 4;                                                                        /* return error */
     }
@@ -2680,7 +2745,7 @@ uint8_t nrf24l01_get_pipe_0_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 1 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_1_payload_number(nrf24l01_handle_t *handle, uint8_t num)
@@ -2695,9 +2760,9 @@ uint8_t nrf24l01_set_pipe_1_payload_number(nrf24l01_handle_t *handle, uint8_t nu
     {
         return 3;                                                                        /* return error */
     }
-    if (num > 0x3F)                                                                      /* check num */
+    if (num > 32)                                                                        /* check num */
     {
-        handle->debug_print("nrf24l01: num is over 0x3F.\n");                            /* num is over 0x3F */
+        handle->debug_print("nrf24l01: num is over 32.\n");                              /* num is over 32 */
        
         return 4;                                                                        /* return error */
     }
@@ -2758,7 +2823,7 @@ uint8_t nrf24l01_get_pipe_1_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 2 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_2_payload_number(nrf24l01_handle_t *handle, uint8_t num)
@@ -2773,9 +2838,9 @@ uint8_t nrf24l01_set_pipe_2_payload_number(nrf24l01_handle_t *handle, uint8_t nu
     {
         return 3;                                                                        /* return error */
     }
-    if (num > 0x3F)                                                                      /* check num */
+    if (num > 32)                                                                        /* check num */
     {
-        handle->debug_print("nrf24l01: num is over 0x3F.\n");                            /* num is over 0x3F */
+        handle->debug_print("nrf24l01: num is over 32.\n");                              /* num is over 32 */
        
         return 4;                                                                        /* return error */
     }
@@ -2836,7 +2901,7 @@ uint8_t nrf24l01_get_pipe_2_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 3 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_3_payload_number(nrf24l01_handle_t *handle, uint8_t num)
@@ -2851,9 +2916,9 @@ uint8_t nrf24l01_set_pipe_3_payload_number(nrf24l01_handle_t *handle, uint8_t nu
     {
         return 3;                                                                        /* return error */
     }
-    if (num > 0x3F)                                                                      /* check num */
+    if (num > 32)                                                                        /* check num */
     {
-        handle->debug_print("nrf24l01: num is over 0x3F.\n");                            /* num is over 0x3F */
+        handle->debug_print("nrf24l01: num is over 32.\n");                              /* num is over 32 */
        
         return 4;                                                                        /* return error */
     }
@@ -2914,7 +2979,7 @@ uint8_t nrf24l01_get_pipe_3_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 4 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_4_payload_number(nrf24l01_handle_t *handle, uint8_t num)
@@ -2929,9 +2994,9 @@ uint8_t nrf24l01_set_pipe_4_payload_number(nrf24l01_handle_t *handle, uint8_t nu
     {
         return 3;                                                                        /* return error */
     }
-    if (num > 0x3F)                                                                      /* check num */
+    if (num > 32)                                                                        /* check num */
     {
-        handle->debug_print("nrf24l01: num is over 0x3F.\n");                            /* num is over 0x3F */
+        handle->debug_print("nrf24l01: num is over 32.\n");                              /* num is over 32 */
        
         return 4;                                                                        /* return error */
     }
@@ -2992,7 +3057,7 @@ uint8_t nrf24l01_get_pipe_4_payload_number(nrf24l01_handle_t *handle, uint8_t *n
  *            - 1 set pipe 5 payload number failed
  *            - 2 handle is NULL
  *            - 3 handle is not initialized
- *            - 4 num is over 0x3F
+ *            - 4 num is over 32
  * @note      none
  */
 uint8_t nrf24l01_set_pipe_5_payload_number(nrf24l01_handle_t *handle, uint8_t num)
@@ -3007,9 +3072,9 @@ uint8_t nrf24l01_set_pipe_5_payload_number(nrf24l01_handle_t *handle, uint8_t nu
     {
         return 3;                                                                        /* return error */
     }
-    if (num > 0x3F)                                                                      /* check num */
+    if (num > 32)                                                                        /* check num */
     {
-        handle->debug_print("nrf24l01: num is over 0x3F.\n");                            /* num is over 0x3F */
+        handle->debug_print("nrf24l01: num is over 32.\n");                              /* num is over 32 */
        
         return 4;                                                                        /* return error */
     }
@@ -3442,9 +3507,6 @@ uint8_t nrf24l01_get_tx_payload_with_no_ack(nrf24l01_handle_t *handle, nrf24l01_
 uint8_t nrf24l01_read_rx_payload(nrf24l01_handle_t *handle, uint8_t *buf, uint8_t len)
 {
     uint8_t res;
-    uint8_t i;
-    uint8_t k;
-    uint8_t tmp;
     
     if (handle == NULL)                                                     /* check handle */
     {
@@ -3468,13 +3530,6 @@ uint8_t nrf24l01_read_rx_payload(nrf24l01_handle_t *handle, uint8_t *buf, uint8_
        
         return 1;                                                           /* return error */
     }
-    k = len / 2;                                                            /* get the half */
-    for (i = 0; i < k; i++)                                                 /* run k times */
-    {
-        tmp = buf[i];                                                       /* copy to tmp */
-        buf[i] = buf[len - 1 - i];                                          /* buf[i] = buf[n - 1 - i] */
-        buf[len - 1 - i] = tmp;                                             /* set buf[n - 1 - i]*/
-    }
 
     return 0;                                                               /* success return 0 */
 }
@@ -3496,8 +3551,6 @@ uint8_t nrf24l01_write_tx_payload(nrf24l01_handle_t *handle, uint8_t *buf, uint8
 {
     uint8_t res;
     uint8_t i;
-    uint8_t k;
-    uint8_t tmp;
     uint8_t buffer[32];
     
     if (handle == NULL)                                                                    /* check handle */
@@ -3518,13 +3571,6 @@ uint8_t nrf24l01_write_tx_payload(nrf24l01_handle_t *handle, uint8_t *buf, uint8
     for (i = 0; i < len; i++)                                                              /* copy the data */
     {
         buffer[i] = buf[i];                                                                /* copy */
-    }
-    k = len / 2;                                                                           /* get the half */
-    for (i = 0; i < k; i++)                                                                /* run k times */
-    {
-        tmp = buffer[i];                                                                   /* copy to tmp */
-        buffer[i] = buffer[len - 1 - i];                                                   /* buffer[i] = buffer[n - 1 - i] */
-        buffer[len - 1 - i] = tmp;                                                         /* set buffer[n - 1 - i]*/
     }
     res = handle->spi_write(NRF24L01_COMMAND_W_TX_PAYLOAD, (uint8_t *)buffer, len);        /* set tx payload */
     if (res != 0)                                                                          /* check result */
@@ -3692,8 +3738,6 @@ uint8_t nrf24l01_write_payload_with_ack(nrf24l01_handle_t *handle, nrf24l01_pipe
 {
     uint8_t res;
     uint8_t i;
-    uint8_t k;
-    uint8_t tmp;
     uint8_t buffer[32];
     
     if (handle == NULL)                                                                            /* check handle */
@@ -3714,13 +3758,6 @@ uint8_t nrf24l01_write_payload_with_ack(nrf24l01_handle_t *handle, nrf24l01_pipe
     for (i = 0; i < len; i++)                                                                      /* copy the data */
     {
         buffer[i] = buf[i];                                                                        /* copy */
-    }
-    k = len / 2;                                                                                   /* get the half */
-    for (i = 0; i < k; i++)                                                                        /* run k times */
-    {
-        tmp = buffer[i];                                                                           /* copy to tmp */
-        buffer[i] = buffer[len - 1 - i];                                                           /* buffer[i] = buffer[n - 1 - i] */
-        buffer[len - 1 - i] = tmp;                                                                 /* set buffer[n - 1 - i]*/
     }
     res = handle->spi_write((uint8_t)(NRF24L01_COMMAND_W_ACK_PAYLOAD | pipe),
                             (uint8_t *)buffer, len);                                               /* set payload with ack */
@@ -3751,8 +3788,6 @@ uint8_t nrf24l01_write_payload_with_no_ack(nrf24l01_handle_t *handle, uint8_t *b
 {
     uint8_t res;
     uint8_t i;
-    uint8_t k;
-    uint8_t tmp;
     uint8_t buffer[32];
     
     if (handle == NULL)                                                                            /* check handle */
@@ -3774,14 +3809,6 @@ uint8_t nrf24l01_write_payload_with_no_ack(nrf24l01_handle_t *handle, uint8_t *b
     {
         buffer[i] = buf[i];                                                                        /* copy */
     }
-    k = len / 2;                                                                                   /* get the half */
-    for (i = 0; i < k; i++)                                                                        /* run k times */
-    {
-        tmp = buffer[i];                                                                           /* copy to tmp */
-        buffer[i] = buffer[len - 1 - i];                                                           /* buffer[i] = buffer[n - 1 - i] */
-        buffer[len - 1 - i] = tmp;                                                                 /* set buffer[n - 1 - i]*/
-    }
-    
     res = handle->spi_write(NRF24L01_COMMAND_W_TX_PAYLOAD_NO_ACK, (uint8_t *)buffer, len);         /* set payload with no ack */
     if (res != 0)                                                                                  /* check result */
     {
